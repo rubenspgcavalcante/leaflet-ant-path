@@ -1,5 +1,4 @@
-*~
 .idea/
-npm_modules/
+node_modules/
 src/vendor/
 coverage-report/
