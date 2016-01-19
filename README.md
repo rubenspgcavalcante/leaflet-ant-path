@@ -1,5 +1,7 @@
 # Leaflet Ant Path
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
+[Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)
+
 
 ### Requirements
     

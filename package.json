@@ -2,12 +2,16 @@
   "name": "leaflet-ant-path",
   "version": "0.0.1",
   "description": "Creates a leaflet polyline with a 'ant-path' animated flux",
-  "main": "index.js",
+  "main": "dist/leaflet-ant-path.min.js",
   "scripts": {
     "test": "gulp test"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rubenspgcavalcante/leaflet-ant-path"
+  },
   "dependencies": {
     "leaflet": "~0.7.7"
   },
