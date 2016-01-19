@@ -2,3 +2,4 @@
 node_modules/
 src/vendor/
 coverage-report/
+npm-debug.log

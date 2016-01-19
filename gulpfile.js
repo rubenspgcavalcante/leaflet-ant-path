@@ -3,8 +3,9 @@ var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var karma = require('karma');
+var rename = require('gulp-rename');
 
-gulp.task('default', ['compress', 'style']);
+gulp.task('default', ['compress', 'style', 'test']);
 
 gulp.task('style', function () {
     gulp.src('./src/style/*.sass')
@@ -19,6 +20,7 @@ gulp.task('compress', function () {
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
+        .pipe(rename('leaflet-ant-path.min.js'))
         .pipe(gulp.dest('dist/'));
 });
 
