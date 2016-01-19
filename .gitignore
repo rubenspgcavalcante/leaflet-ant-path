@@ -1,0 +1,5 @@
+*~
+.idea/
+npm_modules/
+src/vendor/
+coverage-report/
