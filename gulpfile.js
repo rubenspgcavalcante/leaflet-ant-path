@@ -5,14 +5,16 @@ var sourcemaps = require('gulp-sourcemaps');
 var karma = require('karma');
 var rename = require('gulp-rename');
 
-gulp.task('default', ['compress', 'style', 'test']);
+gulp.task('default', ['dist', 'test']);
+
+gulp.task('dist', ['compress', 'style']);
 
 gulp.task('style', function () {
     gulp.src('./src/style/*.sass')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(sourcemaps.write('./'))
         .pipe(rename('leaflet-ant-path.min.css'))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('dist/'));
 });
 
@@ -20,8 +22,8 @@ gulp.task('compress', function () {
     gulp.src('./src/plugin/leaflet-ant-path.js')
         .pipe(sourcemaps.init())
         .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
         .pipe(rename('leaflet-ant-path.min.js'))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('dist/'));
 });
 

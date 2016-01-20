@@ -4,7 +4,9 @@
   "description": "Creates a leaflet polyline with a 'ant-path' animated flux",
   "main": "dist/leaflet-ant-path.min.js",
   "scripts": {
-    "test": "gulp test"
+    "gulp": "gulp",
+    "test": "gulp test",
+    "preinstall": "gulp dist"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
   "license": "MIT",
@@ -13,15 +15,15 @@
     "url": "https://github.com/rubenspgcavalcante/leaflet-ant-path"
   },
   "dependencies": {
-    "leaflet": "~0.7.7"
-  },
-  "devDependencies": {
+    "leaflet": "~0.7.7",
     "gulp": "^3.9.0",
-    "gulp-karma": "0.0.5",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.1",
+    "gulp-uglify": "^1.5.1"
+  },
+  "devDependencies": {
+    "gulp-karma": "0.0.5",
     "jasmine": "^2.4.1",
     "karma": "^0.13.19",
     "karma-coverage": "^0.5.3",
