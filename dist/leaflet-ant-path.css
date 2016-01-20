@@ -1,3 +1,0 @@
-@-webkit-keyframes leaflet-ant-path-animation{from{stroke-dashoffset:0%}to{stroke-dashoffset:100%}}@-moz-keyframes leaflet-ant-path-animation{from{stroke-dashoffset:0%}to{stroke-dashoffset:100%}}@keyframes leaflet-ant-path-animation{from{stroke-dashoffset:0%}to{stroke-dashoffset:100%}}path.leaflet-ant-path{fill:none;stroke-dasharray:10, 20;-webkit-animation:linear infinite leaflet-ant-path-animation;-moz-animation:linear infinite leaflet-ant-path-animation;animation:linear infinite leaflet-ant-path-animation}
-
-/*# sourceMappingURL=leaflet-ant-path.css.map */
