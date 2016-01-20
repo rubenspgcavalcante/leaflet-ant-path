@@ -12,6 +12,7 @@ gulp.task('style', function () {
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(sourcemaps.write('./'))
+        .pipe(rename('leaflet-ant-path.min.css'))
         .pipe(gulp.dest('dist/'));
 });
 

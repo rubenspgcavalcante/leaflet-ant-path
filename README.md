@@ -47,6 +47,8 @@ Using with browerify:
 ```
 
 ### Parameters
+The AntPath extends from the [FeatureGroup](http://leafletjs.com/reference.html#featuregroup), but you initialise with
+the same options of a common [Polyline]((http://leafletjs.com/reference.html#polyline)), with some extra options, like the flux color.  
 
 | name | type | example | description |
 |------|------|---------| ------------|

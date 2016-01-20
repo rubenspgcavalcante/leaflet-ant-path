@@ -21,10 +21,10 @@
     /**
      * Builds a polyline with a ant path animation
      * @constructor
-     * @extends L.LayerGroup
+     * @extends L.FeatureGroup
      * @exports L.AntPath
      */
-    var AntPath = L.LayerGroup.extend({
+    var AntPath = L.FeatureGroup.extend({
         _path: null,
         _animatedPathid: 'ant-path-' + new Date().getTime(),
         _animatedPathClass: 'leaflet-ant-path',

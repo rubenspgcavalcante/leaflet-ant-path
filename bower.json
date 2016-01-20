@@ -22,8 +22,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "src/vendor",
-    "src/specs"
+    "src/vendor"
   ],
   "devDependencies": {
     "leaflet": "~0.7.7"
