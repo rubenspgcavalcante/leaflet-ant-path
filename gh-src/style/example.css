@@ -10,3 +10,10 @@
 .m-l-sm {
     margin-left: 2px;
 }
+
+.color-form-control {
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    margin-top: 34px;
+}
