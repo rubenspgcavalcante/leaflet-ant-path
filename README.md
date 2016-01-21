@@ -20,6 +20,7 @@ Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path/archiv
 ### Requirements
     
     - Leaflet >= 0.7.7
+    - Soon compatible with Leaflet 1.0.0 :+1:
     
 ### Browser compatibility
 Tested on:
@@ -73,7 +74,7 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 |options| Object  | {color: 'red', weight: 5, ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **extra** options bellow
 |options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
 |options.delay | string | 120 | Add a delay to the animation flux (default: 200)
-|options.dashArray| [number, number] | The size of the animated dashes (default: [10, 20])
+|options.dashArray| [number, number] | [15, 30] |The size of the animated dashes (default: [10, 20])
 
 ---
 
