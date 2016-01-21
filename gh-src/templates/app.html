@@ -18,6 +18,17 @@
                 <div class="panel-body">
                     <ng-form>
                         <div class="input-group">
+                            <label>options.delay</label>
+                            <input id="delay" class="form-control" min="1" type="number" ng-model="mv.options.delay">
+                        </div>
+
+                        <div class="input-group">
+                            <label>options.dashArray</label>
+                            <input id="dashArray0" class="half-size form-control" min="1" type="number" ng-model="mv.options.dashArray[0]">
+                            <input id="dashArray1" class="half-size form-control" min="1" type="number" ng-model="mv.options.dashArray[1]">
+                        </div>
+
+                        <div class="input-group">
                             <label for="weight">options.weight</label>
                             <input id="weight" class="form-control" min="1" type="number" ng-model="mv.options.weight">
                         </div>

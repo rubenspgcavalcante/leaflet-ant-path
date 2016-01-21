@@ -8,9 +8,11 @@
         var mv = this;
 
         mv.options = {
+            delay: 200,
             color: '#0000FF',
             pulseColor: '#FFFFFF',
-            weight: 5
+            weight: 5,
+            dashArray: [10, 20]
         };
 
         mv.init = function () {

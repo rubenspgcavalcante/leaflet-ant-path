@@ -4,11 +4,15 @@
 }
 
 .m-r-sm {
-    margin-right:2px;
+    margin-right: 2px;
 }
 
 .m-l-sm {
     margin-left: 2px;
+}
+
+.half-size {
+    width: 50% !important;
 }
 
 .color-form-control {
