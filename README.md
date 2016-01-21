@@ -2,6 +2,20 @@
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
 [Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)
 
+### Installing
+
+Via Bower:
+```
+ bower install leaflet-ant-path
+```
+
+Via NPM:
+```
+ npm install leaflet-ant-path
+```
+
+Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path/archive/master.zip) this source code
+
 
 ### Requirements
     
@@ -22,7 +36,10 @@ It's just like a polyline:
 
 ``` javascript
     // ...
-    var antPolyline = new L.AntPath(latlngs, options);
+    var antPolyline = new L.Polyline.AntPath(latlngs, options);
+    //or use the factory
+    antPolyline = L.polyline.antPath(latlngs, options);
+    
     antPolyline.addTo(map);
 ```
 
@@ -53,8 +70,10 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 | name | type | example | description |
 |------|------|---------| ------------|
 |latlngs| L.LatLng[] **or** Array\[number, number\]  | \[ \[0, 10\], \[-20, 0\], ... \] | A array of latitude and longitudes (same as used in [Polyline constructor](http://leafletjs.com/reference.html#polyline) )
-|options| Object  | {fluxColor: 'red', ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **fluxColor** option
-
+|options| Object  | {color: 'red', weight: 5, ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **extra** options bellow
+|options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
+|options.delay | string | 120 | Add a delay to the animation flux (default: 200)
+|options.dashArray| [number, number] | The size of the animated dashes (default: [10, 20])
 
 ---
 
