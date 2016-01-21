@@ -13,7 +13,11 @@
 
     // attach your plugin to the global 'L' variable
     else if (typeof window !== 'undefined' && window.L) {
-        window.L.AntPath = factory(L);
+        window.L.Polyline.AntPath = factory(L);
+
+        window.L.polyline.antPath = function (path, options) {
+            return new window.L.Polyline.AntPath(path, options);
+        };
     }
 }(function (L) {
     "use strict";
@@ -22,14 +26,19 @@
      * Builds a polyline with a ant path animation
      * @constructor
      * @extends L.FeatureGroup
-     * @exports L.AntPath
+     * @exports L.Polyline.AntPath
      */
     var AntPath = L.FeatureGroup.extend({
         _path: null,
         _animatedPathid: 'ant-path-' + new Date().getTime(),
         _animatedPathClass: 'leaflet-ant-path',
 
-        options: {},
+        /* default options */
+        options: {
+            delay: 200,
+            dashArray: [10, 20],
+            pulseColor: '#FFFFFF'
+        },
 
         initialize: function (path, options) {
             L.LayerGroup.prototype.initialize.call(this);
@@ -49,26 +58,33 @@
         },
 
         onRemove: function (map) {
+            this._map.off('zoomend', this._calculateAnimationSpeed, this);
             this._map = null;
-            this._map.off('zoomend', this._softRedraw, this);
             L.LayerGroup.prototype.onRemove.call(this, map);
         },
 
         _draw: function () {
-            this.addLayer(L.polyline(this._path, this.options));
+            var pathOpts = {};
+            var pulseOpts = {};
 
-            var optsCopy = {};
-            L.extend(optsCopy, this.options);
-            optsCopy.color = this.options.pulseColor || 'white';
-            optsCopy.className = this._animatedPathClass + ' ' + this._animatedPathid;
+            L.extend(pulseOpts, this.options);
+            L.extend(pathOpts, this.options);
 
-            this.addLayer(L.polyline(this._path, optsCopy));
+            pulseOpts.color = pulseOpts.pulseColor || this.options.pulseColor;
+            pulseOpts.className = this._animatedPathClass + ' ' + this._animatedPathid;
+
+            delete pathOpts.dashArray;
+
+            this.addLayer(L.polyline(this._path, pathOpts));
+            this.addLayer(L.polyline(this._path, pulseOpts));
         },
 
         _calculateAnimationSpeed: function () {
             var zoomLevel = this._map.getZoom();
             var animatedPolyElement = document.getElementsByClassName(this._animatedPathid);
-            var animationDuration = 200 / zoomLevel + 's';
+
+            //Get the animation duration (in seconds) based on the given delay and the current zoom level
+            var animationDuration = 1 + (this.options.delay / 3) / zoomLevel + 's';
 
             //TODO Use requestAnimationFrame to support IE
             animatedPolyElement[0].setAttribute('style', '-webkit-animation-duration:' + animationDuration);
