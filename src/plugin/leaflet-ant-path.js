@@ -21,7 +21,6 @@
     }
 }(function (L) {
     "use strict";
-
     /**
      * Builds a polyline with a ant path animation
      * @constructor
@@ -35,7 +34,7 @@
 
         /* default options */
         options: {
-            delay: 200,
+            delay: 5000,
             dashArray: [10, 20],
             pulseColor: '#FFFFFF'
         },
@@ -96,3 +95,52 @@
     return AntPath;
 }, window));
 
+
+(function () {
+    function createMulti(Klass) {
+
+        return L.FeatureGroup.extend({
+
+            initialize: function (latlngs, options) {
+                this._layers = {};
+                this._options = options;
+                this.setLatLngs(latlngs);
+            },
+
+            setLatLngs: function (latlngs) {
+                var i = 0,
+                    len = latlngs.length;
+
+                this.eachLayer(function (layer) {
+                    if (i < len) {
+                        layer.setLatLngs(latlngs[i++]);
+                    } else {
+                        this.removeLayer(layer);
+                    }
+                }, this);
+
+                while (i < len) {
+                    this.addLayer(new Klass(latlngs[i++], this._options));
+                }
+
+                return this;
+            },
+
+            getLatLngs: function () {
+                var latlngs = [];
+
+                this.eachLayer(function (layer) {
+                    latlngs.push(layer.getLatLngs());
+                });
+
+                return latlngs;
+            }
+        });
+    }
+
+    L.MultiAntPath = createMulti(L.Polyline.AntPath);
+
+    L.multiAntPath = function (latlngs, options) {
+        return new L.MultiAntPath(latlngs, options);
+    };
+}());
