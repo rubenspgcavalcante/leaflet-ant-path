@@ -34,6 +34,7 @@
 
         /* default options */
         options: {
+            paused: true,
             delay: 5000,
             dashArray: [10, 20],
             pulseColor: '#FFFFFF'
@@ -62,6 +63,21 @@
             L.LayerGroup.prototype.onRemove.call(this, map);
         },
 
+        pause: function () {
+            if (this.options.paused) return;
+            this.options.paused = true;
+            var animatedPolyElement = document.getElementsByClassName(this._animatedPathid);
+            for (var i = 0; i < animatedPolyElement.length; i++) {
+                animatedPolyElement[i].removeAttribute('style');
+                animatedPolyElement[i].removeAttribute('style');
+                animatedPolyElement[i].removeAttribute('style');
+            }
+        },
+
+        resume: function() {
+            this._calculateAnimationSpeed();
+        },
+
         _draw: function () {
             var pathOpts = {};
             var pulseOpts = {};
@@ -78,7 +94,12 @@
             this.addLayer(L.polyline(this._path, pulseOpts));
         },
 
+
         _calculateAnimationSpeed: function () {
+            if (!this.options.paused) {
+                return;
+            }
+            this.options.paused = false;
             var zoomLevel = this._map.getZoom();
             var animatedPolyElement = document.getElementsByClassName(this._animatedPathid);
 
@@ -86,9 +107,11 @@
             var animationDuration = 1 + (this.options.delay / 3) / zoomLevel + 's';
 
             //TODO Use requestAnimationFrame to support IE
-            animatedPolyElement[0].setAttribute('style', '-webkit-animation-duration:' + animationDuration);
-            animatedPolyElement[0].setAttribute('style', '-moz-animation-duration:' + animationDuration);
-            animatedPolyElement[0].setAttribute('style', 'animation-duration:' + animationDuration);
+            for (var i = 0; i < animatedPolyElement.length; i++) {
+                animatedPolyElement[i].setAttribute('style', '-webkit-animation-duration:' + animationDuration);
+                animatedPolyElement[i].setAttribute('style', '-moz-animation-duration:' + animationDuration);
+                animatedPolyElement[i].setAttribute('style', 'animation-duration:' + animationDuration);
+            }
         }
     });
 
@@ -100,6 +123,8 @@
     function createMulti(Klass) {
 
         return L.FeatureGroup.extend({
+
+
 
             initialize: function (latlngs, options) {
                 this._layers = {};
@@ -134,6 +159,19 @@
                 });
 
                 return latlngs;
+            },
+
+
+            pause: function () {
+                this.eachLayer(function (layer) {
+                    layer.pause();
+                });
+            },
+
+            resume: function() {
+                this.eachLayer(function (layer) {
+                    layer.resume();
+                });
             }
         });
     }
