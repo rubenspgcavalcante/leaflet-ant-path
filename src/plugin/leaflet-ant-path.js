@@ -30,7 +30,7 @@
      */
     var AntPath = L.FeatureGroup.extend({
         _path: null,
-        _animatedPathid: 'ant-path-' + new Date().getTime(),
+        _animatedPathid: null,
         _animatedPathClass: 'leaflet-ant-path',
 
         /* default options */
@@ -45,7 +45,7 @@
             L.Util.setOptions(this, options);
             this._map = null;
             this._path = path;
-
+            this._animatedPathid = 'ant-path-' + new Date().getTime();
             this._draw();
         },
 
