@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "5"
+
+scripts: {
+  test: './node_modules/karma/bin/karma start --single-run --browsers PhantomJS',
+  gulp: './node_modules/gulp/bin/gulp',
+  bower: './node_modules/bower/bin/bower'
+}
+
+before_script:
+  - npm install -g bower
+  - bower install
+
+script: gulp
+
+branches:
+  only:
+    - master
