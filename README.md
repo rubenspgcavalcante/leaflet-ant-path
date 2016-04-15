@@ -36,29 +36,49 @@ Can be used with asynchronous module loaders and CommonJS packers
 It's just like a polyline:  
 
 ``` javascript
-    // ...
+    // Using the AntPath
     var antPolyline = new L.Polyline.AntPath(latlngs, options);
+    
     //or use the factory
     antPolyline = L.polyline.antPath(latlngs, options);
     
     antPolyline.addTo(map);
+    
+    // ... And the MultiAntPath
+    var antPolyline = new L.MultiPolyline.MultiAntPath(latlngsList, options);
+    
+    //or use the factory
+    antPolylines = L.multiPolyline.multiAntPath(latlngsList, options);
+    
+    antPolylines.addTo(map);
+    
 ```
+
+Note for AMD/CommonJS:  
+The direct use as 'AntPath' now is deprecated and instead is exported by default, the modules which contains the AntPath and MultiAntPath
 
 Using with AMD:  
 
 ``` javascript
-require(['leafletAntPath'], function(AntPath) {
+require(['leafletAntPath'], function(AntPathModule) {
     // ...
-    var antPolyline = new AntPath(latlngs, options);
+    var antPolyline = new AntPathModule.AntPath(latlngs, options);
     antPolyline.addTo(map);
     
+    var multiAntPolylines = new AntPathModule.MultiAntPath(latlngs, options);
+    multiAntPolylines.addTo(map);
 });
 ```
 
 Using with browerify:  
 
 ``` javascript
-    var AntPath = require('leafletAntPath');
+    var AntPath = require('leafletAntPath').AntPath;
+    var MultiAntPath = require('leafletAntPath').MultiAntPath;
+    
+    //or just
+    import {AntPath, MultiAntPath} from 'leafletAntPath';
+    
     // ...
     var antPolyline = new AntPath(latlngs, options);
     antPolyline.addTo(map);
@@ -72,8 +92,9 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 |------|------|---------| ------------|
 |latlngs| L.LatLng[] **or** Array\[number, number\]  | \[ \[0, 10\], \[-20, 0\], ... \] | A array of latitude and longitudes (same as used in [Polyline constructor](http://leafletjs.com/reference.html#polyline) )
 |options| Object  | {color: 'red', weight: 5, ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **extra** options bellow
+|options.paused| boolean | true/false | Starts with the animation paused (default: false)
 |options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
-|options.delay | string | 120 | Add a delay to the animation flux (default: 200)
+|options.delay | string | 120 | Add a delay to the animation flux (default: 400)
 |options.dashArray| [number, number] | [15, 30] |The size of the animated dashes (default: [10, 20])
 
 ---

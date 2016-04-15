@@ -11,16 +11,23 @@
         module.exports = factory(require('leaflet'));
     }
 
-    // attach your plugin to the global 'L' variable
+    // attach your plugin to the global 'L' variable and declares the factories
     else if (typeof window !== 'undefined' && window.L) {
-        window.L.Polyline.AntPath = factory(L);
+        var AntPathModule = factory(L);
+        window.L.Polyline.AntPath = AntPathModule.AntPath;
+        window.L.MultiPolyline.MultiAntPath = AntPathModule.MultiAntPath;
 
-        window.L.polyline.antPath = function (path, options) {
+        window.L.polyline.antPath = function antPathFactory(path, options) {
             return new window.L.Polyline.AntPath(path, options);
+        };
+
+        window.L.multiPolyline.multiAntPath = function multiAntPathFactory(multiplePaths, options) {
+            return new window.L.MultiPolyline.MultiAntPath(multiplePaths, options)
         };
     }
 }(function (L) {
     "use strict";
+
     /**
      * Builds a polyline with a ant path animation
      * @constructor
@@ -29,13 +36,13 @@
      */
     var AntPath = L.FeatureGroup.extend({
         _path: null,
-        _animatedPathid: null,
+        _animatedPathId: null,
         _animatedPathClass: 'leaflet-ant-path',
 
         /* default options */
         options: {
-            paused: true,
-            delay: 5000,
+            paused: false,
+            delay: 400,
             dashArray: [10, 20],
             pulseColor: '#FFFFFF'
         },
@@ -45,7 +52,7 @@
             L.Util.setOptions(this, options);
             this._map = null;
             this._path = path;
-            this._animatedPathid = 'ant-path-' + new Date().getTime();
+            this._animatedPathId = 'ant-path-' + new Date().getTime();
             this._draw();
         },
 
@@ -64,17 +71,21 @@
         },
 
         pause: function () {
-            if (this.options.paused) return;
-            this.options.paused = true;
-            var animatedPolyElement = document.getElementsByClassName(this._animatedPathid);
+            if (this.options.paused) {
+                return false;
+            }
+
+            var animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
             for (var i = 0; i < animatedPolyElement.length; i++) {
                 animatedPolyElement[i].removeAttribute('style');
                 animatedPolyElement[i].removeAttribute('style');
                 animatedPolyElement[i].removeAttribute('style');
             }
+
+            return this.options.paused = true;
         },
 
-        resume: function() {
+        resume: function () {
             this._calculateAnimationSpeed();
         },
 
@@ -86,7 +97,7 @@
             L.extend(pathOpts, this.options);
 
             pulseOpts.color = pulseOpts.pulseColor || this.options.pulseColor;
-            pulseOpts.className = this._animatedPathClass + ' ' + this._animatedPathid;
+            pulseOpts.className = this._animatedPathClass + ' ' + this._animatedPathId;
 
             delete pathOpts.dashArray;
 
@@ -96,12 +107,12 @@
 
 
         _calculateAnimationSpeed: function () {
-            if (!this.options.paused) {
+            if (this.options.paused || !this._map) {
                 return;
             }
-            this.options.paused = false;
+
             var zoomLevel = this._map.getZoom();
-            var animatedPolyElement = document.getElementsByClassName(this._animatedPathid);
+            var animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
 
             //Get the animation duration (in seconds) based on the given delay and the current zoom level
             var animationDuration = 1 + (this.options.delay / 3) / zoomLevel + 's';
@@ -115,70 +126,64 @@
         }
     });
 
-    return AntPath;
-}, window));
+    /**
+     * Builds a multi-polyline with a ant path animation
+     * @constructor
+     * @extends L.FeatureGroup
+     * @exports L.MultiPolyline.MultiAntPath
+     */
+    var MultiAntPath = L.FeatureGroup.extend({
+        initialize: function (latlngs, options) {
+            this._layers = {};
+            this._options = options;
+            this.setLatLngs(latlngs);
+        },
 
+        setLatLngs: function (latlngs) {
+            var i = 0,
+                len = latlngs.length;
 
-(function () {
-    function createMulti(Klass) {
-
-        return L.FeatureGroup.extend({
-
-
-
-            initialize: function (latlngs, options) {
-                this._layers = {};
-                this._options = options;
-                this.setLatLngs(latlngs);
-            },
-
-            setLatLngs: function (latlngs) {
-                var i = 0,
-                    len = latlngs.length;
-
-                this.eachLayer(function (layer) {
-                    if (i < len) {
-                        layer.setLatLngs(latlngs[i++]);
-                    } else {
-                        this.removeLayer(layer);
-                    }
-                }, this);
-
-                while (i < len) {
-                    this.addLayer(new Klass(latlngs[i++], this._options));
+            this.eachLayer(function (layer) {
+                if (i < len) {
+                    layer.setLatLngs(latlngs[i++]);
+                } else {
+                    this.removeLayer(layer);
                 }
+            }, this);
 
-                return this;
-            },
-
-            getLatLngs: function () {
-                var latlngs = [];
-
-                this.eachLayer(function (layer) {
-                    latlngs.push(layer.getLatLngs());
-                });
-
-                return latlngs;
-            },
-
-
-            pause: function () {
-                this.eachLayer(function (layer) {
-                    layer.pause();
-                });
-            },
-
-            resume: function() {
-                this.eachLayer(function (layer) {
-                    layer.resume();
-                });
+            while (i < len) {
+                this.addLayer(new AntPath(latlngs[i++], this._options));
             }
-        });
-    }
 
-    L.MultiAntPath = createMulti(L.Polyline.AntPath);
+            return this;
+        },
 
-    L.multiAntPath = function (latlngs, options) {
-        return new L.MultiAntPath(latlngs, options);
+        getLatLngs: function () {
+            var latlngs = [];
+
+            this.eachLayer(function (layer) {
+                latlngs.push(layer.getLatLngs());
+            });
+
+            return latlngs;
+        },
+
+        pause: function () {
+            this.eachLayer(function (layer) {
+                layer.pause();
+            });
+        },
+
+        resume: function () {
+            this.eachLayer(function (layer) {
+                layer.resume();
+            });
+        }
+    });
+
+    //Module exports
+    return {
+        AntPath: AntPath,
+        MultiAntPath: MultiAntPath
     };
-}());
+}, window));
