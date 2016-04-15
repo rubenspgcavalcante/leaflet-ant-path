@@ -8,7 +8,7 @@
         var mv = this;
 
         mv.options = {
-            delay: 200,
+            delay: 400,
             color: '#0000FF',
             pulseColor: '#FFFFFF',
             weight: 5,
