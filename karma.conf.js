@@ -1,6 +1,6 @@
 module.exports = function (config) {
     config.set({
-        basePath: 'src/',
+        basePath: '.',
         frameworks: ['jasmine'],
         browsers: ['PhantomJS'],
         plugins: ['karma-phantomjs-launcher', 'karma-jasmine', 'karma-coverage'],
@@ -8,19 +8,20 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'plugin/leaflet-ant-path.js': ['coverage']
+            'dist/leaflet-ant-path.js': ['coverage']
         },
 
         coverageReporter: {
-            type : 'lcov',
-            dir : '../coverage-report/',
+            type: 'lcov',
+            dir: 'coverage-report/',
             subdir: 'lcov'
         },
 
         files: [
-            {pattern: 'vendor/leaflet/dist/leaflet-src.js', watched: false},
-            {pattern: 'plugin/leaflet-ant-path.js', watched: true},
-            'specs/**/*.unit.js'
+            {pattern: 'node_modules/leaflet/dist/leaflet.js', watched: false},
+            {pattern: 'src/specs/config/bind.polyfill.js', watched: true},
+            {pattern: 'dist/leaflet-ant-path.js', watched: true},
+            'src/specs/**/*.unit.js'
         ],
 
         singleRun: false

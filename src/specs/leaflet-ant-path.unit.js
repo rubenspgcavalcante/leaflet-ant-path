@@ -1,5 +1,6 @@
 describe("Creates a leaflet polyline with a 'ant-path' animated flux", function () {
     var polylineCalls;
+    console.log(window['leaflet-ant-path']);
 
     beforeEach(function () {
         polylineCalls = 0;
