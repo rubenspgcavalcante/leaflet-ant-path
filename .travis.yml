@@ -8,8 +8,7 @@ scripts: {
 }
 
 before_script:
-  - npm install -g bower webpack
-  - bower install
+  - npm install -g webpack
 
 script: gulp
 
