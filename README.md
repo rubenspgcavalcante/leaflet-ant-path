@@ -70,7 +70,7 @@ require(['leafletAntPath'], function(AntPathModule) {
 });
 ```
 
-Using with browerify:  
+Using with browerify:
 
 ``` javascript
     var AntPath = require('leafletAntPath').AntPath;
@@ -104,9 +104,7 @@ To run the build, before install the npm and gulp dependencies, then run:
 
 To build
 ```
-    gulp style
-    ...
-    gulp compress
+    gulp pack
 ```
 
 To test:

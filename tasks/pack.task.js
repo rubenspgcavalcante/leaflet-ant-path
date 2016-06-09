@@ -3,7 +3,9 @@ var gutil = require('gulp-util');
 var webpack = require('webpack');
 
 gulp.task('pack', function (done) {
-    webpack(require('../webpack.config')).run(onBuild(done));
+    var config = require('../webpack.config');
+    config.plugins = [new webpack.optimize.UglifyJsPlugin()];
+    webpack(config).run(onBuild(done));
 });
 
 function onBuild(done) {

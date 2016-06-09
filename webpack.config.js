@@ -1,4 +1,11 @@
+var webpack = require('webpack');
 var path = require('path');
+var is = require('is_js');
+var plugins = [];
+
+if (hasArgument('--minimize', '-m')) {
+    plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
 
 module.exports = {
     entry: './src/plugin/main',
@@ -20,6 +27,7 @@ module.exports = {
     resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.js']
     },
+    plugins: plugins,
     module: {
         loaders: [
             {
@@ -34,3 +42,18 @@ module.exports = {
         ]
     }
 };
+
+// Utilities
+function parseArgument(argument) {
+    var argumentIndex = process.argv.indexOf(argument);
+    return argumentIndex != -1 ? process.argv[argumentIndex] : null;
+}
+
+function hasArgument() {
+    for (var i = 0; i < arguments.length; i++) {
+        if (is.not.null(parseArgument(arguments[i]))) {
+            return true;
+        }
+    }
+    return false;
+}
