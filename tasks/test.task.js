@@ -1,7 +1,8 @@
 var gulp = require('gulp');
-var karma = require('karma');
 
 gulp.task('test', function () {
+    //Loads lazily, because it's only needed in dev env.
+    var karma = require('karma');
     return new karma.Server({
         configFile: __dirname + '/../karma.conf.js',
         singleRun: true
