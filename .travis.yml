@@ -7,9 +7,6 @@ scripts: {
   gulp: './node_modules/gulp/bin/gulp',
 }
 
-before_script:
-  - npm install -g webpack
-
 script: gulp
 
 branches:
