@@ -1,5 +1,5 @@
 .idea/
 dist/
 node_modules/
-coverage-report/
+coverage/
 npm-debug.log

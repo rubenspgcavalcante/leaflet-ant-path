@@ -1,5 +1,5 @@
 .idea/
-coverage-report/
+coverage/
 node_modules/
 dist/
 sample/

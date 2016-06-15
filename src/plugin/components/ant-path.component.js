@@ -3,7 +3,7 @@ import {FeatureGroup, LayerGroup, Util, Polyline, extend} from "leaflet";
 /**
  * Builds the ant path polygon
  * @constructor
- * @extends {FeatureGroup}
+ * @extends {L.FeatureGroup}
  */
 const AntPath = FeatureGroup.extend({
     _path: null,
@@ -49,8 +49,6 @@ const AntPath = FeatureGroup.extend({
         var animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
         for (var i = 0; i < animatedPolyElement.length; i++) {
             animatedPolyElement[i].removeAttribute('style');
-            animatedPolyElement[i].removeAttribute('style');
-            animatedPolyElement[i].removeAttribute('style');
         }
 
         return this.options.paused = true;
@@ -88,12 +86,13 @@ const AntPath = FeatureGroup.extend({
         //Get the animation duration (in seconds) based on the given delay and the current zoom level
         var animationDuration = 1 + (this.options.delay / 3) / zoomLevel + 's';
 
-        //TODO Use requestAnimationFrame to support IE
-        for (var i = 0; i < animatedPolyElement.length; i++) {
-            animatedPolyElement[i].setAttribute('style', '-webkit-animation-duration:' + animationDuration);
-            animatedPolyElement[i].setAttribute('style', '-moz-animation-duration:' + animationDuration);
-            animatedPolyElement[i].setAttribute('style', 'animation-duration:' + animationDuration);
-        }
+        //TODO Use requestAnimationFrame to better support IE
+        var rulesSuffixes = ['-webkit-', '-moz-', '-ms-', ''];
+        animatedPolyElement.map((el)=> {
+            rulesSuffixes.map((suffix)=> {
+                el.setAttribute('style', `${suffix}animation-duration: ${animationDuration}`);
+            });
+        });
     }
 });
 
