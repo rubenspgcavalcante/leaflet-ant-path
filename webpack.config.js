@@ -8,7 +8,7 @@ if (hasArgument('--minimize', '-m')) {
 }
 
 module.exports = {
-    entry: './src/plugin/main.js',
+    entry: './src/plugin/main',
     devtool: 'source-map',
     output: {
         path: './dist',
@@ -16,8 +16,6 @@ module.exports = {
         library: 'leaflet-ant-path',
         libraryTarget: 'umd'
     },
-    resolve: {fallback: path.join(__dirname, "../../node_modules/")},
-    resolveLoader: {fallback: path.join(__dirname, "../../node_modules/")},
     externals: {
         "leaflet": {
             root: 'L',
@@ -26,16 +24,11 @@ module.exports = {
             amd: 'leaflet'
         }
     },
-    resolve: {
-        root: [path.join(__dirname, '../../node_modules')],
-        extensions: ['', '.webpack.js', '.web.js', '.js']
-    },
     plugins: plugins,
     module: {
         loaders: [
             {
                 test: /\.js?$/,
-                exclude: /(node_modules)/,
                 loader: require.resolve('babel-loader'),
                 query: {
                     plugins: [require.resolve("babel-plugin-add-module-exports")],

@@ -88,7 +88,7 @@ const AntPath = FeatureGroup.extend({
 
         //TODO Use requestAnimationFrame to better support IE
         var rulesSuffixes = ['-webkit-', '-moz-', '-ms-', ''];
-        animatedPolyElement.map((el)=> {
+        Array.prototype.map.call(animatedPolyElement, el => {
             rulesSuffixes.map((suffix)=> {
                 el.setAttribute('style', `${suffix}animation-duration: ${animationDuration}`);
             });
