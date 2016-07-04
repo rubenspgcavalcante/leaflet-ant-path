@@ -1,9 +1,10 @@
 # Leaflet Ant Path
+[![Build Status](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path)
+
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
 [Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)
 
 ### Installing
-
 Via Bower:
 ```
  bower install leaflet-ant-path
