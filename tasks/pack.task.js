@@ -19,7 +19,9 @@ function onBuild(done) {
             Object.keys(stats.compilation.assets).forEach(function (key) {
                 gutil.log('Webpack: output ', gutil.colors.green(key));
             });
-            gutil.log('Webpack: ', gutil.colors.blue('finished ', stats.compilation.name));
+
+            var elapsed = (stats.endTime - stats.startTime) / 1000;
+            gutil.log('Webpack: ', gutil.colors.blue('Packing finished in', elapsed, 'seconds'));
             if (done) {
                 done();
             }

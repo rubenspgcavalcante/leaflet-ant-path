@@ -28,8 +28,8 @@ module.exports = function (config) {
         remapIstanbulReporter: {
             src: 'coverage/lcov/coverage.json',
             reports: {
-                lcovonly: 'lcov/coverage/lcov.info',
-                html: 'coverage/lcov/html/report'
+                lcovonly: 'coverage/lcov/lcov.info',
+                html: 'coverage/lcov/html'
             },
             timeoutNotCreated: 5000, // default value
             timeoutNoMoreFiles: 1000 // default value

@@ -8,7 +8,7 @@ if (hasArgument('--minimize', '-m')) {
 }
 
 module.exports = {
-    entry: './src/plugin/main',
+    entry: './src/plugin/main.js',
     devtool: 'source-map',
     output: {
         path: './dist',
@@ -16,6 +16,8 @@ module.exports = {
         library: 'leaflet-ant-path',
         libraryTarget: 'umd'
     },
+    resolve: {fallback: path.join(__dirname, "../../node_modules/")},
+    resolveLoader: {fallback: path.join(__dirname, "../../node_modules/")},
     externals: {
         "leaflet": {
             root: 'L',
@@ -25,6 +27,7 @@ module.exports = {
         }
     },
     resolve: {
+        root: [path.join(__dirname, '../../node_modules')],
         extensions: ['', '.webpack.js', '.web.js', '.js']
     },
     plugins: plugins,
@@ -32,13 +35,21 @@ module.exports = {
         loaders: [
             {
                 test: /\.js?$/,
-                exclude: /(node_modules|vendor)/,
-                loader: 'babel',
+                exclude: /(node_modules)/,
+                loader: require.resolve('babel-loader'),
                 query: {
-                    presets: ['es2015']
-                }
+                    plugins: [require.resolve("babel-plugin-add-module-exports")],
+                    presets: [require.resolve("babel-preset-es2015")]
+                },
             },
-            {test: /\.(scss|sass)$/, loaders: ["style", "css", "sass"]}
+            {
+                test: /\.(scss|sass)$/,
+                loaders: [
+                    require.resolve("style-loader"),
+                    require.resolve("css-loader"),
+                    require.resolve("sass-loader")
+                ]
+            }
         ]
     }
 };
