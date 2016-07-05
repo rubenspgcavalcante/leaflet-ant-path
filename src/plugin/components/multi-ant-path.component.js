@@ -7,9 +7,10 @@ import AntPath from './ant-path.component';
  * @extends {L.FeatureGroup}
  */
 const MultiAntPath = FeatureGroup.extend({
+    options: null,
+
     initialize: function (latlngs, options) {
-        this._layers = {};
-        this._options = options;
+        this.options = options;
         this.setLatLngs(latlngs);
     },
 
@@ -26,7 +27,7 @@ const MultiAntPath = FeatureGroup.extend({
         }, this);
 
         while (i < len) {
-            this.addLayer(new AntPath(latlngs[i++], this._options));
+            this.addLayer(new AntPath(latlngs[i++], this.options));
         }
         return this;
     },

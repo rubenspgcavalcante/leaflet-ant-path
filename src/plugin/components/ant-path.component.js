@@ -6,6 +6,7 @@ import {FeatureGroup, LayerGroup, Util, Polyline, extend} from "leaflet";
  * @extends {L.FeatureGroup}
  */
 const AntPath = FeatureGroup.extend({
+    _map: null,
     _path: null,
     _animatedPathId: null,
     _animatedPathClass: 'leaflet-ant-path',
@@ -21,7 +22,6 @@ const AntPath = FeatureGroup.extend({
     initialize (path, options) {
         LayerGroup.prototype.initialize.call(this);
         Util.setOptions(this, options);
-        this._map = null;
         this._path = path;
         this._animatedPathId = 'ant-path-' + new Date().getTime();
         this._draw();
@@ -50,7 +50,6 @@ const AntPath = FeatureGroup.extend({
         for (var i = 0; i < animatedPolyElement.length; i++) {
             animatedPolyElement[i].removeAttribute('style');
         }
-
         return this.options.paused = true;
     },
 
@@ -74,7 +73,6 @@ const AntPath = FeatureGroup.extend({
         this.addLayer(new Polyline(this._path, pulseOpts));
     },
 
-
     _calculateAnimationSpeed () {
         if (this.options.paused || !this._map) {
             return;
@@ -87,7 +85,7 @@ const AntPath = FeatureGroup.extend({
         var animationDuration = 1 + (this.options.delay / 3) / zoomLevel + 's';
 
         //TODO Use requestAnimationFrame to better support IE
-        var rulesSuffixes = ['-webkit-', '-moz-', '-ms-', ''];
+        var rulesSuffixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
         Array.prototype.map.call(animatedPolyElement, el => {
             rulesSuffixes.map((suffix)=> {
                 el.setAttribute('style', `${suffix}animation-duration: ${animationDuration}`);

@@ -1,29 +1,30 @@
-@-webkit-keyframes leaflet-ant-path-animation
+$animation-rules: linear infinite leaflet-ant-path-animation
+
+=stroke-animation
   from
     stroke-dashoffset: 100%
   to
     stroke-dashoffset: 0%
+
+@-webkit-keyframes leaflet-ant-path-animation
+  +stroke-animation
 
 @-moz-keyframes leaflet-ant-path-animation
-  from
-    stroke-dashoffset: 100%
-  to
-    stroke-dashoffset: 0%
+  +stroke-animation
 
 @-ms-keyframes leaflet-ant-path-animation
-  from
-    stroke-dashoffset: 100%
-  to
-    stroke-dashoffset: 0%
+  +stroke-animation
+
+@-o-keyframes leaflet-ant-path-animation
+  +stroke-animation
 
 @keyframes leaflet-ant-path-animation
-  from
-    stroke-dashoffset: 100%
-  to
-    stroke-dashoffset: 0%
+  +stroke-animation
 
 path.leaflet-ant-path
   fill: none
-  -webkit-animation: linear infinite leaflet-ant-path-animation
-  -moz-animation: linear infinite leaflet-ant-path-animation
-  animation: linear infinite leaflet-ant-path-animation
+  -webkit-animation: $animation-rules
+  -moz-animation: $animation-rules
+  -ms-animation: $animation-rules
+  -o-animation: $animation-rules
+  animation: $animation-rules
