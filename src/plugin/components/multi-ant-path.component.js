@@ -3,18 +3,25 @@ import AntPath from './ant-path.component';
 
 /**
  * Builds multi ant path polygons
- * @constructor
+ * @deprecated
+ * @class
  * @extends {L.FeatureGroup}
  */
-const MultiAntPath = FeatureGroup.extend({
-    options: null,
+class MultiAntPath extends FeatureGroup {
+    options = null;
 
-    initialize: function (latlngs, options) {
+    constructor(latlngs, options) {
+        super();
+        console.warn(`
+            Deprecation warn: Leaflet 1.x doesn't have support for MultiPolylines, please
+            use LayerGroup or FeatureGroup to organize multiple ant-path layers.
+        `);
+
         this.options = options;
         this.setLatLngs(latlngs);
-    },
+    }
 
-    setLatLngs: function (latlngs) {
+    setLatLngs(latlngs = []) {
         var i = 0,
             len = latlngs.length;
 
@@ -30,29 +37,21 @@ const MultiAntPath = FeatureGroup.extend({
             this.addLayer(new AntPath(latlngs[i++], this.options));
         }
         return this;
-    },
-
-    getLatLngs: function () {
-        var latlngs = [];
-
-        this.eachLayer(function (layer) {
-            latlngs.push(layer.getLatLngs());
-        });
-
-        return latlngs;
-    },
-
-    pause: function () {
-        this.eachLayer(function (layer) {
-            layer.pause();
-        });
-    },
-
-    resume: function () {
-        this.eachLayer(function (layer) {
-            layer.resume();
-        });
     }
-});
+
+    getLatLngs() {
+        var latlngs = [];
+        this.eachLayer(layer => latlngs.push(layer.getLatLngs()));
+        return latlngs;
+    }
+
+    pause() {
+        this.eachLayer(layer => layer.pause());
+    }
+
+    resume() {
+        this.eachLayer(layer => layer.resume());
+    }
+}
 
 export default MultiAntPath;

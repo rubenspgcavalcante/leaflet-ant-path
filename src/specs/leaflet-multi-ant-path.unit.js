@@ -1,18 +1,24 @@
 describe("Creates a leaflet multi polyline with a 'ant-path' animated flux", function () {
-    var polylineCalls;
+    var spy, fakePolyline;
 
     beforeEach(function () {
-        polylineCalls = 0;
+        fakePolyline = new L.Polyline([]);
 
-        spyOn(L, 'Polyline').and.callFake(function PolylineMock() {
-            polylineCalls++;
+        spyOn(L, 'Polyline').and.callFake(function() {
+            return fakePolyline;
         });
     });
 
-    it("Should call multiple ant paths and stack then into the double of polylines", function () {
-        var multiAntPath = new L.MultiPolyline.MultiAntPath([0, 0], [0,0]);
+    function isMajorVersion(){
+        return L.version.match(/$1\..*$/);
+    }
 
-        expect(L.Polyline).toHaveBeenCalled();
-        expect(polylineCalls).toBe(4);
-    });
+    if(isMajorVersion()){
+        it("Should call multiple ant paths and stack then into the double of polylines", function () {
+            var multiAntPath = new L.MultiPolyline.MultiAntPath([0, 0], [0,0]);
+
+            expect(L.Polyline).toHaveBeenCalled();
+            expect(spy.calls.count()).toBe(4);
+        });
+    }
 });

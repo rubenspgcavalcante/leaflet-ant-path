@@ -1,19 +1,17 @@
 describe("Creates a leaflet polyline with a 'ant-path' animated flux", function () {
-    var polylineCalls;
-    console.log(window['leaflet-ant-path']);
+    var spy, fakePolyline;
 
     beforeEach(function () {
-        polylineCalls = 0;
+        fakePolyline = new L.Polyline([]);
 
-        spyOn(L, 'Polyline').and.callFake(function PolylineMock() {
-            polylineCalls++;
+        spy = spyOn(L, 'Polyline').and.callFake(function () {
+            return fakePolyline;
         });
     });
 
     it("Should use two polylines to stack in a animation", function () {
         var antPath = new L.Polyline.AntPath([0, 0]);
-
         expect(L.Polyline).toHaveBeenCalled();
-        expect(polylineCalls).toBe(2);
+        expect(spy.calls.count()).toBe(2);
     });
 });

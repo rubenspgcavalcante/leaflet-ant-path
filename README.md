@@ -33,6 +33,10 @@ Tested on:
 ### UMD compatible
 Can be used with asynchronous module loaders and CommonJS packers
     
+### Important!
+Soon leaflet 0.7 will be deprecated, and so MultiPolyline. Because this, the MultiAntPath is
+also been **deprecated**, therefore use the L.LayerGroup to control your AntPath layers collection. :)
+    
 ### Using the plugin
 It's just like a polyline:  
 
@@ -56,7 +60,7 @@ It's just like a polyline:
 ```
 
 Note for AMD/CommonJS:  
-The direct use as 'AntPath' now is deprecated and instead is exported by default, the modules which contains the AntPath and MultiAntPath
+The direct use as 'AntPath' now is **deprecated** and instead is exported by default, the modules which contains the AntPath and MultiAntPath
 
 Using with AMD:  
 
@@ -77,10 +81,15 @@ Using with browerify:
     var AntPath = require('leafletAntPath').AntPath;
     var MultiAntPath = require('leafletAntPath').MultiAntPath;
     
-    //or just
+    // ...
+    var antPolyline = new AntPath(latlngs, options);
+    antPolyline.addTo(map);
+```
+
+Using with ES6 imports
+``` javascript
     import {AntPath, MultiAntPath} from 'leafletAntPath';
     
-    // ...
     var antPolyline = new AntPath(latlngs, options);
     antPolyline.addTo(map);
 ```

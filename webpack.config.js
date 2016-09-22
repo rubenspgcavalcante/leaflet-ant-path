@@ -4,7 +4,7 @@ var is = require('is_js');
 var plugins = [];
 
 if (hasArgument('--minimize', '-m')) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin());
+    plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 }
 
 module.exports = {
@@ -31,7 +31,11 @@ module.exports = {
                 test: /\.js?$/,
                 loader: require.resolve('babel-loader'),
                 query: {
-                    plugins: [require.resolve("babel-plugin-add-module-exports")],
+                    plugins: [
+                        require.resolve("babel-plugin-add-module-exports"),
+                        require.resolve("babel-plugin-transform-class-properties"),
+                        require.resolve("babel-plugin-transform-object-rest-spread")
+                    ],
                     presets: [require.resolve("babel-preset-es2015")]
                 },
             },

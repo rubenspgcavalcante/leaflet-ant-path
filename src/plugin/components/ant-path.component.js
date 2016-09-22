@@ -1,97 +1,100 @@
-import {FeatureGroup, LayerGroup, Util, Polyline, extend} from "leaflet";
+import {FeatureGroup, LayerGroup, Util, Polyline} from "leaflet";
 
 /**
  * Builds the ant path polygon
- * @constructor
+ * @class
  * @extends {L.FeatureGroup}
  */
-const AntPath = FeatureGroup.extend({
-    _map: null,
-    _path: null,
-    _animatedPathId: null,
-    _animatedPathClass: 'leaflet-ant-path',
+class AntPath extends FeatureGroup {
+    _map = null;
+    _path = null;
+    _animatedPathId = null;
+    _animatedPathClass = 'leaflet-ant-path';
 
-    /* default options */
-    options: {
+    _defaultOptions = {
         paused: false,
         delay: 400,
         dashArray: [10, 20],
+        weight: 5,
+        opacity: 0.5,
+        color: '#0000FF',
         pulseColor: '#FFFFFF'
-    },
+    };
 
-    initialize (path, options) {
-        LayerGroup.prototype.initialize.call(this);
-        Util.setOptions(this, options);
+    constructor(path, customOptions={}) {
+        super();
+        Util.setOptions(this, {...this._defaultOptions, ...customOptions});
         this._path = path;
-        this._animatedPathId = 'ant-path-' + new Date().getTime();
+        this._animatedPathId = `ant-path-${new Date().getTime()}`;
         this._draw();
-    },
+    }
 
-    onAdd (map) {
+    onAdd(map) {
         this._map = map;
         this._map.on('zoomend', this._calculateAnimationSpeed, this);
 
         this._draw();
         this._calculateAnimationSpeed();
-    },
+    }
 
-    onRemove (map) {
+    onRemove(map) {
         this._map.off('zoomend', this._calculateAnimationSpeed, this);
         this._map = null;
-        LayerGroup.prototype.onRemove.call(this, map);
-    },
+        super.onRemove(map);
+    }
 
-    pause () {
-        if (this.options.paused) {
+    pause() {
+        const {options} = this;
+        if (options.paused) {
             return false;
         }
 
-        var animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
-        for (var i = 0; i < animatedPolyElement.length; i++) {
-            animatedPolyElement[i].removeAttribute('style');
+        const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
+        for (let el in animatedPolyElement) {
+            el.removeAttribute('style');
         }
-        return this.options.paused = true;
-    },
+        return options.paused = true;
+    }
 
-    resume () {
+    resume() {
         this._calculateAnimationSpeed();
-    },
+    }
 
-    _draw () {
-        var pathOpts = {};
-        var pulseOpts = {};
+    _draw() {
+        const {options, _path, _animatedPathClass, _animatedPathId} = this;
 
-        extend(pulseOpts, this.options);
-        extend(pathOpts, this.options);
+        let pathOpts = {...options};
+        let pulseOpts = {...options};
 
-        pulseOpts.color = pulseOpts.pulseColor || this.options.pulseColor;
-        pulseOpts.className = this._animatedPathClass + ' ' + this._animatedPathId;
-
+        pulseOpts.color = pulseOpts.pulseColor || options.pulseColor;
+        pulseOpts.className = `${_animatedPathClass} ${_animatedPathId}`;
         delete pathOpts.dashArray;
 
-        this.addLayer(new Polyline(this._path, pathOpts));
-        this.addLayer(new Polyline(this._path, pulseOpts));
-    },
+        this.addLayer(new Polyline(_path, pathOpts));
+        this.addLayer(new Polyline(_path, pulseOpts));
+    }
 
-    _calculateAnimationSpeed () {
-        if (this.options.paused || !this._map) {
+    _calculateAnimationSpeed() {
+        const {options, _map, _animatedPathId} = this;
+
+        if (options.paused || !_map) {
             return;
         }
 
-        var zoomLevel = this._map.getZoom();
-        var animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
+        const zoomLevel = _map.getZoom();
+        const animatedPolyElement = document.getElementsByClassName(_animatedPathId);
 
         //Get the animation duration (in seconds) based on the given delay and the current zoom level
-        var animationDuration = 1 + (this.options.delay / 3) / zoomLevel + 's';
+        var animationDuration = 1 + (options.delay / 3) / zoomLevel + 's';
 
         //TODO Use requestAnimationFrame to better support IE
         var rulesSuffixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
-        Array.prototype.map.call(animatedPolyElement, el => {
-            rulesSuffixes.map((suffix)=> {
+        for (let el of animatedPolyElement) {
+            for (let suffix of rulesSuffixes) {
                 el.setAttribute('style', `${suffix}animation-duration: ${animationDuration}`);
-            });
-        });
+            }
+        }
     }
-});
+}
 
 export default AntPath;

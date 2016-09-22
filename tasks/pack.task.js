@@ -12,9 +12,7 @@ function onBuild(done) {
     return function (err, stats) {
         if (err) {
             gutil.log('Error', err);
-            if (done) {
-                done();
-            }
+            done && done();
         } else {
             Object.keys(stats.compilation.assets).forEach(function (key) {
                 gutil.log('Webpack: output ', gutil.colors.green(key));
@@ -22,9 +20,7 @@ function onBuild(done) {
 
             var elapsed = (stats.endTime - stats.startTime) / 1000;
             gutil.log('Webpack: ', gutil.colors.blue('Packing finished in', elapsed, 'seconds'));
-            if (done) {
-                done();
-            }
+            done && done();
         }
     }
 }
