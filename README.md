@@ -15,13 +15,13 @@ Via NPM:
  npm install leaflet-ant-path
 ```
 
-Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path/archive/master.zip) this source code
+Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/archive/master.zip) this source code
 
 
 ### Requirements
     
     - Leaflet >= 0.7.7
-    - Soon compatible with Leaflet 1.0.0 :+1:
+    - Leaflet 1.0.0-rc
     
 ### Browser compatibility
 Tested on:
