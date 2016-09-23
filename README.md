@@ -75,7 +75,7 @@ require(['leafletAntPath'], function(AntPathModule) {
 });
 ```
 
-Using with browerify:
+Using with browserify:
 
 ``` javascript
     var AntPath = require('leafletAntPath').AntPath;
