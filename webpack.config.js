@@ -3,7 +3,6 @@ var path = require("path");
 var utils = require("./tasks/utils");
 
 var plugins = [];
-
 if (utils.hasArgument("--minimize", "-m")) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 }
@@ -25,6 +24,10 @@ module.exports = {
             amd: "leaflet"
         }
     },
+    devServer: {
+        inline: true,
+        hot: true
+    },
     plugins: plugins,
     module: {
         preLoaders: [
@@ -37,15 +40,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js?$/,
-                loader: require.resolve("babel-loader"),
-                query: {
-                    plugins: [
-                        require.resolve("babel-plugin-add-module-exports"),
-                        require.resolve("babel-plugin-transform-class-properties"),
-                        require.resolve("babel-plugin-transform-object-rest-spread")
-                    ],
-                    presets: [require.resolve("babel-preset-es2015")]
-                },
+                loader: require.resolve("babel-loader")
             },
             {
                 test: /\.(scss|sass)$/,

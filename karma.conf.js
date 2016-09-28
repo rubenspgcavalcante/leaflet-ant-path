@@ -8,13 +8,14 @@ module.exports = function (config) {
             "karma-jasmine",
             "karma-coverage",
             "karma-sourcemap-loader",
-            "karma-remap-istanbul"
+            "karma-remap-istanbul",
+            "karma-babel-preprocessor"
         ],
 
         reporters: ["progress", "coverage", "karma-remap-istanbul"],
 
         preprocessors: {
-            "**/*.js": ["sourcemap"],
+            "src/**/*.js": ["babel", "sourcemap"],
             "dist/leaflet-ant-path.js": ["coverage"]
         },
 
