@@ -1,26 +1,9 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var webpack = require('webpack');
+var gulp = require("gulp");
+var webpack = require("webpack");
+var utils = require("./utils");
 
-gulp.task('pack', function (done) {
-    var config = require('../webpack.config');
+gulp.task("pack", function (done) {
+    var config = require("./../webpack.config.js");
     config.plugins = [new webpack.optimize.UglifyJsPlugin()];
-    webpack(config).run(onBuild(done));
+    webpack(config).run(utils.afterBuild(done));
 });
-
-function onBuild(done) {
-    return function (err, stats) {
-        if (err) {
-            gutil.log('Error', err);
-            done && done();
-        } else {
-            Object.keys(stats.compilation.assets).forEach(function (key) {
-                gutil.log('Webpack: output ', gutil.colors.green(key));
-            });
-
-            var elapsed = (stats.endTime - stats.startTime) / 1000;
-            gutil.log('Webpack: ', gutil.colors.blue('Packing finished in', elapsed, 'seconds'));
-            done && done();
-        }
-    }
-}

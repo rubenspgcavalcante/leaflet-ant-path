@@ -9,7 +9,7 @@ class AntPath extends FeatureGroup {
     _map = null;
     _path = null;
     _animatedPathId = null;
-    _animatedPathClass = 'leaflet-ant-path';
+    _animatedPathClass = "leaflet-ant-path";
 
     _defaultOptions = {
         paused: false,
@@ -17,8 +17,8 @@ class AntPath extends FeatureGroup {
         dashArray: [10, 20],
         weight: 5,
         opacity: 0.5,
-        color: '#0000FF',
-        pulseColor: '#FFFFFF'
+        color: "#0000FF",
+        pulseColor: "#FFFFFF"
     };
 
     constructor(path, customOptions={}) {
@@ -31,14 +31,14 @@ class AntPath extends FeatureGroup {
 
     onAdd(map) {
         this._map = map;
-        this._map.on('zoomend', this._calculateAnimationSpeed, this);
+        this._map.on("zoomend", this._calculateAnimationSpeed, this);
 
         this._draw();
         this._calculateAnimationSpeed();
     }
 
     onRemove(map) {
-        this._map.off('zoomend', this._calculateAnimationSpeed, this);
+        this._map.off("zoomend", this._calculateAnimationSpeed, this);
         this._map = null;
         super.onRemove(map);
     }
@@ -51,7 +51,7 @@ class AntPath extends FeatureGroup {
 
         const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
         for (let el in animatedPolyElement) {
-            el.removeAttribute('style');
+            el.removeAttribute("style");
         }
         return options.paused = true;
     }
@@ -85,13 +85,13 @@ class AntPath extends FeatureGroup {
         const animatedPolyElement = document.getElementsByClassName(_animatedPathId);
 
         //Get the animation duration (in seconds) based on the given delay and the current zoom level
-        var animationDuration = 1 + (options.delay / 3) / zoomLevel + 's';
+        var animationDuration = 1 + (options.delay / 3) / zoomLevel + "s";
 
         //TODO Use requestAnimationFrame to better support IE
-        var rulesSuffixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
+        var rulesSuffixes = ["-webkit-", "-moz-", "-ms-", "-o-", ""];
         for (let el of animatedPolyElement) {
             for (let suffix of rulesSuffixes) {
-                el.setAttribute('style', `${suffix}animation-duration: ${animationDuration}`);
+                el.setAttribute("style", `${suffix}animation-duration: ${animationDuration}`);
             }
         }
     }

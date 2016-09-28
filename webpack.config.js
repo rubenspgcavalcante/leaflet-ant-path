@@ -1,35 +1,43 @@
-var webpack = require('webpack');
-var path = require('path');
-var is = require('is_js');
+var webpack = require("webpack");
+var path = require("path");
+var utils = require("./tasks/utils");
+
 var plugins = [];
 
-if (hasArgument('--minimize', '-m')) {
+if (utils.hasArgument("--minimize", "-m")) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 }
 
 module.exports = {
-    entry: './src/plugin/main',
-    devtool: 'source-map',
+    entry: "./src/plugin/main",
+    devtool: "source-map",
     output: {
-        path: './dist',
-        filename: 'leaflet-ant-path.js',
-        library: 'leaflet-ant-path',
-        libraryTarget: 'umd'
+        path: "./dist",
+        filename: "leaflet-ant-path.js",
+        library: "leaflet-ant-path",
+        libraryTarget: "umd"
     },
     externals: {
         "leaflet": {
-            root: 'L',
-            commonjs: 'leaflet',
-            commonjs2: 'leaflet',
-            amd: 'leaflet'
+            root: "L",
+            commonjs: "leaflet",
+            commonjs2: "leaflet",
+            amd: "leaflet"
         }
     },
     plugins: plugins,
     module: {
+        preLoaders: [
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            },
+        ],
         loaders: [
             {
                 test: /\.js?$/,
-                loader: require.resolve('babel-loader'),
+                loader: require.resolve("babel-loader"),
                 query: {
                     plugins: [
                         require.resolve("babel-plugin-add-module-exports"),
@@ -50,18 +58,3 @@ module.exports = {
         ]
     }
 };
-
-// Utilities
-function parseArgument(argument) {
-    var argumentIndex = process.argv.indexOf(argument);
-    return argumentIndex != -1 ? process.argv[argumentIndex] : null;
-}
-
-function hasArgument() {
-    for (var i = 0; i < arguments.length; i++) {
-        if (is.not.null(parseArgument(arguments[i]))) {
-            return true;
-        }
-    }
-    return false;
-}

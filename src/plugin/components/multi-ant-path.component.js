@@ -1,5 +1,5 @@
-import {FeatureGroup} from 'leaflet';
-import AntPath from './ant-path.component';
+import {FeatureGroup} from "leaflet";
+import AntPath from "./ant-path.component";
 
 /**
  * Builds multi ant path polygons

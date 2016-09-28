@@ -4,7 +4,7 @@ describe("Creates a leaflet multi polyline with a 'ant-path' animated flux", fun
     beforeEach(function () {
         fakePolyline = new L.Polyline([]);
 
-        spyOn(L, 'Polyline').and.callFake(function() {
+        spyOn(L, "Polyline").and.callFake(function() {
             return fakePolyline;
         });
     });

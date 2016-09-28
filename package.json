@@ -23,6 +23,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "css-loader": "^0.23.1",
+    "eslint-loader": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",
     "install": "^0.8.1",
@@ -35,6 +36,7 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
+    "babel-eslint": "^7.0.0",
     "jasmine": "^2.4.1",
     "karma": "^0.13.19",
     "karma-coverage": "^0.5.3",
@@ -42,6 +44,6 @@
     "karma-phantomjs-launcher": "^0.2.3",
     "karma-remap-istanbul": "^0.1.0",
     "karma-sourcemap-loader": "^0.3.7",
-    "phantomjs": "^1.9.19"
+    "phantomjs": "^2.1.7"
   }
 }
