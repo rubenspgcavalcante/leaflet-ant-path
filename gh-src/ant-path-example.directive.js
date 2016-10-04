@@ -14,25 +14,26 @@
             link: function (scope, element) {
                 var map = L.map(element.find('#map')[0]).setView([0, 0], 3);
                 var options = {};
-                var layer = null, path = null;
+                var antPath = null, path = null;
 
                 $http.get('route.json').then(function (res) {
-                    path = res.data;
+                    path = res.data.map(point => new L.latLng(point[0], point[1]));
 
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
-                    layer = new L.Polyline.AntPath(path);
-                    map.addLayer(layer);
-                    map.fitBounds(layer.getBounds());
+                    antPath = new L.Polyline.AntPath(path);
+
+                    map.addLayer(antPath);
+                    map.fitBounds(antPath.getBounds());
                 });
 
                 scope.$watch('options', function (opts) {
-                    if (layer !== null) {
-                        map.removeLayer(layer);
-                        layer = new L.Polyline.AntPath(path, opts);
-                        map.addLayer(layer);
+                    if (antPath !== null) {
+                        map.removeLayer(antPath);
+                        antPath = new L.Polyline.AntPath(path, opts);
+                        map.addLayer(antPath);
                     }
                 }, true);
             }
