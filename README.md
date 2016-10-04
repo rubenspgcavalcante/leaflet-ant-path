@@ -160,6 +160,17 @@ To test:
     gulp test
 ```
 
+### Development Environment
+**Be sure all the dev-dependencies are installed.**
+Just run the command:
+```
+npm start
+```
+
+This will make the webpack compile the dev. env. and set up into a
+webserver with hot deployment into the localhost:8080. There you can make
+changes into the plugin and see in real time all your modifications running.
+
 ### License
 
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)

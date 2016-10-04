@@ -4,5 +4,4 @@ export default class CustomAntPath extends AntPath {
     constructor(path, options) {
         super(path, {...options, color: "red"});
     }
-
 }
