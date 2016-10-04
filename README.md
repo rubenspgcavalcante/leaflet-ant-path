@@ -94,6 +94,44 @@ Using with ES6 imports
     antPolyline.addTo(map);
 ```
 
+### ES6/ES2015 features
+Thinking in the new features of JavaScript, and its new way of programing,
+AntPath has some nicely features to work with ES6.
+
+#### spreadable
+When spread the path, you will receive it lat/lngs array;
+```javascript
+    ...
+    let antPathLayer = new AntPath(path, options);
+    let anotherAntPath = new AntPath(path2, options);
+    
+    let latLngs = [...antPathLayer, ...anotherAntPath];
+```
+
+#### iterable
+When used in a **for ... of ...** loops over the path coordinates
+```javascript
+for(let latLng of antPath) {
+    // do something with it latLngs ...
+}
+```
+
+#### extensible
+You can create you custom 'class' based on the AntPath:
+```javascript
+class CustomAntPath extends AntPath {
+    //...
+}
+```
+
+#### map method
+AntPath has a map method as the Array, returning a new instance of 
+AntPath *(or the child class which extends it)*:
+```javascript
+//New path with translated path
+let newAnthPath = myAntPath.map(pos => [pos.lat+1, lng: pos.lng+1]);
+```
+
 ### Parameters
 The AntPath extends from the [FeatureGroup](http://leafletjs.com/reference.html#featuregroup), but you initialise with
 the same options of a common [Polyline]((http://leafletjs.com/reference.html#polyline)), with some extra options, like the flux color.  

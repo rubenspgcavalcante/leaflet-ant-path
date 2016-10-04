@@ -1,4 +1,5 @@
 import {FeatureGroup, LayerGroup, Util, Polyline} from "leaflet";
+import regeneratorRuntime from "regenerator-runtime";
 
 /**
  * Builds the ant path polygon
@@ -21,12 +22,30 @@ class AntPath extends FeatureGroup {
         pulseColor: "#FFFFFF"
     };
 
-    constructor(path, customOptions={}) {
+    constructor(path, customOptions = {}) {
         super();
         Util.setOptions(this, {...this._defaultOptions, ...customOptions});
         this._path = path;
         this._animatedPathId = `ant-path-${new Date().getTime()}`;
         this._draw();
+    }
+
+    map(call) {
+        //This prevents if some class extending AntPath to return a instance of AntPath itself instead of the invoker class
+        const Species = this.constructor[Symbol.species];
+        return new Species(this._path.map(call), {...this.options});
+    }
+
+    static get[Symbol.species]() {
+        return this;
+    }
+
+    get [Symbol.toStringTag]() {
+        return "L.Polyline.AntPath";
+    }
+
+    *[Symbol.iterator]() {
+        yield* this._path;
     }
 
     onAdd(map) {

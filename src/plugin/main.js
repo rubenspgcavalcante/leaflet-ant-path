@@ -4,7 +4,8 @@ import antPath from "./factories/ant-path.factory";
 import MultiAntPath  from "./components/multi-ant-path.component";
 import multiAntPath from "./factories/multi-ant-path.factory";
 
-import style from "../style/leaflet-ant-path.sass";
+import "core-js/es6/symbol";
+import "../style/leaflet-ant-path.sass";
 
 Polyline.AntPath = AntPath;
 polyline.antPath = antPath;

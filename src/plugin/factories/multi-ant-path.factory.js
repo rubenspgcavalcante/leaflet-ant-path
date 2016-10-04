@@ -1,5 +1,4 @@
 import {MultiAntPath} from "../components/multi-ant-path.component";
-export default multiAntPath;
 
 /**
  * Factory for MultiAntPath component
@@ -8,6 +7,4 @@ export default multiAntPath;
  * @param {Object} options
  * @returns {MultiAntPath}
  */
-function multiAntPath(paths, options) {
-    return new MultiAntPath(paths, options);
-}
+export default (paths, options) => Reflect.construct(MultiAntPath, [paths, options]);
