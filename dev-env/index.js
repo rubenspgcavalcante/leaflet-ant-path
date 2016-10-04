@@ -1,4 +1,5 @@
 import {AntPath} from "../src/plugin/main";
+import CustomAntPath from "./components/custom-ant-path";
 import MyMap from "./components/my-map";
 import path from "./sample-path.json";
 
@@ -7,11 +8,13 @@ import "leaflet/dist/leaflet.css";
 import "./style/dev-env.sass";
 
 document.addEventListener("DOMContentLoaded", ()=> {
-    const map = new MyMap();
-    map.setView([0, 0], 3);
+    const container = document.getElementById("container");
 
+    const mapSimple = new MyMap("map-simple", "Simple Usage", container);
     const antPath = new AntPath(path);
-    map.addLayer(antPath);
+    mapSimple.addLayer(antPath);
 
-    map.fitBounds(antPath.getBounds());
+    const mapCustom = new MyMap("map-custom", "Custom AntPath", container);
+    const customAntPath = new CustomAntPath(path).map(pos => [pos[0] + 0.05, pos[1]]); //translation
+    mapCustom.addLayer(customAntPath);
 });
