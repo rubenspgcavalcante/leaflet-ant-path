@@ -6,7 +6,7 @@ import regeneratorRuntime from "regenerator-runtime";
  * @class
  * @extends {L.FeatureGroup}
  */
-class AntPath extends FeatureGroup {
+export default class AntPath extends FeatureGroup {
     _map = null;
     _path = null;
     _animatedPathId = null;
@@ -69,7 +69,7 @@ class AntPath extends FeatureGroup {
         }
 
         const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
-        for (let el in animatedPolyElement) {
+        for (let el of animatedPolyElement) {
             el.removeAttribute("style");
         }
         return options.paused = true;
@@ -104,16 +104,14 @@ class AntPath extends FeatureGroup {
         const animatedPolyElement = document.getElementsByClassName(_animatedPathId);
 
         //Get the animation duration (in seconds) based on the given delay and the current zoom level
-        var animationDuration = 1 + (options.delay / 3) / zoomLevel + "s";
+        const animationDuration = 1 + (options.delay / 3) / zoomLevel + "s";
 
         //TODO Use requestAnimationFrame to better support IE
-        var rulesSuffixes = ["-webkit-", "-moz-", "-ms-", "-o-", ""];
+        const animationRules = ["-webkit-", "-moz-", "-ms-", "-o-", ""]
+            .map(prefix => `${prefix}animation-duration: ${animationDuration}`).join(";");
+
         for (let el of animatedPolyElement) {
-            for (let suffix of rulesSuffixes) {
-                el.setAttribute("style", `${suffix}animation-duration: ${animationDuration}`);
-            }
+            el.style = animationRules;
         }
     }
 }
-
-export default AntPath;

@@ -7,7 +7,7 @@ import AntPath from "./ant-path.component";
  * @class
  * @extends {L.FeatureGroup}
  */
-class MultiAntPath extends FeatureGroup {
+export default class MultiAntPath extends FeatureGroup {
     options = null;
 
     constructor(latlngs, options) {
@@ -53,5 +53,3 @@ class MultiAntPath extends FeatureGroup {
         this.eachLayer(layer => layer.resume());
     }
 }
-
-export default MultiAntPath;
