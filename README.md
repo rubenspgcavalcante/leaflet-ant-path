@@ -129,7 +129,7 @@ AntPath has a map method as the Array, returning a new instance of
 AntPath *(or the child class which extends it)*:
 ```javascript
 //New path with translated path
-let newAnthPath = myAntPath.map(pos => [pos.lat+1, lng: pos.lng+1]);
+let newAnthPath = myAntPath.map(pos => latLng(pos.lat+1, pos.lng+1));
 ```
 
 ### Parameters
