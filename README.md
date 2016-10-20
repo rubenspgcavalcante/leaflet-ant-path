@@ -147,6 +147,9 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 
 ---
 
+### Methods
+Same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)
+
 ### Building and Testing
 To run the build, before install the npm and gulp dependencies, then run:
 
