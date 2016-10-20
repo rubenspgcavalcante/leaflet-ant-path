@@ -22,5 +22,5 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     mapCustom.addLayer(customAntPath);
 
-    logger.log(antPath.getBounds());
+    logger.log(antPath.getLatLngs());
 });

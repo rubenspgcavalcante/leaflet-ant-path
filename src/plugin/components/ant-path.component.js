@@ -34,7 +34,7 @@ export default class AntPath extends FeatureGroup {
         Util.setOptions(this, {...this._defaultOptions, ...customOptions});
         this._path = path;
         this._animatedPathId = `ant-path-${new Date().getTime()}`;
-        this._draw();
+        this._mount();
     }
 
     map(call) {
@@ -59,7 +59,7 @@ export default class AntPath extends FeatureGroup {
         this._map = map;
         this._map.on("zoomend", this._calculateAnimationSpeed, this);
 
-        this._draw();
+        this._mount();
         this._calculateAnimationSpeed();
     }
 
@@ -86,7 +86,7 @@ export default class AntPath extends FeatureGroup {
         this._calculateAnimationSpeed();
     }
 
-    _draw() {
+    _mount() {
         const {options, _path, _animatedPathClass, _animatedPathId} = this;
 
         let pathOpts = {...options};
@@ -132,7 +132,6 @@ export default class AntPath extends FeatureGroup {
         this[Layers.main].setLatLngs(...args);
         this[Layers.pulse].setLatLngs(...args);
     }
-
 
     getLatLngs() {
         return this[Layers.main].getLatLngs();
