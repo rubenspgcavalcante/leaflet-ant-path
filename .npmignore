@@ -1,8 +1,17 @@
+#Directories
 .idea/
 coverage/
 node_modules/
-dist/
 dev-env/
+src/
+tasks/
 *.log
 
-
+#Files
+.babelrc
+.eslintrc
+.gitignore
+.travis.yml
+gulpfile.js
+karma.conf.js
+webpack.config.js
