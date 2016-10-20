@@ -1,6 +1,8 @@
 import {FeatureGroup, LayerGroup, Util, Polyline} from "leaflet";
 import regeneratorRuntime from "regenerator-runtime";
 
+const Layers = {main: Symbol("main"), pulse: Symbol("pulse")};
+
 /**
  * Builds the ant path polygon
  * @class
@@ -24,6 +26,11 @@ export default class AntPath extends FeatureGroup {
 
     constructor(path, customOptions = {}) {
         super();
+
+        //Symbols
+        this[Layers.main] = null;
+        this[Layers.pulse] = null;
+
         Util.setOptions(this, {...this._defaultOptions, ...customOptions});
         this._path = path;
         this._animatedPathId = `ant-path-${new Date().getTime()}`;
@@ -89,8 +96,8 @@ export default class AntPath extends FeatureGroup {
         pulseOpts.className = `${_animatedPathClass} ${_animatedPathId}`;
         delete pathOpts.dashArray;
 
-        this.addLayer(new Polyline(_path, pathOpts));
-        this.addLayer(new Polyline(_path, pulseOpts));
+        this.addLayer(this[Layers.main] = new Polyline(_path, pathOpts));
+        this.addLayer(this[Layers.pulse] = new Polyline(_path, pulseOpts));
     }
 
     _calculateAnimationSpeed() {
@@ -113,5 +120,34 @@ export default class AntPath extends FeatureGroup {
         for (let el of animatedPolyElement) {
             el.style = animationRules;
         }
+    }
+
+    //Polyline interface
+    addLatLng(...args) {
+        this[Layers.main].addLatLng(...args);
+        this[Layers.pulse].addLatLng(...args);
+    }
+
+    setLatLngs(...args) {
+        this[Layers.main].setLatLngs(...args);
+        this[Layers.pulse].setLatLngs(...args);
+    }
+
+
+    getLatLngs() {
+        return this[Layers.main].getLatLngs();
+    }
+
+    spliceLatLngs(...args) {
+        this[Layers.main].spliceLatLngs(...args);
+        this[Layers.pulse].spliceLatLngs(...args);
+    }
+
+    getBounds() {
+        return this[Layers.main].getBounds();
+    }
+
+    toGeoJSON() {
+        return this[Layers.main].toGeoJSON();
     }
 }
