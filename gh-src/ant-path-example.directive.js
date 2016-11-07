@@ -17,7 +17,7 @@
                 var antPath = null, path = null;
 
                 $http.get('route.json').then(function (res) {
-                    path = res.data.map(point => new L.latLng(point[0], point[1]));
+                    path = res.data.map(function(point) { return new L.latLng(point[0], point[1]) });
 
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
