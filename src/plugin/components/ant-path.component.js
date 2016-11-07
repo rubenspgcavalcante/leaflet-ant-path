@@ -1,4 +1,5 @@
 import {FeatureGroup, LayerGroup, Util, Polyline} from "leaflet";
+import Symbol from "core-js/es6/symbol";
 import regeneratorRuntime from "regenerator-runtime";
 
 const Layers = {main: Symbol("main"), pulse: Symbol("pulse")};
@@ -108,7 +109,7 @@ export default class AntPath extends FeatureGroup {
         }
 
         const zoomLevel = _map.getZoom();
-        const animatedPolyElement = document.getElementsByClassName(_animatedPathId);
+        const animatedPolyElements = document.getElementsByClassName(_animatedPathId);
 
         //Get the animation duration (in seconds) based on the given delay and the current zoom level
         const animationDuration = 1 + (options.delay / 3) / zoomLevel + "s";
@@ -117,9 +118,7 @@ export default class AntPath extends FeatureGroup {
         const animationRules = ["-webkit-", "-moz-", "-ms-", "-o-", ""]
             .map(prefix => `${prefix}animation-duration: ${animationDuration}`).join(";");
 
-        for (let el of animatedPolyElement) {
-            el.style = animationRules;
-        }
+        Array.prototype.forEach.call(animatedPolyElements, el => el.style.cssText = animationRules);
     }
 
     //Polyline interface

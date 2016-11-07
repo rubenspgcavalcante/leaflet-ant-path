@@ -12,7 +12,7 @@ module.exports = function (config) {
             "karma-babel-preprocessor"
         ],
 
-        reporters: ["progress", "coverage", "karma-remap-istanbul"],
+        reporters: ["progress", "coverage"],
 
         preprocessors: {
             "src/**/*.js": ["babel", "sourcemap"],
@@ -24,16 +24,6 @@ module.exports = function (config) {
             dir: "coverage/",
             subdir: "lcov",
             file: "coverage.json"
-        },
-
-        remapIstanbulReporter: {
-            src: "coverage/lcov/coverage.json",
-            reports: {
-                lcovonly: "coverage/lcov/lcov.info",
-                html: "coverage/lcov/html"
-            },
-            timeoutNotCreated: 5000, // default value
-            timeoutNoMoreFiles: 1000 // default value
         },
 
         files: [
