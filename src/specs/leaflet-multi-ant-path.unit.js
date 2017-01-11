@@ -18,7 +18,7 @@ describe("Creates a leaflet multi polyline with a 'ant-path' animated flux", () 
             `Should call multiple ant paths and stack
             then into the double of polylines`, () => {
 
-                var multiAntPath = new L.MultiPolyline.MultiAntPath([0, 0], [0, 0]);
+                new L.MultiPolyline.MultiAntPath([0, 0], [0, 0]);
                 expect(L.Polyline).toHaveBeenCalled();
                 expect(spy.calls.count()).toBe(4);
             });

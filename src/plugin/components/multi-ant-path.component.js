@@ -22,7 +22,7 @@ export default class MultiAntPath extends FeatureGroup {
     }
 
     setLatLngs(latlngs = []) {
-        var i = 0,
+        let i = 0,
             len = latlngs.length;
 
         this.eachLayer(function (layer) {
@@ -40,7 +40,7 @@ export default class MultiAntPath extends FeatureGroup {
     }
 
     getLatLngs() {
-        var latlngs = [];
+        let latlngs = [];
         this.eachLayer(layer => latlngs.push(layer.getLatLngs()));
         return latlngs;
     }

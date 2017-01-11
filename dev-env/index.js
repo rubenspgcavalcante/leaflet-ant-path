@@ -8,7 +8,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import "leaflet/dist/leaflet.css";
 import "./style/dev-env.sass";
 
-document.addEventListener("DOMContentLoaded", ()=> {
+document.addEventListener("DOMContentLoaded", () => {
     const logger = new Logger(document.getElementById("log-container"));
     const container = document.getElementById("container");
 

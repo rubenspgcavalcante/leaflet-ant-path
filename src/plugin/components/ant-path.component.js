@@ -1,6 +1,6 @@
-import {FeatureGroup, LayerGroup, Util, Polyline} from "leaflet";
+import {FeatureGroup, Util, Polyline} from "leaflet";
 import Symbol from "core-js/es6/symbol";
-import regeneratorRuntime from "regenerator-runtime";
+import regeneratorRuntime from "regenerator-runtime"; //eslint-disable-line no-unused-vars
 
 const Layers = {main: Symbol("main"), pulse: Symbol("pulse")};
 
@@ -118,7 +118,7 @@ export default class AntPath extends FeatureGroup {
         const animationRules = ["-webkit-", "-moz-", "-ms-", "-o-", ""]
             .map(prefix => `${prefix}animation-duration: ${animationDuration}`).join(";");
 
-        Array.prototype.forEach.call(animatedPolyElements, el => el.style.cssText = animationRules);
+        Array.from(animatedPolyElements, el => el.style.cssText = animationRules);
     }
 
     //Polyline interface

@@ -1,5 +1,4 @@
 var webpack = require("webpack");
-var path = require("path");
 var utils = require("./tasks/utils");
 
 var plugins = [];
@@ -38,7 +37,7 @@ module.exports = {
         libraryTarget: "umd"
     },
     devServer: {
-        contentBase: 'dev-env',
+        contentBase: "dev-env",
         inline: true,
         hot: true
     },
@@ -48,7 +47,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules|~/,
-                loader: require.resolve('eslint-loader')
+                loader: require.resolve("eslint-loader")
             },
         ],
         loaders: [
@@ -59,7 +58,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                exclude: '/node_modules/',
+                exclude: "/node_modules/",
                 loaders: [
                     require.resolve("style-loader"),
                     require.resolve("css-loader"),
@@ -67,7 +66,7 @@ module.exports = {
             },
             {
                 test: /\.(scss|sass)$/,
-                exclude: '/node_modules/',
+                exclude: "/node_modules/",
                 loaders: [
                     require.resolve("style-loader"),
                     require.resolve("css-loader"),
@@ -75,15 +74,15 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(woff2?|svg)$/, loader: 'url?limit=10000'
+                test: /\.(woff2?|svg)$/, loader: "url?limit=10000"
             },
             {
-                test: /\.(ttf|eot|png|jpge?g)$/, loader: 'file'
+                test: /\.(ttf|eot|png|jpge?g)$/, loader: "file"
             },
             {
                 test: /\.json$/,
-                exclude: '/node_modules/',
-                loader: 'json'
+                exclude: "/node_modules/",
+                loader: "json"
             }
         ]
     }
