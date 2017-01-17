@@ -8,7 +8,7 @@
     "polyline",
     "animation"
   ],
-  "main": "src/plugin/main.js",
+  "main": "dist/leaflet-ant-path.js",
   "scripts": {
     "gulp": "gulp",
     "test": "gulp test",
@@ -21,6 +21,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rubenspgcavalcante/leaflet-ant-path"
+  },
+  "homepage": "http://rubenspgcavalcante.github.io/leaflet-ant-path",
+  "bugs": {
+    "url": "https://github.com/rubenspgcavalcante/leaflet-ant-path/issues"
   },
   "perDependencie": {
     "leaflet": "^0.7.7"
