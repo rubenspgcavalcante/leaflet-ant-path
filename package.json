@@ -1,6 +1,6 @@
 {
   "name": "leaflet-ant-path",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Creates a leaflet polyline with a 'ant-path' animated flux",
   "keywords": [
     "leaflet",
