@@ -8,7 +8,9 @@
     "no-console": "off",
     "eqeqeq": "error",
     "quotes": ["error", "double"],
-    "max-len": [1, 100, 2, {"ignoreComments": true}]
+    "max-len": [1, 100, 2, {"ignoreComments": true}],
+    "curly": ["error", "all"],
+    "brace-style": [2, "stroustrup"]
   },
   "extends": "eslint:recommended",
   "globals": {

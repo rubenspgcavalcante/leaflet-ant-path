@@ -1,8 +1,15 @@
 # Leaflet Ant Path
-[![Build Status](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca1062428b51428b8204e9044d4fdc3b)](https://www.codacy.com/app/rubenspgcavalcante/leaflet-ant-path?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubenspgcavalcante/leaflet-ant-path&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca1062428b51428b8204e9044d4fdc3b)](https://www.codacy.com/app/rubenspgcavalcante/leaflet-ant-path?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubenspgcavalcante/leaflet-ant-path&amp;utm_campaign=Badge_Grade)
+[![npm version](https://badge.fury.io/js/leaflet-ant-path.png)](https://badge.fury.io/js/leaflet-ant-path)
+[![Bower version](https://badge.fury.io/bo/leaflet-ant-path.png)](https://badge.fury.io/bo/leaflet-ant-path)
 
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
 [Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)
+
+## Contributing
+Want to help? Open a [issue](/issues) or make a PR!  
+Also, see the guide on [how to contribute](/docs/contributing.md).
 
 ### Installing
 Via Bower:
@@ -19,16 +26,14 @@ Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/
 
 
 ### Requirements
-    
-    - Leaflet >= 0.7.7
-    - Leaflet 1.0.0-rc
+  - Leaflet >= 0.7.7
     
 ### Browser compatibility
 Tested on:
 
-    - Firefox 43
-    - Chrome 45
-    - Chromium 47
+  - Firefox 43
+  - Chrome 45
+  - Chromium 47
 
 ### UMD compatible
 Can be used with asynchronous module loaders and CommonJS packers
@@ -150,30 +155,5 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 ### Methods
 Same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)
 
-### Building and Testing
-To run the build, before install the npm and gulp dependencies, then run:
-
-To build
-```
-    gulp pack
-```
-
-To test:
-```
-    gulp test
-```
-
-### Development Environment
-**Be sure all the dev-dependencies are installed.**
-Just run the command:
-```
-npm start
-```
-
-This will make the webpack compile the dev. env. and set up into a
-webserver with hot deployment into the localhost:8080. There you can make
-changes into the plugin and see in real time all your modifications running.
-
 ### License
-
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)

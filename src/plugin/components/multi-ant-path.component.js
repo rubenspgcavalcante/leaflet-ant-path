@@ -28,7 +28,8 @@ export default class MultiAntPath extends FeatureGroup {
         this.eachLayer(function (layer) {
             if (i < len) {
                 layer.setLatLngs(latlngs[i++]);
-            } else {
+            }
+            else {
                 this.removeLayer(layer);
             }
         }, this);

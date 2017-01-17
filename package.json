@@ -13,7 +13,7 @@
     "gulp": "gulp",
     "test": "gulp test",
     "prepublish": "gulp",
-    "start": "webpack-dev-server -d --host 0.0.0.0"
+    "start": "webpack-dev-server -d --inline --host 0.0.0.0"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
   "license": "MIT",
