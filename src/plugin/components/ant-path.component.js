@@ -84,7 +84,13 @@ export default class AntPath extends FeatureGroup {
     }
 
     resume() {
-        this._calculateAnimationSpeed();
+        const {options} = this;
+        if (options.paused) {
+            options.paused = false;
+            this._calculateAnimationSpeed();
+        } else {
+            return false;
+        }
     }
 
     _mount() {
