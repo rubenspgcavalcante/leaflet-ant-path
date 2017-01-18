@@ -1,14 +1,14 @@
 # Leaflet Ant Path
 [![Build Status](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/leaflet-ant-path)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca1062428b51428b8204e9044d4fdc3b)](https://www.codacy.com/app/rubenspgcavalcante/leaflet-ant-path?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubenspgcavalcante/leaflet-ant-path&amp;utm_campaign=Badge_Grade)
-[![npm version](https://badge.fury.io/js/leaflet-ant-path.png)](https://badge.fury.io/js/leaflet-ant-path)
-[![Bower version](https://badge.fury.io/bo/leaflet-ant-path.png)](https://badge.fury.io/bo/leaflet-ant-path)
+[![npm version](https://badge.fury.io/js/leaflet-ant-path.svg)](https://badge.fury.io/js/leaflet-ant-path)
+[![Bower version](https://badge.fury.io/bo/leaflet-ant-path.svg)](https://badge.fury.io/bo/leaflet-ant-path)
 
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
 [Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)
 
 ## Contributing
-Want to help? Open a [issue](/issues) or make a PR!  
+Want to help? Open a [issue](https://github.com/rubenspgcavalcante/leaflet-ant-path/issues) or make a PR!  
 Also, see the guide on [how to contribute](/docs/contributing.md).
 
 ### Installing

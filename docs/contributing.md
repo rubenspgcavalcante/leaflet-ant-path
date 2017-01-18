@@ -1,5 +1,7 @@
 # How to Contribute
-Before create any pull requests, please open a issue explaining the situation (bug or enhacement).  
+- Before create any pull requests, please open a issue explaining the situation (bug or enhacement)
+- Be sure to follow the eslint rules (webpack will always output its results)
+- Be sure before open the pull request, to test the existent code and/or create tests if you made a new feature.
 
 ## Development Environment (Sandbox Mode)
 **Be sure all the dev-dependencies are installed.**
@@ -19,7 +21,7 @@ dev-env/index.js
 ```
 **Be sure not commit this file!**
 
-## Building and Testing
+## Testing and Building
 After develop/fix a bug, before do a **pull request**, run the test command:
 To run the build, before install the npm and gulp dependencies, then run:
 ```
@@ -30,4 +32,4 @@ If you just want to use the latest version directly from the source code just do
 ```
 npm run gulp
 ```
-All the files will be outputed in the dist directory
+All the files will be outputed in the *dist/* directory
