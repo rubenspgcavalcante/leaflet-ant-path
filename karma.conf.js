@@ -27,7 +27,7 @@ module.exports = function (config) {
         },
 
         files: [
-            'node_modules/babel-polyfill/dist/polyfill.js',
+            "node_modules/babel-polyfill/dist/polyfill.min.js",
             {pattern: "node_modules/leaflet/dist/leaflet.js", watched: false},
             {pattern: "dist/leaflet-ant-path.js", watched: true},
             "src/specs/**/*.unit.js"

@@ -72,15 +72,18 @@ export default class AntPath extends FeatureGroup {
 
     pause() {
         const {options} = this;
-        if (options.paused) {
-            return false;
-        }
 
-        const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
-        for (let el of animatedPolyElement) {
-            el.removeAttribute("style");
+        if (!options.paused) {
+            const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
+            options.paused = true;
+
+            for (let el of animatedPolyElement) {
+                el.removeAttribute("style");
+                el.setAttribute("data-animated", options.paused);
+            }
+            return true;
         }
-        return options.paused = true;
+        return false;
     }
 
     resume() {
@@ -88,7 +91,8 @@ export default class AntPath extends FeatureGroup {
         if (options.paused) {
             options.paused = false;
             this._calculateAnimationSpeed();
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -124,7 +128,10 @@ export default class AntPath extends FeatureGroup {
         const animationRules = ["-webkit-", "-moz-", "-ms-", "-o-", ""]
             .map(prefix => `${prefix}animation-duration: ${animationDuration}`).join(";");
 
-        Array.from(animatedPolyElements, el => el.style.cssText = animationRules);
+        Array.from(animatedPolyElements, el => {
+            el.style.cssText = animationRules;
+            el.setAttribute("data-animated", true);
+        });
     }
 
     //Polyline interface

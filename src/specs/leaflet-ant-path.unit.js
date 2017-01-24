@@ -1,8 +1,8 @@
 describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
-    var spy, fakePolyline;
+    let spy, fakePolyline;
 
     beforeEach(() => {
-        fakePolyline = new L.Polyline([]);
+        fakePolyline = new L.Polyline([0, 0], [1, 1]);
         spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
     });
 
@@ -19,6 +19,14 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
         expect([...antPath]).toEqual(path);
     });
 
+    it("Should stop and resume the animation", () => {
+        const antPath = new L.Polyline.AntPath([0, 0], [1, 1]);
+        antPath.pause();
+        expect(antPath.options.paused).toBeTruthy();
+
+        antPath.resume();
+        expect(antPath.options.paused).toBeFalsy();
+    });
 
     describe("Should behave as in Array, the map method:", () => {
         it("Should return a new AntPath as result", () => {
@@ -45,8 +53,13 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
         const path = [L.latLng(0, 1), L.latLng(2, 3)];
         const antPath = new L.Polyline.AntPath(path);
 
-        it("Can provide the current latLngs", () => expect(antPath.getLatLngs()).toEqual(path));
-        it("Can provide it bounds", () => expect(antPath.getBounds()).toEqual(L.latLngBounds(path)));
+        it("Can provide the current latLngs", () => {
+            expect(antPath.getLatLngs()).toEqual(path);
+        });
+
+        it("Can provide it bounds", () => {
+            expect(antPath.getBounds()).toEqual(L.latLngBounds(path));
+        });
 
         it("Can provide as a GeoJSON", () => {
             expect(antPath.toGeoJSON()).toEqual(jasmine.objectContaining({

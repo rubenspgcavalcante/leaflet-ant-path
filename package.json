@@ -13,7 +13,8 @@
     "gulp": "gulp",
     "test": "gulp test",
     "prepublish": "gulp",
-    "start": "webpack-dev-server -d --inline --host 0.0.0.0"
+    "start": "webpack-dev-server -d --inline --host 0.0.0.0",
+    "codacy": "gulp codacy-coverage"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
   "license": "MIT",
@@ -45,7 +46,7 @@
     "eslint": "^3.11.1",
     "eslint-loader": "^1.5.0",
     "file-loader": "^0.9.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-codacy": "^1.0.0",
     "gulp-util": "^3.0.7",
     "is_js": "^0.8.0",
