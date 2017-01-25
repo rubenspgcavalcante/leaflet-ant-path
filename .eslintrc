@@ -22,6 +22,6 @@
     "commonjs": true,
     "phantomjs": true,
     "jasmine": true,
-    "node": false
+    "node": true
   }
 }

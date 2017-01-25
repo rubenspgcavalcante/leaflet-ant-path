@@ -1,20 +1,12 @@
 var webpack = require("webpack");
-var utils = require("./tasks/utils");
 
 var plugins = [];
 var entries = {};
 var externals = {};
+var devtool = "source-map";
 
-if (utils.hasArgument("--minimize", "-m")) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
-}
-
-if (utils.hasArgument("--development", "-d")) {
-    entries["dev-env"] = "./dev-env/index.js";
-    plugins.push(new webpack.NoErrorsPlugin());
-    plugins.push(new webpack.HotModuleReplacementPlugin());
-}
-else {
+if (process.env.NODE_ENV === "production") {
+    plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true, sourceMap: true}));
     entries["leaflet-ant-path"] = "./src/plugin/main";
     externals = {
         "leaflet": {
@@ -25,11 +17,18 @@ else {
         }
     };
 }
+else if (process.env.NODE_ENV === "development") {
+    devtool = "eval-source-map";
+    entries["dev-env"] = "./dev-env/index.js";
+    plugins.push(new webpack.NoErrorsPlugin());
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+}
 
 module.exports = {
     entry: entries,
     externals: externals,
-    devtool: "source-map",
+    devtool: devtool,
+
     output: {
         path: "./dist",
         filename: "[name].js",
@@ -43,14 +42,13 @@ module.exports = {
     },
     plugins: plugins,
     module: {
-        preLoaders: [
+        loaders: [
             {
+                enforce: "pre",
                 test: /\.js$/,
                 exclude: /node_modules|~/,
                 loader: require.resolve("eslint-loader")
             },
-        ],
-        loaders: [
             {
                 test: /\.js$/,
                 exclude: /node_modules|~/,
