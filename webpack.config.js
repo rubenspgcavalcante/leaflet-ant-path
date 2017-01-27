@@ -1,12 +1,11 @@
-var path = require("path");
-var webpack = require("webpack");
-var merge = require("merge");
-var loaders = require("./webpack/loaders");
-var development = require("./webpack/development");
-var production = require("./webpack/production");
+import path from "path";
+import merge from "merge";
+import loaders from "./webpack/loaders";
+import development from "./webpack/development";
+import production from "./webpack/production";
+const {NODE_ENV} = process.env;
 
-
-var configuration = {
+let configuration = {
     output: {
         path: path.resolve("./dist"),
         filename: "[name].js",
@@ -19,18 +18,16 @@ var configuration = {
         hot: true
     },
     module: {
-        loaders: loaders
+        loaders
     }
 };
 
-switch (process.env.NODE_ENV) {
+switch (NODE_ENV) {
     case "production":
-        console.info("Using production configurations");
         configuration = merge(configuration, production);
         break;
 
     case "development":
-        console.info("Using development configurations");
         configuration = merge(configuration, development);
         break;
 
@@ -38,4 +35,6 @@ switch (process.env.NODE_ENV) {
         throw new Error("Please define your NODE_ENV to development or production!");
 }
 
-module.exports = configuration;
+console.info(`Using ${NODE_ENV} configurations`);
+
+export default configuration;

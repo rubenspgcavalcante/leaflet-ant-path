@@ -30,4 +30,4 @@ module.exports = [
     {test: /\.(woff2?|svg)$/, loader: require.resolve("url-loader")},
     {test: /\.(ttf|eot|png|jpge?g)$/, loader: require.resolve("file-loader")},
     {test: /\.json$/, exclude: "/node_modules/", loader: require.resolve("json-loader")}
-]
+];

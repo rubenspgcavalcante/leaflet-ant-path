@@ -10,9 +10,9 @@
   ],
   "main": "dist/leaflet-ant-path.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "build": "NODE_ENV=production webpack --config webpack.transpiler.js --colors --profile --progress",
     "test": "karma start --log-level debug --single-run",
-    "start": "NODE_ENV=development webpack-dev-server -d --inline --host 0.0.0.0",
+    "start": "NODE_ENV=development webpack-dev-server --config webpack.transpiler.js -d --cache --inline --host 0.0.0.0",
     "codacy": "cat coverage/lcov/lcov.info | codacy-coverage",
     "prepublish": "npm run build"
   },
