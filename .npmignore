@@ -13,6 +13,5 @@ tasks/
 .gitignore
 .travis.yml
 yarn.lock
-gulpfile.js
 karma.conf.js
 webpack.config.js

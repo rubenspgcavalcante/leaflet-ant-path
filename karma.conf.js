@@ -20,10 +20,10 @@ module.exports = function (config) {
         },
 
         coverageReporter: {
-            type: "json",
+            type: "lcov",
             dir: "coverage/",
             subdir: "lcov",
-            file: "coverage.json"
+            file: "coverage.lcov"
         },
 
         files: [

@@ -13,7 +13,7 @@
     "pack": "NODE_ENV=production webpack --config webpack.config.js",
     "test": "karma start --log-level debug --single-run",
     "start": "NODE_ENV=devlopment nowebpack-dev-server -d --inline --host 0.0.0.0",
-    "codacy": "cat covarage gulp codacy-coverage",
+    "codacy": "cat coverage/lcov/lcov.info | codacy-coverage",
     "prepublish": "npm run pack"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
