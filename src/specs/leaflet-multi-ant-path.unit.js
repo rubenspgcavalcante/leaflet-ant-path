@@ -1,3 +1,5 @@
+import L from "leaflet";
+
 describe("Creates a leaflet multi polyline with a 'ant-path' animated flux", () => {
     var spy, fakePolyline;
 

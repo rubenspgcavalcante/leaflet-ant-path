@@ -25,11 +25,11 @@ dev-env/index.js
 After develop/fix a bug, before do a **pull request**, run the test command:
 To run the build, before install the npm and gulp dependencies, then run:
 ```
-npm run test
+npm test
 ```
 
 If you just want to use the latest version directly from the source code just do:
 ```
-npm run gulp
+npm run build
 ```
 All the files will be outputed in the *dist/* directory

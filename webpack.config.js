@@ -1,36 +1,14 @@
+var path = require("path");
 var webpack = require("webpack");
+var merge = require("merge");
+var loaders = require("./webpack/loaders");
+var development = require("./webpack/development");
+var production = require("./webpack/production");
 
-var plugins = [];
-var entries = {};
-var externals = {};
-var devtool = "source-map";
 
-if (process.env.NODE_ENV === "production") {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true, sourceMap: true}));
-    entries["leaflet-ant-path"] = "./src/plugin/main";
-    externals = {
-        "leaflet": {
-            root: "L",
-            commonjs: "leaflet",
-            commonjs2: "leaflet",
-            amd: "leaflet"
-        }
-    };
-}
-else if (process.env.NODE_ENV === "development") {
-    devtool = "eval-source-map";
-    entries["dev-env"] = "./dev-env/index.js";
-    plugins.push(new webpack.NoErrorsPlugin());
-    plugins.push(new webpack.HotModuleReplacementPlugin());
-}
-
-module.exports = {
-    entry: entries,
-    externals: externals,
-    devtool: devtool,
-
+var configuration = {
     output: {
-        path: "./dist",
+        path: path.resolve("./dist"),
         filename: "[name].js",
         library: "leaflet-ant-path",
         libraryTarget: "umd"
@@ -40,48 +18,24 @@ module.exports = {
         inline: true,
         hot: true
     },
-    plugins: plugins,
     module: {
-        loaders: [
-            {
-                enforce: "pre",
-                test: /\.js$/,
-                exclude: /node_modules|~/,
-                loader: require.resolve("eslint-loader")
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules|~/,
-                loader: require.resolve("babel-loader")
-            },
-            {
-                test: /\.css$/,
-                exclude: "/node_modules/",
-                loaders: [
-                    require.resolve("style-loader"),
-                    require.resolve("css-loader"),
-                ]
-            },
-            {
-                test: /\.(scss|sass)$/,
-                exclude: "/node_modules/",
-                loaders: [
-                    require.resolve("style-loader"),
-                    require.resolve("css-loader"),
-                    require.resolve("sass-loader")
-                ]
-            },
-            {
-                test: /\.(woff2?|svg)$/, loader: "url?limit=10000"
-            },
-            {
-                test: /\.(ttf|eot|png|jpge?g)$/, loader: "file"
-            },
-            {
-                test: /\.json$/,
-                exclude: "/node_modules/",
-                loader: "json"
-            }
-        ]
+        loaders: loaders
     }
 };
+
+switch (process.env.NODE_ENV) {
+    case "production":
+        console.info("Using production configurations");
+        configuration = merge(configuration, production);
+        break;
+
+    case "development":
+        console.info("Using development configurations");
+        configuration = merge(configuration, development);
+        break;
+
+    default:
+        throw new Error("Please define your NODE_ENV to development or production!");
+}
+
+module.exports = configuration;

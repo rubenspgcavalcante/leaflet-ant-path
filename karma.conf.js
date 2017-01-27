@@ -1,38 +1,74 @@
+var webpackLoaders = require("./webpack/loaders.js");
+
 module.exports = function (config) {
     config.set({
         basePath: ".",
         frameworks: ["jasmine"],
         browsers: ["PhantomJS"],
         plugins: [
+            "karma-webpack",
             "karma-phantomjs-launcher",
             "karma-jasmine",
             "karma-coverage",
+            "karma-remap-istanbul",
             "karma-sourcemap-loader",
             "karma-remap-istanbul",
             "karma-babel-preprocessor"
         ],
 
-        reporters: ["progress", "coverage"],
+        reporters: ["progress", "coverage", "karma-remap-istanbul"],
 
         preprocessors: {
-            "src/**/*.js": ["babel", "sourcemap"],
-            "dist/leaflet-ant-path.js": ["coverage"]
+            "src/**/*.js": ["webpack", "sourcemap", "coverage"]
+        },
+
+        webpack: {
+            entry: ["./src/specs/bootstrap-tests.js"],
+            devtool: "inline-source-map",
+            output: {
+                path: "dist/",
+                filename: "tests.js"
+            },
+            module: {
+                loaders: webpackLoaders.concat([
+                    {
+                        enforce: "pre",
+                        test: /\.js$/,
+                        include: './src/',
+                        loader: 'istanbul-instrumenter'
+                    }
+                ])
+            }
         },
 
         coverageReporter: {
-            type: "lcov",
+            type: "json",
             dir: "coverage/",
-            subdir: "lcov",
-            file: "coverage.lcov"
+            subdir: ".",
+            file: "coverage.json"
+        },
+        remapIstanbulReporter: {
+            src: 'coverage/lcov/coverage.json',
+            reports: {
+                lcovonly: 'coverage/lcov.info',
+                //html: 'coverage/html/report'
+            },
+            timeoutNotCreated: 5000, // default value
+            timeoutNoMoreFiles: 1000 // default value
         },
 
         files: [
             "node_modules/babel-polyfill/dist/polyfill.min.js",
-            {pattern: "node_modules/leaflet/dist/leaflet.js", watched: false},
-            {pattern: "dist/leaflet-ant-path.js", watched: true},
-            "src/specs/**/*.unit.js"
+            {pattern: "src/**/*.js", watched: true},
         ],
 
-        singleRun: false
+        singleRun: false,
+
+        stats: {
+            colors: true,
+            reasons: true
+        },
+
+        progress: true
     });
 };

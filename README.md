@@ -9,7 +9,7 @@
 
 ## Contributing
 Want to help? Open a [issue](https://github.com/rubenspgcavalcante/leaflet-ant-path/issues) or make a PR!  
-Also, see the guide on [how to contribute](/docs/contributing.md).
+Also, see the guide on [how to contribute](/.github/contributing.md).
 
 ### Installing
 Via Bower:
