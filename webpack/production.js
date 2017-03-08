@@ -1,8 +1,10 @@
-const webpack = require("webpack");
+const {UglifyJsPlugin, DedupePlugin} = require("webpack").optimize;
+
+console.log(require.resolve("regenerator-runtime"));
 
 module.exports = {
     entry: {
-        "leaflet-ant-path": "./src/plugin/main"
+        "leaflet-ant-path": [require.resolve("regenerator-runtime"), "./src/plugin/main"]
     },
     devtool: "source-map",
     externals: {
@@ -13,5 +15,8 @@ module.exports = {
             amd: "leaflet"
         }
     },
-    plugins: [new webpack.optimize.UglifyJsPlugin({minimize: true, sourceMap: true})]
+    plugins: [
+        new DedupePlugin(),
+        new UglifyJsPlugin({minimize: true, sourceMap: true})
+    ]
 };

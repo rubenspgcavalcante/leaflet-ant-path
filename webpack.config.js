@@ -4,6 +4,7 @@ const envConfs = {
     development: require("./webpack/development"),
     production: require("./webpack/production")
 };
+
 const {NODE_ENV} = process.env;
 
 let configuration = {

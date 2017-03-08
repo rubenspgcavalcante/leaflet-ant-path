@@ -1,6 +1,5 @@
 import {FeatureGroup, Util, Polyline} from "leaflet";
 import Symbol from "core-js/es6/symbol";
-import regeneratorRuntime from "regenerator-runtime"; //eslint-disable-line no-unused-vars
 
 const Layers = {main: Symbol("main"), pulse: Symbol("pulse")};
 
@@ -39,7 +38,10 @@ export default class AntPath extends FeatureGroup {
     }
 
     map(call) {
-        //This prevents if some class extending AntPath to return a instance of AntPath itself instead of the invoker class
+        /**
+         * This prevents if some class extending AntPath to return a instance of AntPath itself instead of the invoker class
+         * Doing so, any child class will maintain the status of FUNCTOR object
+         */
         const Species = this.constructor[Symbol.species];
         return new Species(this._path.map(call), {...this.options});
     }
@@ -71,15 +73,15 @@ export default class AntPath extends FeatureGroup {
     }
 
     pause() {
-        const {options} = this;
+        const {paused} = this.options;
 
-        if (!options.paused) {
+        if (!paused) {
             const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
-            options.paused = true;
+            this.options.paused = true;
 
             for (let el of animatedPolyElement) {
                 el.removeAttribute("style");
-                el.setAttribute("data-animated", options.paused);
+                el.setAttribute("data-animated", "true");
             }
             return true;
         }
@@ -126,11 +128,12 @@ export default class AntPath extends FeatureGroup {
 
         //TODO Use requestAnimationFrame to better support IE
         const animationRules = ["-webkit-", "-moz-", "-ms-", "-o-", ""]
-            .map(prefix => `${prefix}animation-duration: ${animationDuration}`).join(";");
+            .map(prefix => `${prefix}animation-duration: ${animationDuration}`)
+            .join(";");
 
         Array.from(animatedPolyElements, el => {
             el.style.cssText = animationRules;
-            el.setAttribute("data-animated", true);
+            el.setAttribute("data-animated", "true");
         });
     }
 
