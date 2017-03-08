@@ -1,8 +1,9 @@
-import path from "path";
-import merge from "merge";
-import loaders from "./webpack/loaders";
-import development from "./webpack/development";
-import production from "./webpack/production";
+const path = require("path");
+const loaders = require("./webpack/loaders");
+const envConfs = {
+    development: require("./webpack/development"),
+    production: require("./webpack/production")
+};
 const {NODE_ENV} = process.env;
 
 let configuration = {
@@ -22,19 +23,11 @@ let configuration = {
     }
 };
 
-switch (NODE_ENV) {
-    case "production":
-        configuration = merge(configuration, production);
-        break;
-
-    case "development":
-        configuration = merge(configuration, development);
-        break;
-
-    default:
-        throw new Error("Please define your NODE_ENV to development or production!");
+if (!NODE_ENV) {
+    throw {message: "Please define your NODE_ENV"};
 }
 
+configuration = Object.assign({}, configuration, envConfs[NODE_ENV]);
 console.info(`Using ${NODE_ENV} configurations`);
 
-export default configuration;
+module.exports = configuration;
