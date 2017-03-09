@@ -1,4 +1,4 @@
-var webpackLoaders = require("./webpack/loaders.js");
+const webpackLoaders = require("./webpack/loaders.js");
 
 module.exports = function (config) {
     config.set({

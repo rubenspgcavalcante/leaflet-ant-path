@@ -1,4 +1,4 @@
-const {UglifyJsPlugin, DedupePlugin} = require("webpack").optimize;
+const {UglifyJsPlugin} = require("webpack").optimize;
 
 console.log(require.resolve("regenerator-runtime"));
 
@@ -15,8 +15,5 @@ module.exports = {
             amd: "leaflet"
         }
     },
-    plugins: [
-        new DedupePlugin(),
-        new UglifyJsPlugin({minimize: true, sourceMap: true})
-    ]
+    plugins: [new UglifyJsPlugin({minimize: true, sourceMap: true})]
 };

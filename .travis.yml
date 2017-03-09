@@ -2,9 +2,8 @@ language: node_js
 node_js:
 - '7'
 scripts:
-  test: ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
-  gulp: ./node_modules/gulp/bin/gulp
-script: gulp && gulp codacy-coverage
+  test: npm test
+script: npm run build
 cache: yarn
 branches:
   only:
