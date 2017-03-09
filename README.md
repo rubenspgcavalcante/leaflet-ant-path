@@ -148,7 +148,7 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 |options.paused| boolean | true/false | Starts with the animation paused (default: false)
 |options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
 |options.delay | string | 120 | Add a delay to the animation flux (default: 400)
-|options.dashArray| [number, number] | [15, 30] |The size of the animated dashes (default: [10, 20])
+|options.dashArray| [number, number] **or** string | [15, 30] |The size of the animated dashes (default: "10, 20"). See also [the pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray)
 
 ---
 

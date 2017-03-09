@@ -12,7 +12,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
     "test": "karma start --log-level debug --single-run",
-    "start": "NODE_ENV=development webpack-dev-server --config -d --cache --inline --host 0.0.0.0",
+    "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
     "codacy": "cat coverage/lcov/lcov.info | codacy-coverage",
     "prepublish": "npm run build"
   },

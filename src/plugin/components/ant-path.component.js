@@ -109,6 +109,10 @@ export default class AntPath extends FeatureGroup {
         pulseOpts.className = `${_animatedPathClass} ${_animatedPathId}`;
         delete pathOpts.dashArray;
 
+        if (Array.isArray(pulseOpts.dashArray)) {
+            pulseOpts.dashArray = String(pulseOpts.dashArray);
+        }
+
         this.addLayer(this[Layers.main] = new Polyline(_path, pathOpts));
         this.addLayer(this[Layers.pulse] = new Polyline(_path, pulseOpts));
     }
