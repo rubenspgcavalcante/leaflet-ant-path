@@ -141,6 +141,17 @@ export default class AntPath extends FeatureGroup {
         });
     }
 
+    //Feature Group methods overwriting
+    bringToFront() {
+        this[Layers.main].bringToFront();
+        this[Layers.pulse].bringToFront();
+    }
+
+    bringToBack() {
+        this[Layers.pulse].bringToBack();
+        this[Layers.main].bringToBack();
+    }
+
     //Polyline interface
     addLatLng(...args) {
         this[Layers.main].addLatLng(...args);
