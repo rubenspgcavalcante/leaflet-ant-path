@@ -1,7 +1,5 @@
 const {UglifyJsPlugin} = require("webpack").optimize;
 
-console.log(require.resolve("regenerator-runtime"));
-
 module.exports = {
     entry: {
         "leaflet-ant-path": [require.resolve("regenerator-runtime"), "./src/plugin/main"]

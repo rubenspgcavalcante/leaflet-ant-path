@@ -29,6 +29,4 @@ if (!NODE_ENV) {
 }
 
 configuration = Object.assign({}, configuration, envConfs[NODE_ENV]);
-console.info(`Using ${NODE_ENV} configurations`);
-
 module.exports = configuration;
