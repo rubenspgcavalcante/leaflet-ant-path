@@ -1,4 +1,5 @@
 import {MultiAntPath} from "../components/multi-ant-path.component";
+import {Reflect} from "core-js/es6/reflect";
 
 /**
  * Factory for MultiAntPath component
