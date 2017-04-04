@@ -7,19 +7,19 @@ module.exports = function (config) {
         browsers: ["PhantomJS"],
         plugins: [
             "karma-webpack",
+            "karma-babel-preprocessor",
             "karma-phantomjs-launcher",
             "karma-jasmine",
-            "karma-coverage",
-            "karma-remap-istanbul",
             "karma-sourcemap-loader",
-            "karma-remap-istanbul",
-            "karma-babel-preprocessor"
+            "karma-sourcemap-writer",
+            "karma-coverage",
+            "karma-remap-istanbul"
         ],
 
         reporters: ["progress", "coverage", "karma-remap-istanbul"],
 
         preprocessors: {
-            "src/**/*.js": ["webpack", "sourcemap", "coverage"]
+            "src/specs/bootstrap-tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]
         },
 
         webpack: {
@@ -47,19 +47,17 @@ module.exports = function (config) {
             subdir: ".",
             file: "coverage.json"
         },
+
         remapIstanbulReporter: {
-            src: 'coverage/lcov/coverage.json',
             reports: {
-                lcovonly: 'coverage/lcov.info',
-                //html: 'coverage/html/report'
-            },
-            timeoutNotCreated: 5000, // default value
-            timeoutNoMoreFiles: 1000 // default value
+                html: "coverage",
+                json: 'coverage/remapped.json'
+            }
         },
 
         files: [
             "node_modules/babel-polyfill/dist/polyfill.min.js",
-            {pattern: "src/**/*.js", watched: true},
+            "src/specs/bootstrap-tests.js",
         ],
 
         singleRun: false,
