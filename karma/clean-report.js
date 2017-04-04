@@ -17,12 +17,13 @@ const coverage = Object.keys(remappedJson).reduce((result, source) => {
     return result;
 }, {});
 
-console.log(Object.keys(coverage));
 collector.add(coverage);
 
+reporter.add("lcovonly");
 reporter.add("html");
+
 reporter.write(
     collector,
     true,
-    () => console.log("open coverage/index.html to see the coverage report.")
+    () => console.info("Report clean!")
 );

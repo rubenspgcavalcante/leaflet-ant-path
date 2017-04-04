@@ -2,6 +2,7 @@
 .idea/
 coverage/
 node_modules/
+karma/
 dev-env/
 src/
 tasks/
@@ -15,3 +16,5 @@ tasks/
 yarn.lock
 karma.conf.js
 webpack.config.js
+webpack.tests.js
+webpack.tests.js.map
