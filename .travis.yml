@@ -3,7 +3,13 @@ node_js:
 - '7'
 scripts:
   test: npm test
-script: npm run build
+  build: npm run build
+  coverage: npm run codacy
+
+before_script: build
+script: test
+after_success: coverage
+
 cache: yarn
 branches:
   only:

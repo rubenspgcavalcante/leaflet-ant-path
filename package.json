@@ -11,10 +11,10 @@
   "main": "dist/leaflet-ant-path.js",
   "scripts": {
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
-    "test": "karma start --log-level debug --single-run",
+    "test": "karma start karma/karma.conf.js --log-level debug --single-run && node karma/clean-report.js",
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
-    "codacy": "cat coverage/lcov/lcov.info | codacy-coverage",
+    "codacy": "cat coverage/lcov.info | codacy-coverage",
     "prepublish": "npm run build"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",

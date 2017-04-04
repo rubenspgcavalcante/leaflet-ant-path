@@ -1,8 +1,8 @@
-const webpackLoaders = require("./webpack/loaders.js");
+const webpackLoaders = require("./../webpack/loaders.js");
 
 module.exports = function (config) {
     config.set({
-        basePath: ".",
+        basePath: "../",
         frameworks: ["jasmine"],
         browsers: ["PhantomJS"],
         plugins: [
@@ -19,11 +19,11 @@ module.exports = function (config) {
         reporters: ["progress", "coverage", "karma-remap-istanbul"],
 
         preprocessors: {
-            "src/specs/bootstrap-tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]
+            "./webpack.tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]
         },
 
         webpack: {
-            entry: ["./src/specs/bootstrap-tests.js"],
+            entry: ["./webpack.tests.js"],
             devtool: "inline-source-map",
             output: {
                 path: "dist/",
@@ -57,7 +57,7 @@ module.exports = function (config) {
 
         files: [
             "node_modules/babel-polyfill/dist/polyfill.min.js",
-            "src/specs/bootstrap-tests.js",
+            "./webpack.tests.js",
         ],
 
         singleRun: false,
