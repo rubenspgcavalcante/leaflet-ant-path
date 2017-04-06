@@ -1,5 +1,4 @@
 import AntPath from "../components/ant-path.component";
-import Reflect from "core-js/es6/reflect";
 
 /**
  * A factory for AntPath component
