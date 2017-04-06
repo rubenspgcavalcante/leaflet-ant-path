@@ -1,5 +1,4 @@
 import {FeatureGroup, Util, Polyline} from "leaflet";
-import Symbol from "core-js/es6/symbol";
 
 const Layers = {main: Symbol("main"), pulse: Symbol("pulse")};
 
