@@ -23,4 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mapCustom.addLayer(customAntPath);
 
     logger.log(antPath.getLatLngs());
+
+    //Changing dynamically the style of the component
+    setTimeout(() => customAntPath.setStyle({delay: 1000, pulseColor: "#000000", color: "blue"}), 5000);
 });

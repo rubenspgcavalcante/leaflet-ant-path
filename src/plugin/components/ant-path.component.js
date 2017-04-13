@@ -98,8 +98,8 @@ export default class AntPath extends FeatureGroup {
         }
     }
 
-    _mount() {
-        const {options, _path, _animatedPathClass, _animatedPathId} = this;
+    _processOptions() {
+        const {options, _animatedPathClass, _animatedPathId} = this;
 
         let pathOpts = {...options};
         let pulseOpts = {...options};
@@ -112,8 +112,14 @@ export default class AntPath extends FeatureGroup {
             pulseOpts.dashArray = String(pulseOpts.dashArray);
         }
 
-        this.addLayer(this[Layers.main] = new Polyline(_path, pathOpts));
-        this.addLayer(this[Layers.pulse] = new Polyline(_path, pulseOpts));
+        return {pathOpts, pulseOpts};
+    }
+
+    _mount() {
+        const {pathOpts, pulseOpts} = this._processOptions();
+
+        this.addLayer(this[Layers.main] = new Polyline(this._path, pathOpts));
+        this.addLayer(this[Layers.pulse] = new Polyline(this._path, pulseOpts));
     }
 
     _calculateAnimationSpeed() {
@@ -152,6 +158,22 @@ export default class AntPath extends FeatureGroup {
     }
 
     //Polyline interface
+    setStyle(options) {
+        const {paused, delay} = options;
+        paused ? this.pause() : this.resume();
+
+        if (delay !== this.options.delay) {
+            this.options.delay = delay;
+            this._calculateAnimationSpeed();
+        }
+
+        this.options = {...this.options, ...options};
+        const {pathOpts, pulseOpts} = this._processOptions();
+
+        this[Layers.main].setStyle(pathOpts);
+        this[Layers.pulse].setStyle(pulseOpts);
+    }
+
     addLatLng(...args) {
         this[Layers.main].addLatLng(...args);
         this[Layers.pulse].addLatLng(...args);
