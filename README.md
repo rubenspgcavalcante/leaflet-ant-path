@@ -133,7 +133,13 @@ the same options of a common [Polyline]((http://leafletjs.com/reference.html#pol
 ---
 
 ### Methods
-Same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)
+| name | returns | description |
+|------|---------|-------------|
+| pause() | boolean | Stops the animation |
+| resume() | booelan | Resume the animation |
+
+
+Also have the same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)
 
 ### License
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
