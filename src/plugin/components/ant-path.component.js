@@ -63,12 +63,13 @@ export default class AntPath extends FeatureGroup {
 
         this._mount();
         this._calculateAnimationSpeed();
+        return super.onAdd(map);
     }
 
     onRemove(map) {
         this._map.off("zoomend", this._calculateAnimationSpeed, this);
         this._map = null;
-        super.onRemove(map);
+        return super.onRemove(map);
     }
 
     pause() {
@@ -92,6 +93,8 @@ export default class AntPath extends FeatureGroup {
         if (options.paused) {
             options.paused = false;
             this._calculateAnimationSpeed();
+
+            return true;
         }
         else {
             return false;
@@ -150,11 +153,15 @@ export default class AntPath extends FeatureGroup {
     bringToFront() {
         this[Layers.main].bringToFront();
         this[Layers.pulse].bringToFront();
+
+        return this;
     }
 
     bringToBack() {
         this[Layers.pulse].bringToBack();
         this[Layers.main].bringToBack();
+
+        return this;
     }
 
     //Polyline interface
@@ -172,16 +179,29 @@ export default class AntPath extends FeatureGroup {
 
         this[Layers.main].setStyle(pathOpts);
         this[Layers.pulse].setStyle(pulseOpts);
+
+        return this;
+    }
+
+    redraw() {
+        this[Layers.main].redraw();
+        this[Layers.pulse].redraw();
+
+        return this;
     }
 
     addLatLng(...args) {
         this[Layers.main].addLatLng(...args);
         this[Layers.pulse].addLatLng(...args);
+
+        return this;
     }
 
     setLatLngs(...args) {
         this[Layers.main].setLatLngs(...args);
         this[Layers.pulse].setLatLngs(...args);
+
+        return this;
     }
 
     getLatLngs() {
@@ -189,8 +209,10 @@ export default class AntPath extends FeatureGroup {
     }
 
     spliceLatLngs(...args) {
-        this[Layers.main].spliceLatLngs(...args);
+        const latLngs = this[Layers.main].spliceLatLngs(...args);
         this[Layers.pulse].spliceLatLngs(...args);
+
+        return latLngs;
     }
 
     getBounds() {
