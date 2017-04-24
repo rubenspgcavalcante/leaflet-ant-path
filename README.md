@@ -37,6 +37,15 @@ Tested on:
 
 ### UMD compatible
 Can be used with asynchronous module loaders and CommonJS packers
+
+### With or without polyfills
+The module provide two bundles, the full one, with some es6 polyfills (loaded by default when importing) and the lighter
+one without the polyfills. If you're already uses the following polyfills in your project:
+- regenerator-runtime
+- core-js/es6/symbol
+- core-js/es6/reflect
+
+Just use the lighter version (leaflet-ant-path.es6.js). If not, just use the full bundle.
     
 ### Important!
 MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using

@@ -1,14 +1,10 @@
 language: node_js
 node_js:
 - '7'
-scripts:
-  test: npm test
-  build: npm run build
-  coverage: npm run codacy
 
-before_script: build
-script: test
-after_success: coverage
+before_script: npm run build
+script: npm run test
+after_success: npm run codacy
 
 cache: yarn
 branches:
