@@ -2,7 +2,14 @@ const {UglifyJsPlugin} = require("webpack").optimize;
 
 module.exports = {
     entry: {
-        "leaflet-ant-path": [require.resolve("regenerator-runtime"), "./src/plugin/main"]
+        "leaflet-ant-path.es6": "./src/plugin/main",
+
+        "leaflet-ant-path": [
+            require.resolve("regenerator-runtime"),
+            require.resolve("core-js/es6/symbol"),
+            require.resolve("core-js/es6/reflect"),
+            "./src/plugin/main"
+        ]
     },
     devtool: "source-map",
     externals: {

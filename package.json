@@ -1,6 +1,6 @@
 {
   "name": "leaflet-ant-path",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Creates a leaflet polyline with a 'ant-path' animated flux",
   "keywords": [
     "leaflet",
@@ -11,10 +11,10 @@
   "main": "dist/leaflet-ant-path.js",
   "scripts": {
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
-    "test": "karma start --log-level debug --single-run",
+    "test": "karma start karma/karma.conf.js --log-level debug --single-run && node karma/clean-report.js",
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
-    "codacy": "cat coverage/lcov/lcov.info | codacy-coverage",
+    "codacy": "cat coverage/lcov.info | codacy-coverage",
     "prepublish": "npm run build"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
@@ -59,6 +59,7 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-remap-istanbul": "^0.6.0",
     "karma-sourcemap-loader": "^0.3.7",
+    "karma-sourcemap-writer": "^0.1.2",
     "karma-webpack": "^2.0.2",
     "leaflet": "^1.0.3",
     "materialize-css": "^0.98.0",

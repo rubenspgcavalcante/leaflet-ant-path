@@ -1,5 +1,4 @@
 import {FeatureGroup, Util, Polyline} from "leaflet";
-import Symbol from "core-js/es6/symbol";
 
 const Layers = {main: Symbol("main"), pulse: Symbol("pulse")};
 
@@ -64,12 +63,13 @@ export default class AntPath extends FeatureGroup {
 
         this._mount();
         this._calculateAnimationSpeed();
+        return super.onAdd(map);
     }
 
     onRemove(map) {
         this._map.off("zoomend", this._calculateAnimationSpeed, this);
         this._map = null;
-        super.onRemove(map);
+        return super.onRemove(map);
     }
 
     pause() {
@@ -93,14 +93,16 @@ export default class AntPath extends FeatureGroup {
         if (options.paused) {
             options.paused = false;
             this._calculateAnimationSpeed();
+
+            return true;
         }
         else {
             return false;
         }
     }
 
-    _mount() {
-        const {options, _path, _animatedPathClass, _animatedPathId} = this;
+    _processOptions() {
+        const {options, _animatedPathClass, _animatedPathId} = this;
 
         let pathOpts = {...options};
         let pulseOpts = {...options};
@@ -113,8 +115,14 @@ export default class AntPath extends FeatureGroup {
             pulseOpts.dashArray = String(pulseOpts.dashArray);
         }
 
-        this.addLayer(this[Layers.main] = new Polyline(_path, pathOpts));
-        this.addLayer(this[Layers.pulse] = new Polyline(_path, pulseOpts));
+        return {pathOpts, pulseOpts};
+    }
+
+    _mount() {
+        const {pathOpts, pulseOpts} = this._processOptions();
+
+        this.addLayer(this[Layers.main] = new Polyline(this._path, pathOpts));
+        this.addLayer(this[Layers.pulse] = new Polyline(this._path, pulseOpts));
     }
 
     _calculateAnimationSpeed() {
@@ -145,22 +153,55 @@ export default class AntPath extends FeatureGroup {
     bringToFront() {
         this[Layers.main].bringToFront();
         this[Layers.pulse].bringToFront();
+
+        return this;
     }
 
     bringToBack() {
         this[Layers.pulse].bringToBack();
         this[Layers.main].bringToBack();
+
+        return this;
     }
 
     //Polyline interface
+    setStyle(options) {
+        const {paused, delay} = options;
+        paused ? this.pause() : this.resume();
+
+        if (delay !== this.options.delay) {
+            this.options.delay = delay;
+            this._calculateAnimationSpeed();
+        }
+
+        this.options = {...this.options, ...options};
+        const {pathOpts, pulseOpts} = this._processOptions();
+
+        this[Layers.main].setStyle(pathOpts);
+        this[Layers.pulse].setStyle(pulseOpts);
+
+        return this;
+    }
+
+    redraw() {
+        this[Layers.main].redraw();
+        this[Layers.pulse].redraw();
+
+        return this;
+    }
+
     addLatLng(...args) {
         this[Layers.main].addLatLng(...args);
         this[Layers.pulse].addLatLng(...args);
+
+        return this;
     }
 
     setLatLngs(...args) {
         this[Layers.main].setLatLngs(...args);
         this[Layers.pulse].setLatLngs(...args);
+
+        return this;
     }
 
     getLatLngs() {
@@ -168,8 +209,10 @@ export default class AntPath extends FeatureGroup {
     }
 
     spliceLatLngs(...args) {
-        this[Layers.main].spliceLatLngs(...args);
+        const latLngs = this[Layers.main].spliceLatLngs(...args);
         this[Layers.pulse].spliceLatLngs(...args);
+
+        return latLngs;
     }
 
     getBounds() {

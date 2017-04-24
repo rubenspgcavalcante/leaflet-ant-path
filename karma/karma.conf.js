@@ -1,29 +1,29 @@
-const webpackLoaders = require("./webpack/loaders.js");
+const webpackLoaders = require("./../webpack/loaders.js");
 
 module.exports = function (config) {
     config.set({
-        basePath: ".",
+        basePath: "../",
         frameworks: ["jasmine"],
         browsers: ["PhantomJS"],
         plugins: [
             "karma-webpack",
+            "karma-babel-preprocessor",
             "karma-phantomjs-launcher",
             "karma-jasmine",
-            "karma-coverage",
-            "karma-remap-istanbul",
             "karma-sourcemap-loader",
-            "karma-remap-istanbul",
-            "karma-babel-preprocessor"
+            "karma-sourcemap-writer",
+            "karma-coverage",
+            "karma-remap-istanbul"
         ],
 
         reporters: ["progress", "coverage", "karma-remap-istanbul"],
 
         preprocessors: {
-            "src/**/*.js": ["webpack", "sourcemap", "coverage"]
+            "./webpack.tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]
         },
 
         webpack: {
-            entry: ["./src/specs/bootstrap-tests.js"],
+            entry: ["./webpack.tests.js"],
             devtool: "inline-source-map",
             output: {
                 path: "dist/",
@@ -47,19 +47,17 @@ module.exports = function (config) {
             subdir: ".",
             file: "coverage.json"
         },
+
         remapIstanbulReporter: {
-            src: 'coverage/lcov/coverage.json',
             reports: {
-                lcovonly: 'coverage/lcov.info',
-                //html: 'coverage/html/report'
-            },
-            timeoutNotCreated: 5000, // default value
-            timeoutNoMoreFiles: 1000 // default value
+                html: "coverage",
+                json: 'coverage/remapped.json'
+            }
         },
 
         files: [
             "node_modules/babel-polyfill/dist/polyfill.min.js",
-            {pattern: "src/**/*.js", watched: true},
+            "./webpack.tests.js",
         ],
 
         singleRun: false,

@@ -31,14 +31,14 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
         expect(antPath.options.paused).toBeFalsy();
     });
 
-    describe("Should behave as in Array, the map method:", () => {
-        it("Should return a new AntPath as result", () => {
+    describe("Behave as a Functor", () => {
+        it("Should return a new AntPath as result when mapped", () => {
             const antPath = new AntPath([L.latLng(0, 1), L.latLng(2, 3)]);
             const otherAntPath = antPath.map(pos => L.latLng(pos.lat + 1, pos.lng + 1));
             expect(otherAntPath).not.toEqual(antPath);
         });
 
-        it("Should return the referent child instance as result", () => {
+        it("Should return the referent child instance as result when mapped", () => {
             class ChildAntPath extends AntPath {
                 constructor(...args) {
                     super(...args);
@@ -54,17 +54,18 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
 
     describe("Should follow all the L.Polygon interface:", () => {
         const path = [L.latLng(0, 1), L.latLng(2, 3)];
-        const antPath = new AntPath(path);
+        const options = {color: "white", pulseColor: "red"};
+        const antPath = new AntPath(path, options);
 
-        it("Can provide the current latLngs", () => {
+        it("Should be able to provide the current latLngs", () => {
             expect(antPath.getLatLngs()).toEqual(path);
         });
 
-        it("Can provide it bounds", () => {
+        it("Should be able to provide it bounds", () => {
             expect(antPath.getBounds()).toEqual(L.latLngBounds(path));
         });
 
-        it("Can provide as a GeoJSON", () => {
+        it("Should be able to provide itself as a GeoJSON", () => {
             expect(antPath.toGeoJSON()).toEqual(jasmine.objectContaining({
                 type: "Feature",
                 geometry: jasmine.objectContaining({
@@ -73,16 +74,30 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
             }));
         });
 
-        it("Can add new points to the path", () => {
+        it("Should be able to add new points to the path", () => {
             const coord = L.latLng(42, 42);
             antPath.addLatLng(coord);
             expect(antPath.getLatLngs()).toEqual([...path, coord]);
         });
 
-        it("Can set a entire new path", () => {
+        it("Should be able to set a entire new path", () => {
             const newPath = [L.latLng(0, 0), L.latLng(1, 1)];
             antPath.setLatLngs(newPath);
             expect(antPath.getLatLngs()).toEqual(newPath);
+        });
+
+        it("Should be able to set new options", () => {
+            const newOptions = {color: "green"};
+            antPath.setStyle(newOptions);
+
+            expect(antPath.options.color).toEqual(newOptions.color);
+            expect(antPath.options.pulseColor).toEqual(options.pulseColor);
+        });
+
+        it("Should be able to redraw the two composite paths", () => {
+            spyOn(fakePolyline, "redraw");
+            new AntPath(path, options).redraw();
+            expect(fakePolyline.redraw).toHaveBeenCalledTimes(2);
         });
     });
 });
