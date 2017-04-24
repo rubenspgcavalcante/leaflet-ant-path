@@ -60,16 +60,13 @@ export default class AntPath extends FeatureGroup {
     onAdd(map) {
         this._map = map;
         this._map.on("zoomend", this._calculateAnimationSpeed, this);
-
         this._mount();
         this._calculateAnimationSpeed();
-        return super.onAdd(map);
     }
 
-    onRemove(map) {
+    onRemove() {
         this._map.off("zoomend", this._calculateAnimationSpeed, this);
         this._map = null;
-        return super.onRemove(map);
     }
 
     pause() {
