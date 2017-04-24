@@ -25,5 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     logger.log(antPath.getLatLngs());
 
     //Changing dynamically the style of the component
-    setTimeout(() => customAntPath.setStyle({delay: 1000, pulseColor: "#000000", color: "blue"}), 5000);
+    setTimeout(
+        () => customAntPath.setStyle({delay: 3000, pulseColor: "#000000", color: "blue"}),
+        5000
+    );
 });

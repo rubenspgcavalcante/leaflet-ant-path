@@ -40,16 +40,16 @@ Can be used with asynchronous module loaders and CommonJS packers
     
 ### Important!
 MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using
-MultiAntPath and Leaflet 0.7, use older versions than 0.6
+MultiAntPath and Leaflet 0.7, use older AntPath versions than 0.6
     
 ### Using the plugin
 It's just like a polyline:  
 
 ```javascript
-    // Using the AntPath
+    // Using the constructor...
     let antPolyline = new L.Polyline.AntPath(latlngs, options);
     
-    //or use the factory
+    // ... or use the factory
     antPolyline = L.polyline.antPath(latlngs, options);
     
     antPolyline.addTo(map);
@@ -58,17 +58,26 @@ It's just like a polyline:
 
 Using with ES6 imports
 ```javascript
-    import {AntPath} from 'leafletAntPath';
+    import {AntPath, antPath} from 'leafletAntPath';
     
-    const antPolyline = new AntPath(latlngs, options);
+    // Using the constructor...
+    let antPolyline = new AntPath(latlngs, options);
+    
+    // ... or use the factory
+    antPolyline = antPath(latlngs, options);   
+    
     antPolyline.addTo(map);
 ```
 
 Using with AMD:  
 ```javascript
 require(['leafletAntPath'], function(AntPathModule) {
-    // ...
-    const antPolyline = new AntPathModule.AntPath(latlngs, options);
+    // Using the constructor ...
+    let antPolyline = new AntPathModule.AntPath(latlngs, options);
+    
+    // ... or use the factory
+    antPolyline = AntPathModule.antPath(latlngs, options);
+    
     antPolyline.addTo(map);
 });
 ```
@@ -94,7 +103,7 @@ When spread the path, you will receive it lat/lngs array;
 ```
 
 #### iterable
-When used in a **for ... of ...** loops over the path coordinates
+Use a **for ... of ...** to iterate over the path coordinates
 ```javascript
 for(let latLng of antPath) {
     // do something with it latLngs ...
