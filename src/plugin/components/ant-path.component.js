@@ -167,7 +167,7 @@ export default class AntPath extends FeatureGroup {
         paused ? this.pause() : this.resume();
 
         if (delay !== this.options.delay) {
-            this.options.delay = delay;
+            this.options.delay = delay || this._defaultOptions.delay;
             this._calculateAnimationSpeed();
         }
 

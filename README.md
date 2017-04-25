@@ -67,7 +67,7 @@ It's just like a polyline:
 
 Using with ES6 imports
 ```javascript
-    import {AntPath, antPath} from 'leafletAntPath';
+    import {AntPath, antPath} from 'leaflet-ant-path';
     
     // Using the constructor...
     let antPolyline = new AntPath(latlngs, options);
@@ -80,7 +80,7 @@ Using with ES6 imports
 
 Using with AMD:  
 ```javascript
-require(['leafletAntPath'], function(AntPathModule) {
+require(['leaflet-ant-path'], function(AntPathModule) {
     // Using the constructor ...
     let antPolyline = new AntPathModule.AntPath(latlngs, options);
     
@@ -93,7 +93,7 @@ require(['leafletAntPath'], function(AntPathModule) {
 
 Using with browserify:
 ```javascript
-    const AntPath = require('leafletAntPath').AntPath;
+    const { AntPath } = require('leaflet-ant-path');
 ```
 
 
@@ -128,16 +128,16 @@ class CustomAntPath extends AntPath {
 ```
 
 #### map method
-AntPath has a map method as the Array, returning a new instance of 
-AntPath *(or the child class which extends it)*:
+AntPath has a map method as the Array, returning a new instance of AntPath
+ *(or the child class which extends it, because of its Functor property)*:
 ```javascript
 //New path with translated path
 const newAnthPath = myAntPath.map(pos => latLng(pos.lat + 1, pos.lng + 1));
 ```
 
 ### Parameters
-The AntPath extends from the [FeatureGroup](http://leafletjs.com/reference.html#featuregroup), but you initialise with
-the same options of a common [Polyline]((http://leafletjs.com/reference.html#polyline)), with some extra options, like the flux color.  
+The AntPath extends from the [FeatureGroup](http://leafletjs.com/reference.html#featuregroup) and implements the [Path](http://leafletjs.com/reference.html#path) interface.
+Initialise with the same options of a common [Polyline]((http://leafletjs.com/reference.html#polyline)), with some extra options, like the flux color.  
 
 | name | type | example | description |
 |------|------|---------| ------------|
