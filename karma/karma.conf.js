@@ -34,8 +34,8 @@ module.exports = function (config) {
                     {
                         enforce: "pre",
                         test: /\.js$/,
-                        include: './src/',
-                        loader: 'istanbul-instrumenter'
+                        include: "./src/",
+                        loader: "istanbul-instrumenter"
                     }
                 ])
             }
@@ -51,7 +51,7 @@ module.exports = function (config) {
         remapIstanbulReporter: {
             reports: {
                 html: "coverage",
-                json: 'coverage/remapped.json'
+                json: "coverage/remapped.json"
             }
         },
 
