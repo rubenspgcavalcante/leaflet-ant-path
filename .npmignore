@@ -1,16 +1,21 @@
 #Directories
 .idea/
+.github/
 coverage/
 node_modules/
 karma/
+webpack/
 dev-env/
 src/
-tasks/
+assets/
 *.log
 
 #Files
 .babelrc
 .eslintrc
+.eslintignore
+.npmignore
+.wbprofile.json
 .gitignore
 .travis.yml
 yarn.lock
