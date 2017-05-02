@@ -31,15 +31,6 @@ Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/
     
 ### UMD compatible
 Can be used with asynchronous module loaders and CommonJS packers
-
-### With or without polyfills
-The module provide two bundles, the full one, with some es6 polyfills (loaded by default when importing) and the lighter
-one without the polyfills. If you're already uses the following polyfills in your project:
-- regenerator-runtime
-- core-js/es6/symbol
-- core-js/es6/reflect
-
-Just use the lighter version (leaflet-ant-path.es6.js). If not, just use the full bundle.
     
 ### Important!
 MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using
@@ -63,7 +54,7 @@ Using with ES6 imports
 ```javascript
     import { AntPath, antPath } from 'leaflet-ant-path';
     
-    // Using the constructor...
+    // Usethe constructor...
     let antPolyline = new AntPath(latlngs, options);
     
     // ... or use the factory
@@ -75,7 +66,7 @@ Using with ES6 imports
 Using with AMD:  
 ```javascript
 require(['leaflet-ant-path'], function(AntPathModule) {
-    // Using the constructor ...
+    // Use the constructor ...
     let antPolyline = new AntPathModule.AntPath(latlngs, options);
     
     // ... or use the factory
@@ -87,7 +78,7 @@ require(['leaflet-ant-path'], function(AntPathModule) {
 
 Using with browserify:
 ```javascript
-    const { AntPath } = require('leaflet-ant-path');
+    const { AntPath, antPath } = require('leaflet-ant-path');
 ```
 
 ### Parameters
@@ -110,6 +101,7 @@ Initialise with the same options of a common [Polyline]((http://leafletjs.com/re
 |------|---------|-------------|
 | pause() | boolean | Stops the animation |
 | resume() | booelan | Resume the animation |
+| map(callback) | new AntPath or extended class | Iterates over the latlngs |
 
 Also have the same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)
 
@@ -153,6 +145,15 @@ AntPath has a map method as the Array, returning a new instance of AntPath
 //New path with translated path
 const newAnthPath = myAntPath.map(pos => latLng(pos.lat + 1, pos.lng + 1));
 ```
+
+### With or without polyfills
+The module provide two bundles, the full one, with some es6 polyfills (loaded by default when importing) and the lighter
+one without the polyfills. If you're already uses the following polyfills in your project:
+- regenerator-runtime
+- core-js/es6/symbol
+- core-js/es6/reflect
+
+Just use the lighter version (leaflet-ant-path.es6.js). If not, just use the full bundle.
 
 ### License
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
