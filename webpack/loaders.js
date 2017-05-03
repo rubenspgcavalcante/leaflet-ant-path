@@ -5,10 +5,12 @@ module.exports = {
     rules: [
         {
             test: /\.js$/,
+            exclude: /node_modules/,
             use: {loader: 'babel-loader'}
         },
         {
             test: /\.template\.html$/,
+            exclude: /node_modules/,
             use: {
                 loader: 'raw-loader',
                 options: {root: 'gh-src'}
