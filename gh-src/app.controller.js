@@ -1,8 +1,8 @@
-(function () {
-    "use strict";
+import 'bootstrap-colorpicker';
 
+export default module => {
     AppController.$inject = ['$scope', '$element'];
-    angular.module('ant-path-example').controller('AppController', AppController);
+    module.controller('AppController', AppController);
 
     function AppController($scope, $element) {
         var mv = this;
@@ -16,8 +16,8 @@
         };
 
         mv.init = function () {
-            var colorInput = $($element).find('#color');
-            var pulseColorInput = $($element).find('#pulse-color');
+            const colorInput = $($element).find('#color');
+            const pulseColorInput = $($element).find('#pulse-color');
 
             colorInput.colorpicker({
                 format: 'hex'
@@ -34,6 +34,6 @@
             });
         };
     }
-}());
+}
 
 

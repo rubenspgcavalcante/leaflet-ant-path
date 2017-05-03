@@ -1,44 +1,36 @@
-(function () {
-    "use strict";
+import L from 'leaflet';
+import {AntPath} from 'leaflet-ant-path';
 
+export default module => {
     AntPathExampleDirective.$inject = ['$http'];
-    angular.module('ant-path-example').directive('antPathExample', AntPathExampleDirective);
+    module.directive('antPathExample', AntPathExampleDirective);
 
     function AntPathExampleDirective($http) {
         return {
-            templateUrl: 'gh-src/templates/ant-path-example.html',
+            templateUrl: 'ant-path-example.template.html',
             restrict: 'E',
             scope: {
                 options: '='
             },
             link: function (scope, element) {
-                var map = L.map(element.find('#map')[0]).setView([0, 0], 3);
-                var options = {};
-                var antPath = null, path = null;
+                let options = {};
+                let antPath = null, path = null;
 
-                $http.get('route.json').then(function (res) {
-                    path = res.data.map(function(point) { return new L.latLng(point[0], point[1]) });
+                $http.get('route.json').then(res => {
+                    const map = L.map($(element).find('#map')[0]).setView([0, 0], 3);
+                    path = res.data.map(point => new L.latLng(point[0], point[1]));
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
-                    antPath = new L.Polyline.AntPath(path);
-
+                    antPath = new AntPath(path);
                     map.addLayer(antPath);
                     map.fitBounds(antPath.getBounds());
                 });
 
-                scope.$watch('options', function (opts) {
-                    if (antPath !== null) {
-                        map.removeLayer(antPath);
-                        antPath = new L.Polyline.AntPath(path, opts);
-                        map.addLayer(antPath);
-                    }
-                }, true);
+                scope.$watch('options', opts => antPath && antPath.setStyle(opts), true);
             }
         }
     }
-}());
-
-
+}

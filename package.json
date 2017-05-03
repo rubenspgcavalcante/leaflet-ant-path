@@ -1,0 +1,52 @@
+{
+  "name": "leaflet-ant-path-gh-pages",
+  "version": "1.0.0",
+  "description": "The GitHub pages for Leaflet AntPath",
+  "main": "index.js",
+  "repository": "https://github.com/rubenspgcavalcante/leaflet-ant-path.git",
+  "author": "Rubens Pinheiro <rubenspgcavalcante@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "NODE_ENV=production webpack --progress",
+    "server": "NODE_ENV=development webpack-dev-server --hot --inline --compress --colors --history-api-fallback"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "bootstrap": "^3.3.7",
+    "bootstrap-colorpicker": "^2.5.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "leaflet": "^1.0.3",
+    "leaflet-ant-path": "^0.6.2"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.28.0",
+    "exports-loader": "^0.6.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "imports-loader": "^0.7.1",
+    "node-sass": "^4.5.2",
+    "optimize-css-assets-webpack-plugin": "^1.3.1",
+    "raw-loader": "^0.5.1",
+    "react-transform-catch-errors": "^1.0.2",
+    "react-transform-hmr": "^1.0.4",
+    "redbox-react": "^1.3.6",
+    "regenerator-runtime": "^0.10.4",
+    "resolve-url-loader": "^2.0.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
