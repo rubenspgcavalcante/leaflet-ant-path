@@ -1,12 +1,13 @@
 import L from "leaflet";
-import {AntPath} from "../plugin/main";
+import {AntPath, antPath as antPathFactory} from "../plugin/main";
 
 describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
-    let spy, fakePolyline;
+    let spy, fakePolyline, path;
 
     beforeEach(() => {
         fakePolyline = new L.Polyline([0, 0], [1, 1]);
         spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
+        path = [L.latLng(0, 0), L.latLng(1, 1)];
     });
 
     it("Should use two polylines to stack in a animation", () => {
@@ -16,19 +17,22 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
     });
 
     it("Should be spreadable into a coordinates collection", () => {
-        const path = [L.latLng(0, 0), L.latLng(1, 1)];
         const antPath = new AntPath(path);
-
         expect([...antPath]).toEqual(path);
     });
 
     it("Should stop and resume the animation", () => {
-        const antPath = new AntPath([0, 0], [1, 1]);
+        const antPath = new AntPath(path);
         antPath.pause();
         expect(antPath.options.paused).toBeTruthy();
 
         antPath.resume();
         expect(antPath.options.paused).toBeFalsy();
+    });
+
+    it("Should expose a factory to create new instances", () => {
+        const fabricated = antPathFactory(path);
+        expect(fabricated).toEqual(jasmine.any(AntPath));
     });
 
     describe("Behave as a Functor", () => {
@@ -45,24 +49,54 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
                 }
             }
 
-            const child = new ChildAntPath([L.latLng(0, 0)]);
+            const child = new ChildAntPath(path);
             const childCopy = child.map(pos => pos);
             expect(childCopy).toEqual(jasmine.any(ChildAntPath));
         });
     });
 
+    describe("Should follow all the Layer interface", () => {
+        let map;
+        beforeEach(() => map = L.map(document.createElement("div")));
+
+        it("Should be able to add it to a map", () => {
+            const antPath = new AntPath(path);
+            expect(map.hasLayer(antPath)).toBeFalsy();
+
+            antPath.addTo(map);
+            expect(map.hasLayer(antPath)).toBeTruthy();
+        });
+
+        it("Should be removable from maps", () => {
+            const antPath = new AntPath(path);
+            map.addLayer(antPath);
+            expect(map.hasLayer(antPath)).toBeTruthy();
+
+            antPath.removeFrom(map);
+            expect(map.hasLayer(antPath)).toBeFalsy();
+        });
+
+        it("Should be removable from the current map", ()=> {
+            const antPath = new AntPath(path);
+            map.addLayer(antPath);
+            expect(map.hasLayer(antPath)).toBeTruthy();
+
+            antPath.remove();
+            expect(map.hasLayer(antPath)).toBeFalsy();
+        });
+    });
 
     describe("Should follow all the L.Polygon interface:", () => {
-        const path = [L.latLng(0, 1), L.latLng(2, 3)];
         const options = {color: "white", pulseColor: "red"};
-        const antPath = new AntPath(path, options);
+        const samplePath = [L.latLng(1, 2), L.latLng(3, 4)];
+        const antPath = new AntPath(samplePath, options);
 
         it("Should be able to provide the current latLngs", () => {
-            expect(antPath.getLatLngs()).toEqual(path);
+            expect(antPath.getLatLngs()).toEqual(samplePath);
         });
 
         it("Should be able to provide it bounds", () => {
-            expect(antPath.getBounds()).toEqual(L.latLngBounds(path));
+            expect(antPath.getBounds()).toEqual(L.latLngBounds(samplePath));
         });
 
         it("Should be able to provide itself as a GeoJSON", () => {
@@ -77,7 +111,7 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
         it("Should be able to add new points to the path", () => {
             const coord = L.latLng(42, 42);
             antPath.addLatLng(coord);
-            expect(antPath.getLatLngs()).toEqual([...path, coord]);
+            expect(antPath.getLatLngs()).toEqual([...samplePath, coord]);
         });
 
         it("Should be able to set a entire new path", () => {

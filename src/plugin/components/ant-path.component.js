@@ -161,6 +161,15 @@ export default class AntPath extends FeatureGroup {
         return this;
     }
 
+    //Layer interface
+    removeFrom(map) {
+        if (map && map.hasLayer(this)) {
+            map.removeLayer(this[Layers.main])
+                .removeLayer(this[Layers.pulse])
+                .removeLayer(this);
+        }
+    }
+
     //Polyline interface
     setStyle(options) {
         const {paused, delay} = options;
