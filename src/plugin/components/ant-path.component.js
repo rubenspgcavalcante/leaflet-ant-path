@@ -70,7 +70,11 @@ export default class AntPath extends FeatureGroup {
             this._map.off("zoomend", this._calculateAnimationSpeed, this);
             this._map = null;
         }
-        this.removeFrom(layer);
+        if (layer) {
+            layer.removeLayer(this[Layers.main])
+                .removeLayer(this[Layers.pulse]);
+        }
+
         return this;
     }
 
@@ -166,8 +170,7 @@ export default class AntPath extends FeatureGroup {
     //Layer interface
     removeFrom(layer) {
         if (layer && layer.hasLayer(this)) {
-            layer.removeLayer(this[Layers.main])
-                .removeLayer(this[Layers.pulse]);
+            layer.removeLayer(this);
         }
         return this;
     }
