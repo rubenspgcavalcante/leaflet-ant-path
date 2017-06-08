@@ -8,6 +8,6 @@ module.exports = {
             require.resolve("core-js/es6/reflect"),
             "./dev-env/index.js"]
     },
-    devtool: "eval-source-map",
+    devtool: "source-map",
     plugins: [new webpack.NoEmitOnErrorsPlugin(), new webpack.HotModuleReplacementPlugin()]
 };
