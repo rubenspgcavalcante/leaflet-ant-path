@@ -62,11 +62,16 @@ export default class AntPath extends FeatureGroup {
         this._map.on("zoomend", this._calculateAnimationSpeed, this);
         this._mount();
         this._calculateAnimationSpeed();
+        return this;
     }
 
-    onRemove() {
-        this._map.off("zoomend", this._calculateAnimationSpeed, this);
-        this._map = null;
+    onRemove(layer) {
+        if (this._map) {
+            this._map.off("zoomend", this._calculateAnimationSpeed, this);
+            this._map = null;
+        }
+        this.removeFrom(layer);
+        return this;
     }
 
     pause() {
@@ -90,7 +95,6 @@ export default class AntPath extends FeatureGroup {
         if (options.paused) {
             options.paused = false;
             this._calculateAnimationSpeed();
-
             return true;
         }
         else {
@@ -150,24 +154,22 @@ export default class AntPath extends FeatureGroup {
     bringToFront() {
         this[Layers.main].bringToFront();
         this[Layers.pulse].bringToFront();
-
         return this;
     }
 
     bringToBack() {
         this[Layers.pulse].bringToBack();
         this[Layers.main].bringToBack();
-
         return this;
     }
 
     //Layer interface
-    removeFrom(map) {
-        if (map && map.hasLayer(this)) {
-            map.removeLayer(this[Layers.main])
-                .removeLayer(this[Layers.pulse])
-                .removeLayer(this);
+    removeFrom(layer) {
+        if (layer && layer.hasLayer(this)) {
+            layer.removeLayer(this[Layers.main])
+                .removeLayer(this[Layers.pulse]);
         }
+        return this;
     }
 
     //Polyline interface
