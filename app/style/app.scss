@@ -1,0 +1,10 @@
+$fa-font-path: "~font-awesome/fonts";
+
+@import "~font-awesome/scss/font-awesome";
+@import '~leaflet/dist/leaflet.css';
+@import "~bulma/css/bulma.css";
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}

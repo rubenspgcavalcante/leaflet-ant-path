@@ -3,8 +3,8 @@ const loaders = require('./webpack/loaders');
 const plugins = require('./webpack/plugins');
 
 module.exports = {
-  context: path.resolve(__dirname, 'gh-src'),
-  entry: ['./app.js'],
+  context: path.resolve(__dirname, 'app'), //path.resolve(__dirname, 'gh-src'),
+  entry: ['./app.jsx'],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),

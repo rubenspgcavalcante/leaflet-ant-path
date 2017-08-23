@@ -1,10 +1,11 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const {dev, test, prod} = require('./envs');
 
 module.exports = {
     rules: [
         {
-            test: /\.js$/,
+            test: /\.jsx?$/,
             exclude: /node_modules/,
             use: {loader: 'babel-loader'}
         },
@@ -20,8 +21,8 @@ module.exports = {
             test: /\.scss|sass$/,
             use: ExtractTextPlugin.extract({
                 fallback: "style-loader",
-                use: 'css-loader!sass-loader'
-            }),
+                use: "css-loader!sass-loader"
+            })
         },
         {
             test: /\.css$/,
@@ -54,7 +55,7 @@ module.exports = {
         {
             test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             use: [
-                { loader: 'file-loader' }
+                {loader: 'file-loader'}
             ]
         }
     ]
