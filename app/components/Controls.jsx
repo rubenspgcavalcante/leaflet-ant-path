@@ -3,6 +3,7 @@ import { func } from 'prop-types';
 import throttle from 'lodash/throttle';
 
 import OptionSlider from './stateless/OptionSlider';
+import OptionColorPicker from './stateless/OptionColorPicker';
 
 export default class Controls extends PureComponent {
   static propTypes = {
@@ -38,6 +39,15 @@ export default class Controls extends PureComponent {
             <OptionSlider property="dashArray[1]"
                           onOptionChange={(dashArrayY) => delayedChange({ dashArray: [options.dashArray[0], dashArrayY] })}
                           min={1} max={100} option={options.dashArray[1]} />
+          </div >
+        </div >
+        <div className="columns" >
+          <div className="column is-6" >
+            <OptionColorPicker property="color" option={options.color} onChange={(color) => delayedChange({ color })} />
+          </div >
+          <div className="column is-6" >
+            <OptionColorPicker property="pulseColor" option={options.pulseColor}
+                               onChange={(pulseColor) => delayedChange({ pulseColor })} />
           </div >
         </div >
       </div >
