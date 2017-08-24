@@ -1,30 +1,30 @@
-import {PureComponent} from "react";
-import {connect} from "react-redux";
-import {loadRoute} from "../actions/demo";
+import React, { PureComponent } from "react";
+
 import Map from "./Map";
+import Controls from './Controls';
 
-const mapStateToProps = (state) => ({
-    route: state.routes.data['route-1']
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    loadRoute: () => dispatch(loadRoute("route-1"))
-});
+export default class OptionsSample extends PureComponent {
+  componentWillMount() {
+    this.props.loadRoute();
+  }
 
-class OptionsSample extends PureComponent{
-    componentWillMount() {
-        this.props.loadRoute();
-    }
+  render() {
+    const { route, options } = this.props;
 
-    render() {
-        const {route} = this.props;
-
-        return (
-            <div>
-                {route? <Map route={route} /> : null}
-            </div>
-        )
-    }
+    return (
+      <div className='columns' >
+        <div className='column is-8' >
+          <div className="box" >
+            {route ? <Map route={route} options={options} /> : null}
+          </div >
+        </div >
+        <div className='column is-4' >
+          <div className="box" >
+            <Controls options={options} updateOptions={this.props.updateOptions} />
+          </div >
+        </div >
+      </div >
+    )
+  }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(OptionsSample);

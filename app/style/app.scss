@@ -2,9 +2,16 @@ $fa-font-path: "~font-awesome/fonts";
 
 @import "~font-awesome/scss/font-awesome";
 @import '~leaflet/dist/leaflet.css';
-@import "~bulma/css/bulma.css";
+@import "~bulma/bulma.sass";
+@import "~rc-slider/assets/index.css";
 
 .leaflet-container {
-  height: 100%;
+  height: 400px;
   width: 100%;
+
+  @include mobile {
+    height: 200px;
+  }
 }
+
+@import "stateless/mobile_header";

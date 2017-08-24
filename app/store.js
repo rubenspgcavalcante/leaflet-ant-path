@@ -1,19 +1,18 @@
-import {combineReducers, createStore, applyMiddleware} from "redux";
-import {combineEpics, createEpicMiddleware} from "redux-observable";
-import {composeWithDevTools} from "redux-devtools-extension";
+import { applyMiddleware, createStore } from "redux";
+import { combineEpics, createEpicMiddleware } from "redux-observable";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-import {loadRouteEpic} from "./actions/demo";
-import {routes} from "./reducers/demo";
+import { loadRouteEpic } from "./actions/demo";
+import reducer from './reducers/index';
 
 const rootEpic = combineEpics(
-    loadRouteEpic
+  loadRouteEpic
 );
 
-const rootReducer = combineReducers({routes});
 
 export default createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(
-        createEpicMiddleware(rootEpic)
-    ))
+  reducer,
+  composeWithDevTools(applyMiddleware(
+    createEpicMiddleware(rootEpic)
+  ))
 );
