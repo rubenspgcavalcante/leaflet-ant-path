@@ -14,9 +14,40 @@ export default class Controls extends PureComponent {
     this.props.updateOptions(options);
   }, 50);
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showColorPicker: false,
+      showPulseColorPicker: false
+    }
+  }
+
+  closeDropdown(id) {
+    const capitalized = id[0].toUpperCase() + id.slice(1);
+    const property = `show${capitalized}Picker`;
+    this.setState((prev) => ({ [property]: false }));
+  }
+
+  toggleDropdown(id, show) {
+    if (id === 'color') {
+      this.setState((prev) => ({
+          showColorPicker: !prev.showColorPicker,
+          showPulseColorPicker: false
+        }
+      ));
+    }
+    else if (id === 'pulseColor') {
+      this.setState((prev) => ({
+        showColorPicker: false,
+        showPulseColorPicker: !prev.showPulseColorPicker
+      }));
+    }
+  }
+
   render() {
     const delayedChange = this.delayedChange.bind(this);
     const { options } = this.props;
+    const { showColorPicker, showPulseColorPicker } = this.state;
 
     return (
       <div >
@@ -43,10 +74,14 @@ export default class Controls extends PureComponent {
         </div >
         <div className="columns" >
           <div className="column is-6" >
-            <OptionColorPicker property="color" option={options.color} onChange={(color) => delayedChange({ color })} />
+            <OptionColorPicker onClick={() => this.toggleDropdown('color')} onBlur={() => this.closeDropdown('color')}
+                               display={showColorPicker} property="color" option={options.color}
+                               onChange={(color) => delayedChange({ color })} />
           </div >
           <div className="column is-6" >
-            <OptionColorPicker property="pulseColor" option={options.pulseColor}
+            <OptionColorPicker onClick={() => this.toggleDropdown('pulseColor')}
+                               display={showPulseColorPicker} property="pulseColor"
+                               option={options.pulseColor} align="right" onBlur={() => this.closeDropdown('pulseColor')}
                                onChange={(pulseColor) => delayedChange({ pulseColor })} />
           </div >
         </div >
