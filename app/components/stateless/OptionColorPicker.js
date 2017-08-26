@@ -17,7 +17,7 @@ export default ({ property, option, display, align = 'left', onClick, onBlur, on
       </button >
     </div >
     <div className="dropdown-menu" id={`dropdown-menu-${property}`} role="menu" >
-      <ChromePicker onChange={(color) => onChange(color.hex)} color={option} />
+      <ChromePicker onChange={(color) => onChange(color.hex.toUpperCase())} color={option} />
     </div >
   </div >
 );

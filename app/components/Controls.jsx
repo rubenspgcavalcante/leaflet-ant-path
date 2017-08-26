@@ -28,7 +28,7 @@ export default class Controls extends PureComponent {
     this.setState((prev) => ({ [property]: false }));
   }
 
-  toggleDropdown(id, show) {
+  toggleDropdown(id) {
     if (id === 'color') {
       this.setState((prev) => ({
           showColorPicker: !prev.showColorPicker,
@@ -72,13 +72,13 @@ export default class Controls extends PureComponent {
                           min={1} max={100} option={options.dashArray[1]} />
           </div >
         </div >
-        <div className="columns" >
-          <div className="column is-6" >
+        <div className="columns is-mobile" >
+          <div className="column is-centered is-6" >
             <OptionColorPicker onClick={() => this.toggleDropdown('color')} onBlur={() => this.closeDropdown('color')}
                                display={showColorPicker} property="color" option={options.color}
                                onChange={(color) => delayedChange({ color })} />
           </div >
-          <div className="column is-6" >
+          <div className="column is-centered is-6" >
             <OptionColorPicker onClick={() => this.toggleDropdown('pulseColor')}
                                display={showPulseColorPicker} property="pulseColor"
                                option={options.pulseColor} align="right" onBlur={() => this.closeDropdown('pulseColor')}
