@@ -53,6 +53,15 @@ export default class Controls extends PureComponent {
       <div >
         <span className='subtitle' ><span className='icon' ><i className='fa fa-cogs' /></span > Options</span >
         <hr />
+        <div className="field" >
+          <div className="control" >
+            <label className="checkbox" >
+              <input type="checkbox" onChange={(ev) => delayedChange({ paused: ev.target.checked })} />
+              <small ><b > paused</b ></small >
+            </label >
+          </div >
+        </div >
+
         <OptionSlider property="delay" onOptionChange={(delay) => delayedChange({ delay })}
                       min={1} max={800} option={options.delay} />
 

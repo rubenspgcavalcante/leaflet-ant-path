@@ -4,12 +4,15 @@ import { connect, Provider } from "react-redux";
 import store from "./store";
 import "./style/app.scss";
 
-import Hero from "./components/stateless/Hero";
+import Header from "./modules/ui/components/containers/Header";
 import OptionsSample from "./components/containers/OptionsSample";
+import { loadRepoInfo } from "./actions/github";
+
+store.dispatch(loadRepoInfo());
 
 let App = connect()(() => (
   <div >
-    <Hero />
+    <Header />
     <div className="section" >
       <OptionsSample />
     </div >

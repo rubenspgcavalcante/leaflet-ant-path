@@ -4,9 +4,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import { loadRouteEpic } from "./actions/demo";
 import reducer from './reducers/index';
+import { loadRepoInfoEpic } from "./actions/github";
 
 const rootEpic = combineEpics(
-  loadRouteEpic
+  loadRouteEpic, loadRepoInfoEpic
 );
 
 
