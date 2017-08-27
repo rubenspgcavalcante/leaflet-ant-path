@@ -15,7 +15,7 @@ module.exports = [
   }),
   new ExtractTextPlugin('styles.css'),
   new CopyWPPlugin([{
-    from: '../app/routes/*.json',
+    from: '../app/latlngs/*.json',
     to: '../dist',
     flatten: true
   }]),
