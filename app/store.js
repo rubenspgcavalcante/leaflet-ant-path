@@ -2,8 +2,8 @@ import { applyMiddleware, createStore } from "redux";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { composeWithDevTools } from "redux-devtools-extension";
 
+import reducer from './reducer';
 import { loadRouteEpic } from "./modules/home/actions/demo";
-import reducer from './modules/home/reducers/index';
 import { loadRepoInfoEpic } from "./modules/core/actions/github";
 
 const rootEpic = combineEpics(

@@ -7,8 +7,9 @@ import store from "./store";
 import "./style/app.scss";
 
 import Header from "./modules/ui/components/containers/Header";
-import OptionsSample from "./modules/home/components/containers/OptionsSample";
+
 import { loadRepoInfo } from "./modules/core/actions/github";
+import { Component as Home} from "./modules/home/index";
 
 store.dispatch(loadRepoInfo());
 
@@ -17,7 +18,7 @@ let App = connect()(() => (
     <div id="react-app">
       <Header />
       <div className="section" >
-        <Route exact path="/" component={OptionsSample} />
+        <Route exact path="/" component={Home} />
       </div >
       <div className="footer" ></div >
     </div >
