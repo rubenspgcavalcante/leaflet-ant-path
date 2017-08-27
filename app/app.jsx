@@ -13,12 +13,12 @@ import { Component as Home} from "./modules/home/index";
 
 store.dispatch(loadRepoInfo());
 
-let App = connect()(() => (
+const App = connect()(() => (
   <Router >
     <div id="react-app">
       <Header />
       <div className="section" >
-        <Route exact path="/" component={Home} />
+        <Route exact path={app.path} component={Home} />
       </div >
       <div className="footer" ></div >
     </div >
