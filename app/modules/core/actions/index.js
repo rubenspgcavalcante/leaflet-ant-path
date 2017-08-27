@@ -1,0 +1,2 @@
+export const LOAD_REPO_INFO = 'LOAD_REPO_INFO';
+export const REPO_INFO_LOADED = 'REPO_INFO_LOADED';
