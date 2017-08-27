@@ -8,7 +8,7 @@ import Hero from "./components/stateless/Hero";
 import OptionsSample from "./components/containers/OptionsSample";
 
 let App = connect()(() => (
-  <div className="container" >
+  <div >
     <Hero />
     <div className="section" >
       <OptionsSample />
