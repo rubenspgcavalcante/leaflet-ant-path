@@ -1,29 +1,28 @@
 import { render } from "react-dom";
 import { connect, Provider } from "react-redux";
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import store from "./store";
 import "./style/app.scss";
 
 import Header from "./modules/ui/components/containers/Header";
+import Footer from "./modules/ui/components/stateless/Footer"
 
 import { loadRepoInfo } from "./modules/core/actions/github";
-import { Component as Home } from "./modules/home/index";
+import { routesFactory } from "./routes";
 
 store.dispatch(loadRepoInfo());
-
-const route = (path = '') => `${app.path}${path}`;
+const routeComponents = routesFactory();
 
 const App = connect()(() => (
   <Router >
     <div id="react-app" >
       <Header />
       <div className="section" >
-        <Route exact path={route()} component={Home} />
-        <Route path={route`docs/`} />
+        {routeComponents}
       </div >
-      <div className="footer" />
+      <Footer />
     </div >
   </Router >
 ));
