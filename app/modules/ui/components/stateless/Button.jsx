@@ -1,8 +1,8 @@
 import React from 'react';
 import { any, func, string } from 'prop-types';
 
-const Button = ({ children, icon, onClick }) => (
-  <a className="button is-small" onClick={onClick} >
+const Button = ({ children, icon, href, onClick }) => (
+  <a href={!!href ? href : '#'} className="button is-small" onClick={onClick} >
     {icon ?
       <span className="icon" >
         <i className={`fa fa-${icon}`} />
@@ -14,6 +14,7 @@ const Button = ({ children, icon, onClick }) => (
 
 Button.propTypes = {
   icon: string,
+  href: string,
   onClick: func
 };
 

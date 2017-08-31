@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import Map from "./Map";
 import Controls from './Controls';
-import CodeSnippet from './stateless/CodeSnippet';
+import CodeSnippet from '../../ui/components/stateless/CodeSnippet';
 
 export default class OptionsSample extends PureComponent {
   componentWillMount() {
@@ -29,8 +29,8 @@ export default class OptionsSample extends PureComponent {
         <div className="columns" >
           <div className="column is-12" >
             <div className="box" >
-              <h1 >Check the above example:</h1 >
-              <CodeSnippet id="mainDemo" options={options} />
+              <h1 ><i className="fa fa-info-circle" /> Check the above example code:</h1 >
+              <CodeSnippet id="mainDemo" params={options} />
             </div >
           </div >
         </div >

@@ -1,3 +1,3 @@
-import DocsIntro from './components/DocsIntro';
+import Docs from './components/Docs';
 
-export const Component = DocsIntro;
+export const Component = Docs;
