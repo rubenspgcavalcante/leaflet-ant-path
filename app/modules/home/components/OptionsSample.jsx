@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import Map from "./Map";
 import Controls from './Controls';
-import CodeSnippet from '../../ui/components/stateless/CodeSnippet';
+import CodeDemo from './stateless/CodeDemo';
 
 export default class OptionsSample extends PureComponent {
   componentWillMount() {
@@ -10,7 +10,7 @@ export default class OptionsSample extends PureComponent {
   }
 
   render() {
-    const { route, options } = this.props;
+    const { route, options, snippetType, changeSnippet, updateOptions } = this.props;
 
     return (
       <div className="options-sample" >
@@ -22,7 +22,7 @@ export default class OptionsSample extends PureComponent {
           </div >
           <div className='column is-4' >
             <div className="box" >
-              <Controls options={options} updateOptions={this.props.updateOptions} />
+              <Controls options={options} updateOptions={updateOptions} />
             </div >
           </div >
         </div >
@@ -30,7 +30,7 @@ export default class OptionsSample extends PureComponent {
           <div className="column is-12" >
             <div className="box" >
               <h1 ><i className="fa fa-info-circle" /> Check the above example code:</h1 >
-              <CodeSnippet id="mainDemo" params={options} />
+              <CodeDemo type={snippetType} options={options} onClick={(type) => changeSnippet(type)} />
             </div >
           </div >
         </div >

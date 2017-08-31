@@ -1,0 +1,4 @@
+const SNIPPET_ = (TYPE) => `SNIPPET_${TYPE}`;
+export const SNIPPET_ES5 = SNIPPET_`ES5`;
+export const SNIPPET_ES6 = SNIPPET_`ES6`;
+export const SNIPPET_BROWSERIFY = SNIPPET_`BROWSERIFY`;
