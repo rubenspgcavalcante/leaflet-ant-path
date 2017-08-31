@@ -1,6 +1,17 @@
 import React from 'react';
 import DocSection from './DocSection';
 import CodeSnippet from 'modules/ui/components/stateless/CodeSnippet';
+import Table from 'modules/ui/components/stateless/Table';
+import Info from './Info';
+
+const table = {
+  header: ["name", "returns", "description"],
+  rows: [
+    ["pause()", "boolean", "Stops the animation"],
+    ["resume()", "boolean", "Resume the animation"],
+    ["map(callback)", "new AntPath or extended class", "Iterates over the latlngs"]
+  ]
+};
 
 export default ({ title, id }) => (
   <DocSection id={id} title={title} >
@@ -10,8 +21,9 @@ export default ({ title, id }) => (
       following options:</p >
     <div className="highlight" >
       <CodeSnippet id="withOptions" />
-      <small ><span className="icon is-small" ><i className="fa fa-info-circle" /></span ><i >The above options are the
-        default ones</i ></small >
+      <Info >The above options are the default ones</Info >
     </div >
+    <p ><b >Methods</b ></p >
+    <Table {...table}/>
   </DocSection >
 );
