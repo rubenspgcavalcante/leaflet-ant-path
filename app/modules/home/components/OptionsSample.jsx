@@ -10,7 +10,7 @@ export default class OptionsSample extends PureComponent {
   }
 
   render() {
-    const { route, options, snippetType, changeSnippet, updateOptions } = this.props;
+    const { route, options, snippetType, changeSnippet, updateOptions, resetOptions } = this.props;
 
     return (
       <div className="options-sample" >
@@ -22,7 +22,7 @@ export default class OptionsSample extends PureComponent {
           </div >
           <div className='column is-4' >
             <div className="box" >
-              <Controls options={options} updateOptions={updateOptions} />
+              <Controls options={options} updateOptions={updateOptions} onReset={resetOptions} />
             </div >
           </div >
         </div >

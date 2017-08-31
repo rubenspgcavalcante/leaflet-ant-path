@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { changeSnippet, loadRoute, updateOptions } from '../../actions/demo';
+import { changeSnippet, loadRoute, resetOptions, updateOptions } from '../../actions/demo';
 
 import OptionsSample from '../OptionsSample';
 
@@ -12,7 +12,8 @@ const mapStateToProps = ({ routes, snippetType, options }) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadRoute: () => dispatch(loadRoute("route-1")),
   changeSnippet: (type) => dispatch(changeSnippet(type)),
-  updateOptions: (options) => dispatch(updateOptions(options))
+  updateOptions: (options) => dispatch(updateOptions(options)),
+  resetOptions: () => dispatch(resetOptions())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OptionsSample);

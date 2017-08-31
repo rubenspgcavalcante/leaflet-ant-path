@@ -4,3 +4,5 @@ export const ROUTE_LOADED = 'ROUTE_LOADED';
 export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
 
 export const CHANGE_SNIPPET = 'CHANGE_SNIPPET';
+
+export const RESET_OPTIONS = 'RESET_OPTIONS';

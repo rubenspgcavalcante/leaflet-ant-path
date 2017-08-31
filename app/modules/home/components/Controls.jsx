@@ -7,7 +7,8 @@ import OptionColorPicker from './stateless/OptionColorPicker';
 
 export default class Controls extends PureComponent {
   static propTypes = {
-    updateOptions: func.isRequired
+    updateOptions: func.isRequired,
+    onReset: func.isRequired
   };
 
   delayedChange = throttle((options) => {
@@ -46,12 +47,18 @@ export default class Controls extends PureComponent {
 
   render() {
     const delayedChange = this.delayedChange.bind(this);
-    const { options } = this.props;
+    const { options, onReset } = this.props;
     const { showColorPicker, showPulseColorPicker } = this.state;
 
     return (
       <div >
         <span className='subtitle' ><span className='icon' ><i className='fa fa-cogs' /></span > Options</span >
+        <a className="button is-small is-pulled-right" onClick={onReset} >
+              <span className="icon is-small" >
+                <i className="fa fa-reply" />
+              </span >
+          <span >reset</span >
+        </a >
         <hr />
         <div className="field" >
           <div className="control" >
