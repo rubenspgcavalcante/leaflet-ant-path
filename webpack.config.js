@@ -1,14 +1,15 @@
 const path = require('path');
+const {dev, prod} = require('./webpack/envs');
 const loaders = require('./webpack/loaders');
 const plugins = require('./webpack/plugins');
 
 module.exports = {
-  context: path.resolve(__dirname, 'app'), //path.resolve(__dirname, 'gh-src'),
+  context: path.resolve(__dirname, 'app'),
   entry: ['./app.jsx'],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/'
+    publicPath: prod('/leaflet-ant-path/dist/') || dev('/dist/')
   },
   devtool: 'source-map',
   resolve: {
