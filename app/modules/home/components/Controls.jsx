@@ -63,7 +63,8 @@ export default class Controls extends PureComponent {
         <div className="field" >
           <div className="control" >
             <label className="checkbox" >
-              <input type="checkbox" onChange={(ev) => delayedChange({ paused: ev.target.checked })} />
+              <input type="checkbox" checked={options.paused}
+                     onChange={(ev) => delayedChange({ paused: ev.target.checked })} />
               <small ><b > paused</b ></small >
             </label >
           </div >

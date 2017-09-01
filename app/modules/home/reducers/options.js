@@ -5,7 +5,8 @@ const defaultOptions = {
   dashArray: [10, 20],
   weight: 5,
   color: '#0000FF',
-  pulseColor: '#FFFFFF'
+  pulseColor: '#FFFFFF',
+  paused: false
 };
 
 export default (state = defaultOptions, { type, payload }) => {
