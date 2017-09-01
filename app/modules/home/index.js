@@ -1,7 +1,10 @@
+import "rxjs/add/operator/filter";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/mergeMap";
+
 import OptionsSample from './components/containers/OptionsSample';
-import routes from './reducers/routes';
 import options from './reducers/options';
 import snippetType from './reducers/snippetType';
 
 export const Component = OptionsSample;
-export const reducers = { routes, options, snippetType };
+export const reducers = { options, snippetType };

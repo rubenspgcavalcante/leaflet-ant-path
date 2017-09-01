@@ -23,7 +23,7 @@ export default (state = { loading: false, data: {} }, action) => {
       return {
         ...state,
         loading: false,
-        data: addRoute(state.routes, action)
+        data: addRoute(state.data, action)
       }
   }
 

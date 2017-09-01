@@ -1,7 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 
-export default ({ title, icon, children }) => (
+const Card = ({ title, icon, children }) => (
   <div className="card" >
     {title ?
       <header className="card-header" >
@@ -23,4 +23,11 @@ export default ({ title, icon, children }) => (
       </div >
     </div >
   </div >
-)
+);
+
+Card.propTypes = {
+  title: string,
+  icon: string
+};
+
+export default Card;

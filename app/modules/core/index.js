@@ -1,3 +1,4 @@
 import repository from './reducers/repository';
+import routes from './reducers/routes';
 
-export const reducers = { repository };
+export const reducers = { repository, routes };

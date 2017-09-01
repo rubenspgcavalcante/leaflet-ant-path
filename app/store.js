@@ -3,7 +3,7 @@ import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from './reducer';
-import { loadRouteEpic } from "./modules/home/actions/demo";
+import { loadRouteEpic } from "./modules/core/actions/demo";
 import { loadRepoInfoEpic } from "./modules/core/actions/github";
 
 const rootEpic = combineEpics(
