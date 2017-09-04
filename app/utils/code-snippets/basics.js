@@ -1,6 +1,6 @@
 export const including = () =>
-  `<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" type="text/javascript"></script>
-<script src="your_libs_path/leaflet-ant-path/dist/leaflet-ant-path.js" type="text/javascript"></script> `;
+  `<script src="https://unpkg.com/leaflet" type="text/javascript"></script>
+<script src="https://unpkg.com/leaflet-ant-path" type="text/javascript"></script>`;
 
 export const installing = () =>
   `npm install leaflet-ant-path --save

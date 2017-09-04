@@ -8,7 +8,7 @@ const OptionsSlider = ({ property, option, min, max, onOptionChange }) => {
       <label >
         <small ><b >{property}</b > ({option})</small >
       </label >
-      <Slider min={min} max={max} defaultValue={option}
+      <Slider min={min} max={max} defaultValue={option} value={option}
               onChange={onOptionChange} />
     </div >
   );

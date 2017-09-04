@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Examples from '../Examples';
+import FasterOption from '../FasterOption';
 import { loadRoute } from "modules/core/actions/demo";
 
 const mapStateToProps = ({ routes }) => ({
@@ -10,4 +10,4 @@ const mapDispatchToProps = (dispatch) => ({
   loadRoute: (routeName) => dispatch(loadRoute(routeName))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Examples);
+export default connect(mapStateToProps, mapDispatchToProps)(FasterOption);

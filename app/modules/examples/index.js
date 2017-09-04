@@ -1,3 +1,3 @@
-import Examples from './components/containers/Examples';
+import Examples from './components/Examples';
 
 export const Component = Examples;
