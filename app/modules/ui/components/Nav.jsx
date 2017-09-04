@@ -9,6 +9,10 @@ export default class Nav extends PureComponent {
     this.state = { open: false };
   }
 
+  _toggleMenu() {
+    this.setState({ open: !this.state.open });
+  }
+
   render() {
     const { open } = this.state;
 
@@ -21,14 +25,15 @@ export default class Nav extends PureComponent {
             </a >
           </div >
           <div >
-          <span id="nav-toggle" className="nav-toggle" onClick={(ev) => this.setState({ open: !open })} >
+          <span id="nav-toggle" className="nav-toggle" onClick={this._toggleMenu.bind(this)} >
             <span />
             <span />
             <span />
           </span >
           </div >
           <div className={`nav-right nav-menu ${open ? 'is-active' : ''}`} >
-            {routes.map(({ path, label }) => <Link to={path} key={path} className="nav-item" >{label}</Link >)}
+            {routes.map(({ path, label }) => <Link to={path} key={path} className="nav-item"
+                                                   onClick={() => open && this._toggleMenu()} >{label}</Link >)}
           </div >
         </div >
       </header >
