@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { AppRoutesProvider } from "modules/core/index";
 import GHButtons from './GHButtons';
 import Nav from '../Nav';
-import { getRoute } from "routes";
 
-const Title = ({ repository }) => (
+const Title = ({ repository, appRoutes, getRoute }) => (
   <div >
-    <h1 className="title" ><Link to={getRoute('home').path}>Leaflet Ant Path</Link></h1 >
+    <h1 className="title" ><Link to={getRoute(appRoutes, 'home').path} >Leaflet Ant Path</Link ></h1 >
     <h2 className="subtitle" >Animate polylines as ants walking in a path</h2 >
     <GHButtons repository={repository} />
   </div >
@@ -15,10 +15,14 @@ const Title = ({ repository }) => (
 export default ({ repository }) => (
   <div >
     <section className="hero is-dark" >
-      <Nav />
+      <AppRoutesProvider >
+        <Nav />
+      </AppRoutesProvider >
       <div className="hero-body" >
         <div className="container" >
-          <Title repository={repository} />
+          <AppRoutesProvider >
+            <Title repository={repository} />
+          </AppRoutesProvider >
         </div >
       </div >
     </section >

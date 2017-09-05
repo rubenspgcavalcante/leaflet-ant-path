@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { changeSnippet, resetOptions, updateOptions } from '../../actions/demo';
 
 import OptionsSample from '../OptionsSample';
-import { loadRoute } from "../../../core/actions/demo";
+import { loadRoute } from "modules/core/actions/demo";
 
 const mapStateToProps = ({ routes, snippetType, options }) => ({
   routes,

@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
+import { array } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { routes } from "routes";
 
 export default class Nav extends PureComponent {
+  static propTypes = {
+    appRoutes: array
+  };
 
   constructor(props) {
     super(props);
@@ -15,6 +18,7 @@ export default class Nav extends PureComponent {
 
   render() {
     const { open } = this.state;
+    const { appRoutes } = this.props;
 
     return (
       <header className="nav" >
@@ -32,8 +36,8 @@ export default class Nav extends PureComponent {
           </span >
           </div >
           <div className={`nav-right nav-menu ${open ? 'is-active' : ''}`} >
-            {routes.map(({ path, label }) => <Link to={path} key={path} className="nav-item"
-                                                   onClick={() => open && this._toggleMenu()} >{label}</Link >)}
+            {appRoutes.map(({ path, label }) => <Link to={path} key={path} className="nav-item"
+                                                      onClick={() => open && this._toggleMenu()} >{label}</Link >)}
           </div >
         </div >
       </header >

@@ -8,19 +8,21 @@ import "./style/app.scss";
 
 import Header from "./modules/ui/components/containers/Header";
 import Footer from "./modules/ui/components/stateless/Footer"
-
+import { AppRoutes } from './modules/core/index';
 import { loadRepoInfo } from "./modules/core/actions/github";
-import { routesFactory } from "./routes";
+import { setupRoutes } from "./modules/core/actions/routes";
 
 store.dispatch(loadRepoInfo());
-const routeComponents = routesFactory();
+store.dispatch(setupRoutes());
 
-const App = connect()(() => (
+const mapStateToProps = ({ appRoutes }) => ({ appRoutes });
+
+const App = connect(mapStateToProps)(({ appRoutes }) => (
   <Router >
     <div id="react-app" >
       <Header />
       <div className="section" >
-        {routeComponents}
+        <AppRoutes appRoutes={appRoutes} />
       </div >
       <Footer />
     </div >
