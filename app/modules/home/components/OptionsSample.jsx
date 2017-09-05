@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import AntPath from 'react-leaflet-ant-path';
 
-import Map from "../../ui/components/Map";
+import Map from "modules/ui/components/Map";
 import Controls from './Controls';
 import CodeDemo from './stateless/CodeDemo';
+import HowToInstall from './stateless/HowToInstall';
 
 const DEMO_ROUTE = 'tabuba-fortaleza';
 
@@ -28,9 +29,18 @@ export default class OptionsSample extends PureComponent {
                 null}
             </div >
           </div >
-          <div className='column is-4' >
-            <div className="box" >
-              <Controls options={options} updateOptions={updateOptions} onReset={resetOptions} />
+          <div className='is-4' >
+            <div className="container" >
+              <div className="column is-12" >
+                <div className="box" >
+                  <Controls options={options} updateOptions={updateOptions} onReset={resetOptions} />
+                </div >
+              </div >
+              <div className="column is-12" >
+                <div className="box" >
+                  <HowToInstall />
+                </div >
+              </div >
             </div >
           </div >
         </div >
