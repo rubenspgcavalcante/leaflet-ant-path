@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import AntPath from 'react-leaflet-ant-path';
 
 import Map from "modules/ui/components/Map";
+import { AppRoutesProvider } from "modules/core/index";
 import Controls from './Controls';
 import CodeDemo from './stateless/CodeDemo';
 import HowToInstall from './stateless/HowToInstall';
@@ -38,7 +39,9 @@ export default class OptionsSample extends PureComponent {
               </div >
               <div className="column is-12" >
                 <div className="box" >
-                  <HowToInstall />
+                  <AppRoutesProvider >
+                    <HowToInstall />
+                  </AppRoutesProvider >
                 </div >
               </div >
             </div >

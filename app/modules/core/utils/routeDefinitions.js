@@ -15,7 +15,7 @@ const extractComp = ({ Component }) => Component;
  */
 export const routes = [
   { id: 'home', path: route(), label: 'Home', exact: true, component: HOME },
-  { id: 'documentation', path: route`docs`, label: 'Documentation', component: DOCS },
+  { id: 'documentation', path: route`documentation`, label: 'Documentation', component: DOCS },
   { id: 'examples', path: route`examples`, label: 'Examples', component: EXAMPLES }
 ];
 
