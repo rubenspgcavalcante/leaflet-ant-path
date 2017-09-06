@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import AsyncComponent from '../components/AsyncComponent';
+import { AsyncComponent } from '../index';
 
 export default ({ appRoutes }) => {
   const routes = appRoutes.map(route => ({

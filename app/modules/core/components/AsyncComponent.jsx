@@ -16,7 +16,13 @@ export default class  extends PureComponent {
 
   componentWillMount() {
     const { component } = this.props;
-    componentLoader[component]().then(Component => this.setState({ Component }));
+    this.props.loading(true);
+    const loader = componentLoader[component];
+
+    loader().then(Component => {
+      this.props.loading(false);
+      this.setState({ Component })
+    });
   }
 
   render() {
@@ -24,7 +30,7 @@ export default class  extends PureComponent {
 
     return (
       <div >
-        {Component ? <Component /> : <div >Loading!</div >}
+        {Component ? <Component /> : null}
       </div >
     );
   }

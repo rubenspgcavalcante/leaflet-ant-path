@@ -30,18 +30,21 @@ export default class OptionsSample extends PureComponent {
                 null}
             </div >
           </div >
-          <div className='is-4' >
-            <div className="container" >
-              <div className="column is-12" >
-                <div className="box" >
-                  <Controls options={options} updateOptions={updateOptions} onReset={resetOptions} />
+          <div className='column is-4' >
+            <div className="columns" >
+              <div className="container" >
+                <div className="column is-12" >
+                  <div className="box" >
+                    <Controls options={options} updateOptions={updateOptions} onReset={resetOptions} />
+                  </div >
                 </div >
-              </div >
-              <div className="column is-12" >
-                <div className="box" >
-                  <AppRoutesProvider >
-                    <HowToInstall />
-                  </AppRoutesProvider >
+
+                <div className="column is-12" >
+                  <div className="box" >
+                    <AppRoutesProvider >
+                      <HowToInstall />
+                    </AppRoutesProvider >
+                  </div >
                 </div >
               </div >
             </div >
