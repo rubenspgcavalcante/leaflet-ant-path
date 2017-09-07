@@ -1,7 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 
-const Card = ({ title, icon, children }) => (
+const Card = ({ title, icon, footerItems, onClick, children }) => (
   <div className="card" >
     {title ?
       <header className="card-header" >
@@ -22,6 +22,12 @@ const Card = ({ title, icon, children }) => (
         {children}
       </div >
     </div >
+    {footerItems ?
+      <footer className="card-footer" >
+        {footerItems.map(item => <a key={item} className="card-footer-item"
+                                    onClick={(ev) => onClick(item)} >{item}</a >)}
+      </footer > : null
+    }
   </div >
 );
 
