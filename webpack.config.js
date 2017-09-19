@@ -7,8 +7,8 @@ module.exports = {
   context: path.resolve(__dirname, 'app'),
   entry: ['./app.jsx'],
   output: {
-    filename: 'bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].chunk.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: prod('/leaflet-ant-path/dist/') || dev('/dist/')
   },

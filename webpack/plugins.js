@@ -1,9 +1,9 @@
-const {ProvidePlugin, DefinePlugin} = require('webpack');
+const { ProvidePlugin, DefinePlugin } = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-const {dev, test, prod, CURRENT} = require('./envs');
+const { dev, test, prod, CURRENT } = require('./envs');
 
 module.exports = [
   new ProvidePlugin({
