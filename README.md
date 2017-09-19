@@ -34,7 +34,10 @@ Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/
 Can be used with asynchronous module loaders and CommonJS packers
     
 ### Important!
-MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using
+- Leaflet AntPath uses CSS transitions to animate the SVG element. If the map options **preferCanvas** is active (true),
+the animation will not work, as there's no information about what was drawn inside the canvas tag.
+
+- MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using
 MultiAntPath and Leaflet 0.7, use older AntPath versions than 0.6
     
 ### Using the plugin
