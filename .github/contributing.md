@@ -1,7 +1,44 @@
 # How to Contribute
-- Before create any pull requests, please open a issue explaining the situation (bug or enhacement)
-- Be sure to follow the eslint rules (webpack will always output its results)
-- Be sure before open the pull request, to test the existent code and/or create tests if you made a new feature.
+
+## Important checks
+- Before create any pull requests, please open a issue explaining the situation
+- Be sure to follow the eslint rules
+- Be sure, **before opening the pull request**, to test the existent code and/or create tests if you made a new feature or
+changed a already existing one.
+
+## Issues
+Should be in the format:
+
+```text
+**Type:**
+- [x] bug  
+- [ ] feature
+- [ ] enhancement
+- [ ] question
+ 
+**Environment:**
+ - OS: Windows 10
+ - Version: 0.6.4 
+ 
+**Going to open a PR:**
+- [x] yes
+- [ ] no
+ 
+**Description:**  
+The polyline doesn't appear
+```
+
+## Pull Requests
+- On the description of the pull request set the issue id for closing it:
+```text
+Now the polyline appear normally. Closes #41
+```
+
+## Following the guideline
+Please follow the above rules, so the repo can stay consistent and easy for everyone find questions and
+already resolved stuff. Be aware that your PR can be denied if you don't follow then :cry:
+
+# Developing
 
 ## Development Environment (Sandbox Mode)
 **Be sure all the dev-dependencies are installed.**
