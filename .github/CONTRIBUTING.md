@@ -18,9 +18,10 @@ Should be in the format:
  
 **Environment:**
  - OS: Windows 10
- - Version: 0.6.4 
+ - Browser: Chrome 63
+ - Library Version: 0.6.4
  
-**Going to open a PR:**
+**I'm going to open a PR:**
 - [x] yes
 - [ ] no
  
