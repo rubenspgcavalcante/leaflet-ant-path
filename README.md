@@ -94,6 +94,7 @@ Initialise with the same options of a common [Polyline]((http://leafletjs.com/re
 |latlngs| L.LatLng[] **or** Array\[number, number\]  | \[ \[0, 10\], \[-20, 0\], ... \] | A array of latitude and longitudes (same as used in [Polyline constructor](http://leafletjs.com/reference.html#polyline) )
 |options| Object  | {color: 'red', weight: 5, ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **extra** options bellow
 |options.paused| boolean | true/false | Starts with the animation paused (default: false)
+|options.reverse| boleam | true/false | Defines if the flow follows or not the path order
 |options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
 |options.delay | string | 120 | Add a delay to the animation flux (default: 400)
 |options.dashArray| [number, number] **or** string | [15, 30] |The size of the animated dashes (default: "10, 20"). See also [the pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray)
@@ -105,6 +106,7 @@ Initialise with the same options of a common [Polyline]((http://leafletjs.com/re
 |------|---------|-------------|
 | pause() | boolean | Stops the animation |
 | resume() | booelan | Resume the animation |
+| reverse() | boolean | Reverses the animation flow |
 | map(callback) | new AntPath or extended class | Iterates over the latlngs |
 
 Also have the same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)

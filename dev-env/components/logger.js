@@ -1,16 +1,15 @@
 export default class Logger {
+  constructor(container) {
+    this._element = container;
+    this.log("");
+  }
 
-    constructor(container) {
-        this._element = container;
-        this.log("");
-    }
+  _format(msg) {
+    return typeof msg === "string" ? msg : JSON.stringify(msg, null, 2);
+  }
 
-    _format(msg) {
-        return typeof msg === "string" ? msg : JSON.stringify(msg, null, 2);
-    }
-
-    log(message) {
-        const template = `
+  log(message) {
+    const template = `
             <div class="col m6 s12">      
                 <div class="card">
                     <div class="card-content">
@@ -20,6 +19,6 @@ export default class Logger {
                 </div>
             </div>
         `;
-        this._element.innerHTML = template;
-    }
+    this._element.innerHTML = template;
+  }
 }
