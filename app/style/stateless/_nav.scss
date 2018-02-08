@@ -1,9 +1,1 @@
-.nav {
-  @include mobile {
-    .nav-menu.is-active {
-      width: 50%;
-      box-shadow: 1px 1px 4px $black-bis;
-      left: 50%;
-    }
-  }
-}
+@import "~bulma/sass/utilities/_all";

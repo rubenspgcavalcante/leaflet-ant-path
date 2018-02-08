@@ -6,7 +6,8 @@ const defaultOptions = {
   weight: 5,
   color: '#0000FF',
   pulseColor: '#FFFFFF',
-  paused: false
+  paused: false,
+  reverse: false
 };
 
 export default (state = defaultOptions, { type, payload }) => {

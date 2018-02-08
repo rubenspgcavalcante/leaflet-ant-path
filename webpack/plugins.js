@@ -23,9 +23,6 @@ module.exports = [
   }),
   prod(new OptimizeCssAssetsPlugin()),
   prod(new UglifyJSPlugin({
-    sourceMap: true,
-    compress: {
-      warnings: false
-    }
+    sourceMap: true
   }))
 ].filter(plugin => plugin !== null);

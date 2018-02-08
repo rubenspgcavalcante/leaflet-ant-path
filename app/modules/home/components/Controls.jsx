@@ -51,58 +51,65 @@ export default class Controls extends PureComponent {
     const { showColorPicker, showPulseColorPicker } = this.state;
 
     return (
-      <div >
-        <span className='subtitle' ><span className='icon' ><i className='fa fa-cogs' /></span > Options</span >
-        <a className="button is-small is-pulled-right" onClick={onReset} >
-              <span className="icon is-small" >
-                <i className="fa fa-reply" />
-              </span >
-          <span >reset</span >
-        </a >
-        <hr />
-        <div className="field" >
-          <div className="control" >
-            <label className="checkbox" >
+      <div>
+        <span className='subtitle'><span className='icon'><i className='fa fa-cogs'/></span> Options</span>
+        <a className="button is-small is-pulled-right" onClick={onReset}>
+              <span className="icon is-small">
+                <i className="fa fa-reply"/>
+              </span>
+          <span>reset</span>
+        </a>
+        <hr/>
+        <div className="field">
+          <div className="control is-inline">
+            <label className="checkbox">
               <input type="checkbox" checked={options.paused}
-                     onChange={(ev) => delayedChange({ paused: ev.target.checked })} />
-              <small ><b > paused</b ></small >
-            </label >
-          </div >
-        </div >
+                     onChange={(ev) => delayedChange({ paused: ev.target.checked })}/>
+              <small><b> paused</b></small>
+            </label>
+          </div>
+          <div className="control is-inline">
+            <label className="checkbox">
+              <input type="checkbox" checked={options.reversed}
+                     onChange={(ev) => delayedChange({ reverse: ev.target.checked })}/>
+              <small><b> reversed</b></small>
+            </label>
+          </div>
+        </div>
 
         <OptionSlider property="delay" onOptionChange={(delay) => delayedChange({ delay })}
-                      min={1} max={800} option={options.delay} />
+                      min={1} max={800} option={options.delay}/>
 
         <OptionSlider property="weight" onOptionChange={(weight) => delayedChange({ weight })}
-                      min={1} max={20} option={options.weight} />
+                      min={1} max={20} option={options.weight}/>
 
-        <div className="columns" >
-          <div className="column is-6" >
+        <div className="columns">
+          <div className="column is-6">
             <OptionSlider property="dashArray[0]"
                           onOptionChange={(dashArrayX) => delayedChange({ dashArray: [dashArrayX, options.dashArray[1]] })}
-                          min={1} max={100} option={options.dashArray[0]} />
-          </div >
+                          min={1} max={100} option={options.dashArray[0]}/>
+          </div>
 
-          <div className="column is-6" >
+          <div className="column is-6">
             <OptionSlider property="dashArray[1]"
                           onOptionChange={(dashArrayY) => delayedChange({ dashArray: [options.dashArray[0], dashArrayY] })}
-                          min={1} max={100} option={options.dashArray[1]} />
-          </div >
-        </div >
-        <div className="columns is-mobile" >
-          <div className="column is-centered is-6" >
+                          min={1} max={100} option={options.dashArray[1]}/>
+          </div>
+        </div>
+        <div className="columns is-mobile">
+          <div className="column is-centered is-6">
             <OptionColorPicker onClick={() => this.toggleDropdown('color')} onBlur={() => this.closeDropdown('color')}
                                display={showColorPicker} property="color" option={options.color}
-                               onChange={(color) => delayedChange({ color })} />
-          </div >
-          <div className="column is-centered is-6" >
+                               onChange={(color) => delayedChange({ color })}/>
+          </div>
+          <div className="column is-centered is-6">
             <OptionColorPicker onClick={() => this.toggleDropdown('pulseColor')}
                                display={showPulseColorPicker} property="pulseColor"
                                option={options.pulseColor} align="right" onBlur={() => this.closeDropdown('pulseColor')}
-                               onChange={(pulseColor) => delayedChange({ pulseColor })} />
-          </div >
-        </div >
-      </div >
+                               onChange={(pulseColor) => delayedChange({ pulseColor })}/>
+          </div>
+        </div>
+      </div>
     )
   }
 }

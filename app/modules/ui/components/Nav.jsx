@@ -21,26 +21,23 @@ export default class Nav extends PureComponent {
     const { appRoutes } = this.props;
 
     return (
-      <header className="nav" >
-        <div className="container" >
-          <div className="nav-left" >
-            <a className="nav-item" >
-              {/* TODO: logo here */}
-            </a >
-          </div >
-          <div >
-          <span id="nav-toggle" className="nav-toggle" onClick={this._toggleMenu.bind(this)} >
-            <span />
-            <span />
-            <span />
-          </span >
-          </div >
-          <div className={`nav-right nav-menu ${open ? 'is-active' : ''}`} >
-            {appRoutes.map(({ path, label }) => <Link to={path} key={path} className="nav-item"
-                                                      onClick={() => open && this._toggleMenu()} >{label}</Link >)}
-          </div >
-        </div >
-      </header >
+      <header>
+        <nav className="navbar" role="navigation" aria-label="main navigation">
+          <div className="navbar-burger">
+            <button className="button navbar-burger is-dark" onClick={this._toggleMenu.bind(this)}>
+              <span/>
+              <span/>
+              <span/>
+            </button>
+          </div>
+          <div className={`navbar-menu ${open ? 'is-active' : ''}`}>
+            <div className="navbar-end">
+              {appRoutes.map(({ path, label }) => <Link to={path} key={path} className="navbar-item"
+                                                        onClick={() => open && this._toggleMenu()}>{label}</Link>)}
+            </div>
+          </div>
+        </nav>
+      </header>
     );
   }
 }

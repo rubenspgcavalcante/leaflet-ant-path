@@ -9,6 +9,7 @@ const table = {
   rows: [
     ["pause()", "boolean", "Stops the animation"],
     ["resume()", "boolean", "Resume the animation"],
+    ["reverse()", "boolean", "Revert the animation"],
     ["map(callback)", "new AntPath or extended class", "Iterates over the latlngs"]
   ]
 };

@@ -18,6 +18,7 @@ export default class OptionsSample extends PureComponent {
     const { routes, options, snippetType, changeSnippet, updateOptions, resetOptions } = this.props;
     const route = routes.data[DEMO_ROUTE] || null;
 
+    console.log(options);
     return (
       <div className="options-sample" >
         <div className='columns' >

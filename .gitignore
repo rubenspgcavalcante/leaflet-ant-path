@@ -6,3 +6,4 @@ node_modules/
 coverage/
 coverage-report/
 karma/
+webpack.tests.js.map

@@ -13,7 +13,7 @@ const Title = ({ repository, appRoutes, getRoute }) => (
 );
 
 export default ({ repository }) => (
-  <div >
+  <header >
     <section className="hero is-dark" >
       <AppRoutesProvider >
         <Nav />
@@ -26,5 +26,5 @@ export default ({ repository }) => (
         </div >
       </div >
     </section >
-  </div >
+  </header >
 )
