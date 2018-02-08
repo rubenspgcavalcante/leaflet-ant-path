@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("container");
 
     const mapSimple = new MyMap("map-simple", "Simple Usage", container);
-    const antPath = new AntPath(path);
+    const antPath = new AntPath(path, {reverse: true});
     mapSimple.addLayer(antPath);
 
     const mapCustom = new MyMap("map-custom", "Custom AntPath", container);
@@ -26,7 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Changing dynamically the style of the component
     setTimeout(
-        () => customAntPath.setStyle({delay: 3000, pulseColor: "#000000", color: "blue"}),
+        () => customAntPath.setStyle({
+          reverse: true,
+          delay: 1000,
+          pulseColor: "#000000",
+          color: "blue"
+        }),
         5000
     );
-});
+})

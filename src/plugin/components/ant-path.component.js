@@ -12,9 +12,11 @@ export default class AntPath extends FeatureGroup {
     _path = null;
     _animatedPathId = null;
     _animatedPathClass = "leaflet-ant-path";
+    _reversePathClass = "reverse";
 
     _defaultOptions = {
         paused: false,
+        reverse: false,
         delay: 400,
         dashArray: [10, 20],
         weight: 5,
@@ -107,13 +109,15 @@ export default class AntPath extends FeatureGroup {
     }
 
     _processOptions() {
-        const {options, _animatedPathClass, _animatedPathId} = this;
+        const {options, _animatedPathClass, _reversePathClass, _animatedPathId} = this;
 
         let pathOpts = {...options};
         let pulseOpts = {...options};
 
         pulseOpts.color = pulseOpts.pulseColor || options.pulseColor;
-        pulseOpts.className = `${_animatedPathClass} ${_animatedPathId}`;
+        pulseOpts.className =
+          `${_animatedPathClass} ${_animatedPathId} ${options.reverse ? _reversePathClass : ""}`;
+
         delete pathOpts.dashArray;
 
         if (Array.isArray(pulseOpts.dashArray)) {
@@ -177,12 +181,16 @@ export default class AntPath extends FeatureGroup {
 
     //Polyline interface
     setStyle(options) {
-        const {paused, delay} = options;
+        const {paused, delay, reverse} = options;
         paused ? this.pause() : this.resume();
 
         if (delay !== this.options.delay) {
             this.options.delay = delay || this._defaultOptions.delay;
             this._calculateAnimationSpeed();
+        }
+        if(reverse && reverse !== this.options.reverse){
+          this.options.revese = reverse;
+          this.reverse();
         }
 
         this.options = {...this.options, ...options};
@@ -192,6 +200,13 @@ export default class AntPath extends FeatureGroup {
         this[Layers.pulse].setStyle(pulseOpts);
 
         return this;
+    }
+
+    reverse() {
+        const el = this[Layers.pulse].getElement();
+        this.options.reverse
+          ? el.classList.remove(this._reversePathClass)
+          : el.classList.add(this._reversePathClass)
     }
 
     redraw() {
