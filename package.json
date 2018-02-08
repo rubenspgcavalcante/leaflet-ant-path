@@ -13,7 +13,7 @@
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
     "test": "karma start karma/karma.conf.js --log-level debug --single-run && node karma/clean-report.js",
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
-    "format": "prettier --write \"{dev-env,src}/**/*.js\"",
+    "format": "prettier-eslint \"{dev-env,src}/**/*.js\"",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
     "codacy": "cat coverage/lcov.info | codacy-coverage",
     "prepublish": "npm run build"
@@ -67,6 +67,8 @@
     "node-sass": "^4.3.0",
     "phantomjs-prebuilt": "^2.1.14",
     "prettier": "^1.10.2",
+    "prettier-eslint": "^8.8.1",
+    "prettier-eslint-cli": "^4.7.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

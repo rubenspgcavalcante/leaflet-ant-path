@@ -30,6 +30,14 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
     expect(antPath.options.paused).toBeFalsy();
   });
 
+  it("Should reverse the animation", () => {
+    const antPath = new AntPath(path);
+    expect(antPath.options.reverse).toBeFalsy();
+
+    antPath.reverse();
+    expect(antPath.options.reverse).toBeTruthy();
+  });
+
   it("Should expose a factory to create new instances", () => {
     const fabricated = antPathFactory(path);
     expect(fabricated).toEqual(jasmine.any(AntPath));

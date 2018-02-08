@@ -1,4 +1,4 @@
-import { FeatureGroup, Util, Polyline } from "leaflet";
+import { FeatureGroup, Polyline, Util } from "leaflet";
 
 const Layers = { main: Symbol("main"), pulse: Symbol("pulse") };
 
@@ -55,7 +55,7 @@ export default class AntPath extends FeatureGroup {
     return "L.Polyline.AntPath";
   }
 
-  *[Symbol.iterator]() {
+  * [Symbol.iterator]() {
     yield* this._path;
   }
 
@@ -83,10 +83,10 @@ export default class AntPath extends FeatureGroup {
     const { paused } = this.options;
 
     if (!paused) {
-      const animatedPolyElement = document.getElementsByClassName(this._animatedPathId);
+      const el = this[Layers.pulse].getElement();
       this.options.paused = true;
 
-      for (let el of animatedPolyElement) {
+      if (el) {
         el.removeAttribute("style");
         el.setAttribute("data-animated", "true");
       }
@@ -101,7 +101,8 @@ export default class AntPath extends FeatureGroup {
       options.paused = false;
       this._calculateAnimationSpeed();
       return true;
-    } else {
+    }
+    else {
       return false;
     }
   }
@@ -115,7 +116,7 @@ export default class AntPath extends FeatureGroup {
     pulseOpts.color = pulseOpts.pulseColor || options.pulseColor;
     pulseOpts.className = `${_animatedPathClass} ${_animatedPathId} ${
       options.reverse ? _reversePathClass : ""
-    }`;
+      }`;
 
     delete pathOpts.dashArray;
 
@@ -203,9 +204,15 @@ export default class AntPath extends FeatureGroup {
 
   reverse() {
     const el = this[Layers.pulse].getElement();
-    this.options.reverse
-      ? el.classList.remove(this._reversePathClass)
-      : el.classList.add(this._reversePathClass);
+    const { options } = this;
+
+    if (el) {
+      options.reverse
+        ? el.classList.remove(this._reversePathClass)
+        : el.classList.add(this._reversePathClass);
+    }
+    options.reverse = !options.reverse;
+    return this;
   }
 
   redraw() {
