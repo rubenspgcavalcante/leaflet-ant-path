@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from "react-dom";
 import { connect, Provider } from "react-redux";
+import "core-js/es6/promise";
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
