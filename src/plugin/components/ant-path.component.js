@@ -59,54 +59,6 @@ export default class AntPath extends FeatureGroup {
     yield* this._path;
   }
 
-  onAdd(map) {
-    this._map = map;
-    this._map.on("zoomend", this._calculateAnimationSpeed, this);
-    this._mount();
-    this._calculateAnimationSpeed();
-    return this;
-  }
-
-  onRemove(layer) {
-    if (this._map) {
-      this._map.off("zoomend", this._calculateAnimationSpeed, this);
-      this._map = null;
-    }
-    if (layer) {
-      layer.removeLayer(this[Layers.main]).removeLayer(this[Layers.pulse]);
-    }
-
-    return this;
-  }
-
-  pause() {
-    const { paused } = this.options;
-
-    if (!paused) {
-      const el = this[Layers.pulse].getElement();
-      this.options.paused = true;
-
-      if (el) {
-        el.removeAttribute("style");
-        el.setAttribute("data-animated", "true");
-      }
-      return true;
-    }
-    return false;
-  }
-
-  resume() {
-    const { options } = this;
-    if (options.paused) {
-      options.paused = false;
-      this._calculateAnimationSpeed();
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
   _processOptions() {
     const { options, _animatedPathClass, _reversePathClass, _animatedPathId } = this;
 
@@ -158,6 +110,63 @@ export default class AntPath extends FeatureGroup {
     });
   }
 
+  _pureReverse() {
+    const el = this[Layers.pulse].getElement();
+    if(el) {
+      this.options.reverse
+        ? el.classList.remove(this._reversePathClass)
+        : el.classList.add(this._reversePathClass);
+    }
+  }
+
+  onAdd(map) {
+    this._map = map;
+    this._map.on("zoomend", this._calculateAnimationSpeed, this);
+    this._mount();
+    this._calculateAnimationSpeed();
+    return this;
+  }
+
+  onRemove(layer) {
+    if (this._map) {
+      this._map.off("zoomend", this._calculateAnimationSpeed, this);
+      this._map = null;
+    }
+    if (layer) {
+      layer.removeLayer(this[Layers.main]).removeLayer(this[Layers.pulse]);
+    }
+
+    return this;
+  }
+
+  pause() {
+    const { paused } = this.options;
+
+    if (!paused) {
+      const el = this[Layers.pulse].getElement();
+      this.options.paused = true;
+
+      if (el) {
+        el.removeAttribute("style");
+        el.setAttribute("data-animated", "true");
+      }
+      return true;
+    }
+    return false;
+  }
+
+  resume() {
+    const { options } = this;
+    if (options.paused) {
+      options.paused = false;
+      this._calculateAnimationSpeed();
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   //Feature Group methods overwriting
   bringToFront() {
     this[Layers.main].bringToFront();
@@ -188,9 +197,8 @@ export default class AntPath extends FeatureGroup {
       this.options.delay = delay || this._defaultOptions.delay;
       this._calculateAnimationSpeed();
     }
-    if (reverse && reverse !== this.options.reverse) {
-      this.options.revese = reverse;
-      this.reverse();
+    if (typeof reverse !== "undefined" && reverse !== this.options.reverse) {
+      this._pureReverse();
     }
 
     this.options = { ...this.options, ...options };
@@ -203,15 +211,8 @@ export default class AntPath extends FeatureGroup {
   }
 
   reverse() {
-    const el = this[Layers.pulse].getElement();
-    const { options } = this;
-
-    if (el) {
-      options.reverse
-        ? el.classList.remove(this._reversePathClass)
-        : el.classList.add(this._reversePathClass);
-    }
-    options.reverse = !options.reverse;
+    this._pureReverse();
+    this.options.reverse = !this.options.reverse;
     return this;
   }
 
