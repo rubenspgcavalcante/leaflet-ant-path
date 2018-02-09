@@ -61,22 +61,16 @@ export default class Controls extends PureComponent {
         </a>
         <hr/>
         <div className="field">
-          <div className="control is-inline">
-            <label className="checkbox">
-              <input type="checkbox" checked={options.paused}
-                     onChange={(ev) => delayedChange({ paused: ev.target.checked })}/>
-              <small><b> paused</b></small>
-            </label>
-          </div>
-          <div className="control is-inline">
-            <label className="checkbox">
-              <input type="checkbox" checked={options.reversed}
-                     onChange={(ev) => delayedChange({ reverse: ev.target.checked })}/>
-              <small><b> reversed</b></small>
-            </label>
-          </div>
+          {['paused', 'reverse'].map(opt =>
+            <div className="control is-inline" key={opt}>
+              <label className="checkbox">
+                <input type="checkbox" checked={options[opt]}
+                       onChange={(ev) => delayedChange({ [opt]: ev.target.checked })}/>
+                <small><b> {opt}</b></small>
+              </label>
+            </div>
+          )}
         </div>
-
         <OptionSlider property="delay" onOptionChange={(delay) => delayedChange({ delay })}
                       min={1} max={800} option={options.delay}/>
 
