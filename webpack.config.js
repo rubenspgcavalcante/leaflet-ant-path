@@ -8,6 +8,7 @@ const envConfs = {
 const {NODE_ENV} = process.env;
 
 let configuration = {
+    mode: NODE_ENV,
     output: {
         path: path.resolve("./dist"),
         filename: "[name].js",
@@ -20,7 +21,7 @@ let configuration = {
         hot: true
     },
     module: {
-        loaders
+      rules: loaders
     }
 };
 
