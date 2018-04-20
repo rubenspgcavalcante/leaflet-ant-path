@@ -34,9 +34,6 @@ Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/
 Can be used with asynchronous module loaders and CommonJS packers
     
 ### Important!
-- Leaflet AntPath uses CSS transitions to animate the SVG element. If the map options **preferCanvas** is active (true),
-the animation will not work, as there's no information about what was drawn inside the canvas tag.
-
 - MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using
 MultiAntPath and Leaflet 0.7, use older AntPath versions than 0.6
     
@@ -95,6 +92,7 @@ Initialise with the same options of a common [Polyline]((http://leafletjs.com/re
 |options| Object  | {color: 'red', weight: 5, ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **extra** options bellow
 |options.paused| boolean | true/false | Starts with the animation paused (default: false)
 |options.reverse| boolean | true/false | Defines if the flow follows or not the path order
+|options.hardwareAccelerated| boolean | true/false | Makes the animation run with hardware acceleration (default: false)
 |options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
 |options.delay | string | 120 | Add a delay to the animation flux (default: 400)
 |options.dashArray| [number, number] **or** string | [15, 30] |The size of the animated dashes (default: "10, 20"). See also [the pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray)
@@ -155,7 +153,6 @@ const newAnthPath = myAntPath.map(pos => latLng(pos.lat + 1, pos.lng + 1));
 ### With or without polyfills
 The module provide two bundles, the full one, with some es6 polyfills (loaded by default when importing) and the lighter
 one without the polyfills. If you're already uses the following polyfills in your project:
-- regenerator-runtime
 - core-js/es6/symbol
 - core-js/es6/reflect
 

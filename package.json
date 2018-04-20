@@ -13,7 +13,7 @@
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
     "test": "karma start karma/karma.conf.js --log-level debug --single-run && node karma/clean-report.js",
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
-    "format": "prettier-eslint \"{dev-env,src}/**/*.js\"",
+    "format": "prettier-eslint --write \"{dev-env,src}/**/*.js\"",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
     "codacy": "cat coverage/lcov.info | codacy-coverage",
     "prepublish": "npm run build"
