@@ -1,9 +1,9 @@
-import { tileLayer, Map } from "leaflet";
+import { Map, tileLayer } from "leaflet";
 
 export default class MyMap extends Map {
   constructor(id, title, container) {
     container.appendChild(MyMap._renderContainer(id, title));
-    super(id);
+    super(id, { preferCanvas: true });
 
     tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
       attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"

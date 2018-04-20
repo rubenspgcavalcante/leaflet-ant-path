@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("container");
 
   const mapSimple = new MyMap("map-simple", "Simple Usage", container);
-  const antPath = new AntPath(path, { reverse: true });
+  const antPath = new AntPath(path, { reverse: true, hardwareAcceleration: true });
   mapSimple.addLayer(antPath);
 
   const mapCustom = new MyMap("map-custom", "Custom AntPath", container);

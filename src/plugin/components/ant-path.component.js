@@ -1,4 +1,4 @@
-import { FeatureGroup, Polyline, Util } from "leaflet";
+import { FeatureGroup, Polyline, svg, Util } from "leaflet";
 
 const Layers = { main: Symbol("main"), pulse: Symbol("pulse") };
 
@@ -8,15 +8,21 @@ const Layers = { main: Symbol("main"), pulse: Symbol("pulse") };
  * @extends {L.FeatureGroup}
  */
 export default class AntPath extends FeatureGroup {
+  [Layers.main] = null;
+  [Layers.pulse] = null;
+
   _map = null;
   _path = null;
   _animatedPathId = null;
   _animatedPathClass = "leaflet-ant-path";
   _reversePathClass = "reverse";
+  _hardwareAccClass = "hardware-acceleration";
 
   _defaultOptions = {
     paused: false,
     reverse: false,
+    hardwareAcceleration: false,
+    renderer: svg(),
     delay: 400,
     dashArray: [10, 20],
     weight: 5,
@@ -27,10 +33,6 @@ export default class AntPath extends FeatureGroup {
 
   constructor(path, customOptions = {}) {
     super();
-
-    //Symbols
-    this[Layers.main] = null;
-    this[Layers.pulse] = null;
 
     Util.setOptions(this, { ...this._defaultOptions, ...customOptions });
     this._path = path;
@@ -55,20 +57,30 @@ export default class AntPath extends FeatureGroup {
     return "L.Polyline.AntPath";
   }
 
-  * [Symbol.iterator]() {
+  *[Symbol.iterator]() {
     yield* this._path;
   }
 
   _processOptions() {
-    const { options, _animatedPathClass, _reversePathClass, _animatedPathId } = this;
+    const {
+      options,
+      _animatedPathClass,
+      _reversePathClass,
+      _hardwareAccClass,
+      _animatedPathId
+    } = this;
+    const { reverse, hardwareAcceleration } = options;
 
     let pathOpts = { ...options };
     let pulseOpts = { ...options };
 
     pulseOpts.color = pulseOpts.pulseColor || options.pulseColor;
-    pulseOpts.className = `${_animatedPathClass} ${_animatedPathId} ${
-      options.reverse ? _reversePathClass : ""
-      }`;
+    pulseOpts.className = [
+      _animatedPathClass,
+      _animatedPathId,
+      reverse ? `${_animatedPathClass}__${_reversePathClass}` : "",
+      hardwareAcceleration ? `${_animatedPathClass}__${_hardwareAccClass}` : ""
+    ].join(" ");
 
     delete pathOpts.dashArray;
 
@@ -112,7 +124,7 @@ export default class AntPath extends FeatureGroup {
 
   _pureReverse() {
     const el = this[Layers.pulse].getElement();
-    if(el) {
+    if (el) {
       this.options.reverse
         ? el.classList.remove(this._reversePathClass)
         : el.classList.add(this._reversePathClass);
@@ -162,7 +174,7 @@ export default class AntPath extends FeatureGroup {
       this._calculateAnimationSpeed();
       return true;
     }
-    else {
+ else {
       return false;
     }
   }

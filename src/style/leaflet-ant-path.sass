@@ -1,4 +1,9 @@
 $animation-rules: linear infinite leaflet-ant-path-animation
+$engines: "-webkit-", "-moz-", "-ms-", "-o-", ""
+
+@mixin applyEngines($rule, $value)
+  @each $engine in $engines
+    #{$engine+$rule}: $value
 
 =stroke-animation
   from
@@ -23,15 +28,10 @@ $animation-rules: linear infinite leaflet-ant-path-animation
 
 path.leaflet-ant-path
   fill: none
-  -webkit-animation: $animation-rules
-  -moz-animation: $animation-rules
-  -ms-animation: $animation-rules
-  -o-animation: $animation-rules
-  animation: $animation-rules
+  @include applyEngines(animation, $animation-rules)
 
-  &.reverse
-    -webkit-animation-direction: reverse
-    -moz-animation-direction: reverse
-    -o-animation-direction: reverse
-    -ms-animation-direction: reverse
-    animation-direction: reverse
+  &__hardware-acceleration
+    @include applyEngines(transform, translateZ(0))
+
+  &__reverse
+    @include applyEngines(animation-direction, reverse)
