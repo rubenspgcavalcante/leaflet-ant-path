@@ -1,3 +1,4 @@
+const {resolve} = require("path");
 const webpackLoaders = require("./../webpack/loaders.js");
 
 module.exports = function (config) {
@@ -9,6 +10,7 @@ module.exports = function (config) {
             "karma-webpack",
             "karma-babel-preprocessor",
             "karma-phantomjs-launcher",
+            "karma-chrome-launcher",
             "karma-jasmine",
             "karma-sourcemap-loader",
             "karma-sourcemap-writer",
@@ -16,13 +18,18 @@ module.exports = function (config) {
             "karma-remap-istanbul"
         ],
 
-        reporters: ["progress", "coverage", "karma-remap-istanbul"],
+        /**
+         * FIXME: Removed karma-remap-istanbul because of istanbul error
+         * @see https://github.com/gotwarlost/istanbul/issues/602
+         */
+        reporters: ["progress", "coverage"],
 
         preprocessors: {
             "./webpack.tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]
         },
 
         webpack: {
+            mode: "development",
             entry: ["./webpack.tests.js"],
             devtool: "inline-source-map",
             output: {
@@ -30,12 +37,17 @@ module.exports = function (config) {
                 filename: "tests.js"
             },
             module: {
-                loaders: webpackLoaders.concat([
+                rules: webpackLoaders.concat([
                     {
-                        enforce: "pre",
+                        enforce: "post",
                         test: /\.js$/,
-                        include: "./src/",
-                        loader: "istanbul-instrumenter"
+                        include: resolve(__dirname, "../src/"),
+                        use: {
+                            loader: "istanbul-instrumenter-loader",
+                            options: {
+                                esModules: true
+                            }
+                        }
                     }
                 ])
             }
@@ -56,7 +68,7 @@ module.exports = function (config) {
         },
 
         files: [
-            "node_modules/babel-polyfill/dist/polyfill.min.js",
+            require.resolve("babel-polyfill/dist/polyfill.min.js"),
             "./webpack.tests.js",
         ],
 

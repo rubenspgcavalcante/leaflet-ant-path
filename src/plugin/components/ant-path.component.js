@@ -236,6 +236,7 @@ export default class AntPath extends FeatureGroup {
   }
 
   addLatLng(...args) {
+    this._path = [...this._path, args];
     this[Layers.main].addLatLng(...args);
     this[Layers.pulse].addLatLng(...args);
 
@@ -243,6 +244,7 @@ export default class AntPath extends FeatureGroup {
   }
 
   setLatLngs(...args) {
+    this._path = args;
     this[Layers.main].setLatLngs(...args);
     this[Layers.pulse].setLatLngs(...args);
 
