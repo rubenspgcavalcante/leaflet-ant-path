@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-- '7'
+- '8'
 
 before_script: yarn build
-script: yarn test && yarn clean-reports
+script: yarn test
 after_success: yarn codacy
 
 cache: yarn
