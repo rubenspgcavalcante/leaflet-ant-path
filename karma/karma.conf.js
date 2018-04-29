@@ -10,6 +10,7 @@ module.exports = function (config) {
             "karma-webpack",
             "karma-babel-preprocessor",
             "karma-phantomjs-launcher",
+            "karma-chrome-launcher",
             "karma-jasmine",
             "karma-sourcemap-loader",
             "karma-sourcemap-writer",
@@ -17,7 +18,8 @@ module.exports = function (config) {
             "karma-remap-istanbul"
         ],
 
-        reporters: ["progress", "coverage", "karma-remap-istanbul"],
+        // Removed karma-remap-instabull to fix errors
+        reporters: ["progress", "coverage"],
 
         preprocessors: {
             "./webpack.tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]

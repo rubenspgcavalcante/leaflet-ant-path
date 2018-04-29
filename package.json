@@ -11,7 +11,9 @@
   "main": "dist/leaflet-ant-path.js",
   "scripts": {
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
-    "test": "karma start karma/karma.conf.js --log-level debug --single-run && node karma/clean-report.js",
+    "test": "NODE_ENV=test karma start karma/karma.conf.js --single-run",
+    "test:chrome": "npm run test -- --browsers=Chrome --single-run=false",
+    "clean-report": "node karma/clean-report.js",
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
     "format": "prettier-eslint --write \"{dev-env,src}/**/*.js\"",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
@@ -55,6 +57,7 @@
     "jasmine-core": "^3.1.0",
     "karma": "^2.0.0",
     "karma-babel-preprocessor": "^7.0.0",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",

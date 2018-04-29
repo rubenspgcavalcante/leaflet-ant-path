@@ -2,15 +2,16 @@ import L from "leaflet";
 import { AntPath, antPath as antPathFactory } from "../plugin/main";
 
 describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
-  let spy, fakePolyline, path;
+  let spy, path;
 
   beforeEach(() => {
-    fakePolyline = new L.Polyline([0, 0], [1, 1]);
-    spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
     path = [L.latLng(0, 0), L.latLng(1, 1)];
   });
 
   it("Should use two polylines to stack in a animation", () => {
+    const fakePolyline = L.polyline(path);
+    spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
+
     new AntPath([0, 0]);
     expect(L.Polyline).toHaveBeenCalled();
     expect(spy.calls.count()).toBe(2);
@@ -97,7 +98,8 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
   describe("Should follow all the L.Polygon interface:", () => {
     const options = { color: "white", pulseColor: "red" };
     const samplePath = [L.latLng(1, 2), L.latLng(3, 4)];
-    const antPath = new AntPath(samplePath, options);
+    let antPath;
+    beforeEach(() => antPath = new AntPath(samplePath, options));
 
     it("Should be able to provide the current latLngs", () => {
       expect(antPath.getLatLngs()).toEqual(samplePath);
@@ -139,7 +141,10 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
     });
 
     it("Should be able to redraw the two composite paths", () => {
+      const fakePolyline = L.polyline(path);
+      spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
       spyOn(fakePolyline, "redraw");
+
       new AntPath(path, options).redraw();
       expect(fakePolyline.redraw).toHaveBeenCalledTimes(2);
     });
