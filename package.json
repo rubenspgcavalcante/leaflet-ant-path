@@ -18,7 +18,7 @@
     "format": "prettier-eslint --write \"{dev-env,src}/**/*.js\"",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
     "codacy": "cat coverage/lcov.info | codacy-coverage",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test && npm run build"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
   "license": "MIT",

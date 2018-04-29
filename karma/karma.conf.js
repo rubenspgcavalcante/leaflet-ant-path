@@ -18,7 +18,10 @@ module.exports = function (config) {
             "karma-remap-istanbul"
         ],
 
-        // Removed karma-remap-instabull to fix errors
+        /**
+         * FIXME: Removed karma-remap-istanbul because of istanbul error
+         * @see https://github.com/gotwarlost/istanbul/issues/602
+         */
         reporters: ["progress", "coverage"],
 
         preprocessors: {

@@ -3,6 +3,8 @@ node_js:
 - '7'
 
 before_script: yarn build
+script: yarn test && yarn clean-reports
+after_success: yarn codacy
 
 cache: yarn
 branches:
