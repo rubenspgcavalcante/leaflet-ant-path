@@ -15,7 +15,7 @@ export default class AntPath extends FeatureGroup {
   _path = null;
   _animatedPathId = null;
   _animatedPathClass = "leaflet-ant-path";
-  _reversePathClass = "reverse";
+  _reversePathClass = `${this._animatedPathClass}__reverse`;
   _hardwareAccClass = "hardware-acceleration";
 
   _defaultOptions = {
@@ -78,7 +78,7 @@ export default class AntPath extends FeatureGroup {
     pulseOpts.className = [
       _animatedPathClass,
       _animatedPathId,
-      reverse ? `${_animatedPathClass}__${_reversePathClass}` : "",
+      reverse ? _reversePathClass : "",
       hardwareAcceleration ? `${_animatedPathClass}__${_hardwareAccClass}` : ""
     ].join(" ");
 
