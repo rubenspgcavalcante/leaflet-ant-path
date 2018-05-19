@@ -31,8 +31,8 @@
   "bugs": {
     "url": "https://github.com/rubenspgcavalcante/leaflet-ant-path/issues"
   },
-  "perDependencie": {
-    "leaflet": "^1.0.0"
+  "perDependencies": {
+    "leaflet": ">=1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
