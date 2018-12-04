@@ -7,7 +7,7 @@
 
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
 [Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)  
-[![example of the animation](assets/ant-path-demo.gif)](http://rubenspgcavalcante.github.io/leaflet-ant-path)
+[![example of the animation](assets/ant-path-demo.gif)](http://rubenspgcavalcante.github.io/leaflet-ant-path) [![Greenkeeper badge](https://badges.greenkeeper.io/rubenspgcavalcante/leaflet-ant-path.svg)](https://greenkeeper.io/)
 
 ## Contributing
 Find any bug? Open a [issue](https://github.com/rubenspgcavalcante/leaflet-ant-path/issues) or make a PR!  
