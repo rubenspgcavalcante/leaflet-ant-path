@@ -1,4 +1,4 @@
-import { FeatureGroup, Polyline, svg, Util } from "leaflet";
+import { FeatureGroup, polyline, svg, Util } from "leaflet";
 
 const Layers = { main: Symbol("main"), pulse: Symbol("pulse") };
 
@@ -19,6 +19,7 @@ export default class AntPath extends FeatureGroup {
   _hardwareAccClass = "hardware-acceleration";
 
   _defaultOptions = {
+    use: polyline,
     paused: false,
     reverse: false,
     hardwareAcceleration: false,
@@ -93,9 +94,10 @@ export default class AntPath extends FeatureGroup {
 
   _mount() {
     const { pathOpts, pulseOpts } = this._processOptions();
+    const { use } = this.options;
 
-    this.addLayer((this[Layers.main] = new Polyline(this._path, pathOpts)));
-    this.addLayer((this[Layers.pulse] = new Polyline(this._path, pulseOpts)));
+    this.addLayer((this[Layers.main] = use(this._path, pathOpts)));
+    this.addLayer((this[Layers.pulse] = use(this._path, pulseOpts)));
   }
 
   _calculateAnimationSpeed() {
@@ -173,8 +175,7 @@ export default class AntPath extends FeatureGroup {
       options.paused = false;
       this._calculateAnimationSpeed();
       return true;
-    }
- else {
+    } else {
       return false;
     }
   }
