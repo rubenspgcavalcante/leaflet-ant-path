@@ -4,19 +4,21 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca1062428b51428b8204e9044d4fdc3b)](https://www.codacy.com/app/rubenspgcavalcante/leaflet-ant-path?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubenspgcavalcante/leaflet-ant-path&amp;utm_campaign=Badge_Grade)
 [![npm version](https://badge.fury.io/js/leaflet-ant-path.svg)](https://badge.fury.io/js/leaflet-ant-path)
 [![Bower version](https://badge.fury.io/bo/leaflet-ant-path.svg)](https://badge.fury.io/bo/leaflet-ant-path)
+[![Greenkeeper badge](https://badges.greenkeeper.io/rubenspgcavalcante/leaflet-ant-path.svg)](https://greenkeeper.io/)
 
 ## *Creates a leaflet polyline with a 'ant-path' animated flux*
 [Live demo here](http://rubenspgcavalcante.github.io/leaflet-ant-path)  
-[![example of the animation](assets/ant-path-demo.gif)](http://rubenspgcavalcante.github.io/leaflet-ant-path) [![Greenkeeper badge](https://badges.greenkeeper.io/rubenspgcavalcante/leaflet-ant-path.svg)](https://greenkeeper.io/)
+[![example of the animation](assets/ant-path-demo.gif)](http://rubenspgcavalcante.github.io/leaflet-ant-path)
 
-## Contributing
-Find any bug? Open a [issue](https://github.com/rubenspgcavalcante/leaflet-ant-path/issues) or make a PR!  
-Also, see the guide on [how to contribute](/.github/contributing.md).
-
-### Installing
+## Installing
 Via NPM:
 ```
- npm install leaflet-ant-path
+ npm install --save leaflet-ant-path 
+```
+
+Via Yarn:
+```
+ yarn add leaflet-ant-path
 ```
 
 Via Bower:
@@ -27,17 +29,13 @@ Via Bower:
 Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/archive/master.zip) this source code
 
 
-### Requirements
+## Requirements
   - Leaflet >= 1
     
-### UMD compatible
+## UMD compatible
 Can be used with asynchronous module loaders and CommonJS packers
     
-### Important!
-- MultiAntPath was removed, and now AntPath doesn't support the legacy version anymore (0.7.7). If you're still using
-MultiAntPath and Leaflet 0.7, use older AntPath versions than 0.6
-    
-### Using the plugin
+## Using the plugin
 It's just like a polyline:  
 
 ```javascript
@@ -50,7 +48,57 @@ It's just like a polyline:
     antPolyline.addTo(map);
 ```
 
+### Update: Using more Vectors
+On this version you now can use diferent vector other than polyline, passing the **factory** to the **option.use**.
+Currently tested support:
+ - [L.curve](https://github.com/elfalem/Leaflet.curve)
+ - [L.polygon](https://leafletjs.com/reference-1.3.4.html#polygon)
+ - [L.rectangle](https://leafletjs.com/reference-1.3.4.html#rectangle)
+ - [L.circle](https://leafletjs.com/reference-1.3.4.html#circle)
 
+```javascript
+// Using a polygon
+const antPolygon = antPath([
+  [51.509, -0.08],
+  [51.503, -0.06],
+  [51.51, -0.047]
+], { use: L.polygon, fillColor: "red" });
+
+// Using a circle
+const antCircle = antPath(
+  [51.508, -0.11],
+  {
+    use: L.circle
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+  }
+);
+
+// Using a curve (Leaflet.curve plugin)
+const antCurve = antPath([
+  "M",
+  [50.54136296522163, 28.520507812500004],
+  
+  "C",
+  [52.214338608258224, 28.564453125000004],
+  [48.45835188280866, 33.57421875000001],
+  [50.680797145321655, 33.83789062500001],
+  
+  "V",
+  [48.40003249610685],
+  
+  "L",
+  [47.45839225859763, 31.201171875],
+  [48.40003249610685, 28.564453125000004],
+  
+  "Z"
+  ],
+  {use: L.curve, color: "red", fill: true })
+```
+
+### Importing
 Using with ES6 imports
 ```javascript
     import { AntPath, antPath } from 'leaflet-ant-path';
@@ -86,32 +134,33 @@ Using with browserify:
 The AntPath extends from the [FeatureGroup](http://leafletjs.com/reference.html#featuregroup) and implements the [Path](http://leafletjs.com/reference.html#path) interface.
 Initialise with the same options of a common [Polyline]((http://leafletjs.com/reference.html#polyline)), with some extra options, like the flux color.  
 
-| name | type | example | description |
-|------|------|---------| ------------|
-|latlngs| L.LatLng[] **or** Array\[number, number\]  | \[ \[0, 10\], \[-20, 0\], ... \] | A array of latitude and longitudes (same as used in [Polyline constructor](http://leafletjs.com/reference.html#polyline) )
-|options| Object  | {color: 'red', weight: 5, ...}  | Same as the [Polyline options](http://leafletjs.com/reference.html#polyline-options) plus the **extra** options bellow
-|options.paused| boolean | true/false | Starts with the animation paused (default: false)
-|options.reverse| boolean | true/false | Defines if the flow follows or not the path order
-|options.hardwareAccelerated| boolean | true/false | Makes the animation run with hardware acceleration (default: false)
-|options.pulseColor| string | #FF00FF | Adds a color to the dashed flux (default: 'white')
-|options.delay | string | 120 | Add a delay to the animation flux (default: 400)
-|options.dashArray| [number, number] **or** string | [15, 30] |The size of the animated dashes (default: "10, 20"). See also [the pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray)
+| name                        | type                                      | example                               | description                                                                                                                                              |
+| --------------------------- | ----------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| latlngs                     | L.LatLng[] **or** Array\[number, number\] | \[ \[0, 10\], \[-20, 0\], ... \]      | A path (depends on vector used, default as in [polyline constructor](http://leafletjs.com/reference.html#polyline) )                                     |
+| options                     | Object                                    | {color: 'red', weight: 5, ...}        | Same as the vector choosen (default to [polyline](http://leafletjs.com/reference.html#polyline-options) ) plus the **extra** options bellow              |
+| options.use                 | Vector Layer factory                      | Vector to use (default to L.polyline) | The vector to enhance with the ant-path animation ([check the compatibilty](#update-using-more-vectors))                                                 |
+| options.paused              | boolean                                   | true/false                            | Starts with the animation paused (default: false)                                                                                                        |
+| options.reverse             | boolean                                   | true/false                            | Defines if the flow follows or not the path order                                                                                                        |
+| options.hardwareAccelerated | boolean                                   | true/false                            | Makes the animation run with hardware acceleration (default: false)                                                                                      |
+| options.pulseColor          | string                                    | #FF00FF                               | Adds a color to the dashed flux (default: 'white')                                                                                                       |
+| options.delay               | string                                    | 120                                   | Add a delay to the animation flux (default: 400)                                                                                                         |
+| options.dashArray           | [number, number] **or** string            | [15, 30]                              | The size of the animated dashes (default: "10, 20"). See also [the pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray) |
 
 ---
 
 ### Methods
-| name | returns | description |
-|------|---------|-------------|
-| pause() | boolean | Stops the animation |
-| resume() | booelan | Resume the animation |
-| reverse() | **this** instance | Reverses the animation flow |
-| map(callback) | new AntPath or extended class | Iterates over the latlngs |
+| name          | returns                       | description                 |
+| ------------- | ----------------------------- | --------------------------- |
+| pause()       | boolean                       | Stops the animation         |
+| resume()      | booelan                       | Resume the animation        |
+| reverse()     | **this** instance             | Reverses the animation flow |
+| map(callback) | new AntPath or extended class | Iterates over the latlngs   |
 
 Also have the same as the L.Polyline API and with the same behaviour. [See it here.](http://leafletjs.com/reference.html#polyline)
 
 ---
 
-# Extras!
+## Extras!
 ### ES6/ES2015 features
 Thinking in the new features of JavaScript, and its new way of programing,
 AntPath has some nicely features to work with ES6.
@@ -158,5 +207,9 @@ one without the polyfills. If you're already uses the following polyfills in you
 
 Just use the lighter version (leaflet-ant-path.es6.js). If not, just use the full bundle.
 
-### License
+## Contributing
+Find any bug? Open a [issue](https://github.com/rubenspgcavalcante/leaflet-ant-path/issues) or make a PR!  
+Also, see the guide on [how to contribute](/.github/contributing.md).
+
+## License
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
