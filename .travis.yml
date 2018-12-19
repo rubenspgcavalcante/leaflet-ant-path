@@ -13,6 +13,7 @@ cache: yarn
 branches:
   only:
   - master
+  - /^greenkeeper/.*$/
 env:
   global:
     secure: ESmtejbFa14XYz2GS45u/SXoWOEZvBGW+psVxbjkMm9Cse0Q/OFikog9K+fQkmBUSBLs9La5r8ZnT7t5+a/HsX86wwIle6hyGCZu+liobCRnfT+Pf6TONqvuPFhvlNq2kAPUla35fYIDy/935d2NMnA7FdbpIyNWy3nJkuVp+hzVx/VnDXyob5B0YS9x9SCXnd2ya4V9ik7TBJaqtEWKrVLkS/ycLN8LcscjrT6EcNFyx2vc/uVH9Nmwca3lUra3x/Wc8mebmN105KTt3P/JujEzcOgxRt3kAU8nR2jq0m7nMeKQ+ctTHjVYYvTQEkUbpVeMB2yFOdCLLeQCaWpHZXh5WSwPaVnIKg31MOK4IMfaXAjYIRoUdc+s25FoOpt0hElK06/srAxCxO9uPl9fsYu30KD9YsPIKv5pNnxar8latUvmDXqRDvESl37HX2+nZRepx2uKIcAgO24Hlf85A8B11WSMKxnlBoUUCs2lL7sc13ZPj1UflYkOqDjCaKilnuHrBbxcas7SAxvNBI3A+Y2oGTGpbC364YBZCq/g506pgiZ74/zcQcIOAb0sRi1+BfMYowPhFYUFMmLzsNE/XAqyrAO05c8XtKnsJem3HEOYNu2xSKxrp4X/LQgSaZYOMfNzy+8lPy0/z7YsMihC7zvXA/wbdy6QYIGMb5x23rQ=
