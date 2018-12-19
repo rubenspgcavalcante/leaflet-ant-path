@@ -1,11 +1,12 @@
 import { Polyline, polyline } from "leaflet";
-import AntPath from "./components/ant-path.component";
-import antPath from "./factories/ant-path.factory";
+import _AntPath from "./components/ant-path.component";
+import _antPath from "./factories/ant-path.factory";
 
 import "../style/leaflet-ant-path.sass";
 
-Polyline.AntPath = AntPath;
-polyline.antPath = antPath;
-module.exports = { AntPath, antPath };
+Polyline.AntPath = _AntPath;
+polyline.antPath = _antPath;
 
-export { AntPath, antPath };
+export const AntPath = _AntPath;
+export const antPath = _antPath;
+export default { AntPath, antPath };
