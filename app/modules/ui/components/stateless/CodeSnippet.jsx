@@ -1,7 +1,7 @@
 import React from 'react';
 import { object, string } from 'prop-types';
 import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/dist/light';
-import darcula from 'react-syntax-highlighter/dist/styles/lowlight/darcula';
+import darcula from 'react-syntax-highlighter/dist/styles/prism/darcula';
 import js from 'react-syntax-highlighter/dist/languages/hljs/javascript';
 import html from 'react-syntax-highlighter/dist/languages/hljs/htmlbars';
 import shell from 'react-syntax-highlighter/dist/languages/hljs/shell';

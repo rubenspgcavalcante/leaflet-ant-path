@@ -1,28 +1,35 @@
-const { ProvidePlugin, DefinePlugin } = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { ProvidePlugin, DefinePlugin } = require("webpack");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
-const { dev, test, prod, CURRENT } = require('./envs');
+const { dev, test, prod, CURRENT } = require("./envs");
 
 module.exports = [
   new ProvidePlugin({
-    jQuery: 'jquery',
-    $: 'jquery',
-    jquery: 'jquery',
-    React: 'react'
+    jQuery: "jquery",
+    $: "jquery",
+    jquery: "jquery",
+    React: "react"
   }),
-  new ExtractTextPlugin('styles.css'),
+  prod(
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+  ),
   new DefinePlugin({
-    'process.env': {
+    "process.env": {
       NODE_ENV: JSON.stringify(CURRENT)
     },
     app: {
-      path: JSON.stringify(dev('/') || prod('/leaflet-ant-path/'))
+      path: JSON.stringify(dev("/") || prod("/leaflet-ant-path/"))
     }
   }),
   prod(new OptimizeCssAssetsPlugin()),
-  prod(new UglifyJSPlugin({
-    sourceMap: true
-  }))
+  prod(
+    new UglifyJSPlugin({
+      sourceMap: true
+    })
+  )
 ].filter(plugin => plugin !== null);

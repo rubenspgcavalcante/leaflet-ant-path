@@ -1,4 +1,11 @@
 {
-  "presets": ["react", "es2015"],
-  "plugins": ["transform-object-rest-spread", "transform-class-properties", "syntax-dynamic-import"]
+  "presets": [
+    "@babel/preset-react",
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import"
+  ]
 }
