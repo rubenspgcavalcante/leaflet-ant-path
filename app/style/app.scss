@@ -1,7 +1,11 @@
 $fa-font-path: "~font-awesome/fonts";
 
-@import "~font-awesome/scss/font-awesome";
+@import "~bulma/sass/utilities/initial-variables.sass";
+$body-background-color: $grey-lighter;
+
+
 @import "~bulma/bulma.sass";
+@import "~font-awesome/scss/font-awesome";
 @import '~leaflet/dist/leaflet.css';
 @import "~rc-slider/assets/index.css";
 

@@ -22,5 +22,5 @@ export const loadRepoInfoEpic = action$ =>
     map(action => ghApi`/repos/rubenspgcavalcante/leaflet-ant-path`),
     mergeMap(url => ajax.getJSON(url)),
     map(res => repoInfoLoaded(res)),
-    catchError(err => of(repoInfoError(err)))
+    catchError(err => of(repoInfoError(err.response)))
   );
