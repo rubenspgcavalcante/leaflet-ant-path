@@ -10,10 +10,10 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
 
   it("Should use two polylines to stack in a animation", () => {
     const fakePolyline = L.polyline(path);
-    spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
+    spy = spyOn(L, "polyline").and.callFake(() => fakePolyline);
 
     new AntPath([0, 0]);
-    expect(L.Polyline).toHaveBeenCalled();
+    expect(L.polyline).toHaveBeenCalled();
     expect(spy.calls.count()).toBe(2);
   });
 
@@ -99,7 +99,7 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
     const options = { color: "white", pulseColor: "red" };
     const samplePath = [L.latLng(1, 2), L.latLng(3, 4)];
     let antPath;
-    beforeEach(() => antPath = new AntPath(samplePath, options));
+    beforeEach(() => (antPath = new AntPath(samplePath, options)));
 
     it("Should be able to provide the current latLngs", () => {
       expect(antPath.getLatLngs()).toEqual(samplePath);
@@ -142,7 +142,7 @@ describe("Creates a leaflet polyline with a 'ant-path' animated flux:", () => {
 
     it("Should be able to redraw the two composite paths", () => {
       const fakePolyline = L.polyline(path);
-      spy = spyOn(L, "Polyline").and.callFake(() => fakePolyline);
+      spy = spyOn(L, "polyline").and.callFake(() => fakePolyline);
       spyOn(fakePolyline, "redraw");
 
       new AntPath(path, options).redraw();
