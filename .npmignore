@@ -18,6 +18,7 @@ assets/
 .wbprofile.json
 .gitignore
 .travis.yml
+.prettierrc
 yarn.lock
 karma.conf.js
 webpack.config.js
