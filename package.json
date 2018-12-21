@@ -12,13 +12,13 @@
   "scripts": {
     "build": "NODE_ENV=production webpack  --colors --profile --progress",
     "test": "NODE_ENV=test karma start karma/karma.conf.js --single-run",
-    "test:chrome": "npm run test -- --browsers=Chrome --single-run=false",
+    "test:chrome": "yarn run test --browsers=Chrome --single-run=false",
     "clean-report": "node karma/clean-report.js",
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
     "format": "prettier-eslint --write \"{dev-env,src}/**/*.js\"",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
     "codacy": "cat coverage/lcov.info | codacy-coverage",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "yarn run test && yarn run build"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
   "license": "MIT",
