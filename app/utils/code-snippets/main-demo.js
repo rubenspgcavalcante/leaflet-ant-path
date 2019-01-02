@@ -22,9 +22,9 @@ myMap.fitBounds(path.getBounds())`;
 export const es6 = ({ use, ...rest }) => `
 import {${includeVector(use)} map, tileLayer} from 'leaflet';
 import {antPath} from 'leaflet-ant-path';
-import route from 'sample-route.json'; //This is a example, the JSON can come from any place
+import latLngs from 'sample-${use}.json'; //This is a example, the JSON can come from any place
 
-const path = antPath(route,
+const path = antPath(latLngs,
   { ${useVector(use) + bracklessJSON(rest)} }
 );
 const myMap = map('map').setView([0, 0], 13);

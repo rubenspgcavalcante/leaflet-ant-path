@@ -9,6 +9,7 @@ import * as vectors from "../../../utils/vectors.constant";
 export default class Controls extends PureComponent {
   static propTypes = {
     updateOptions: func.isRequired,
+    loadVector: func.isRequired,
     onReset: func.isRequired
   };
 
@@ -83,7 +84,18 @@ export default class Controls extends PureComponent {
         <div className="field">
           <div className="control has-icons-left">
             <div className="select is-rounded">
-              <select onChange={ev => delayedChange({ use: ev.target.value }) }>
+              <select
+                onChange={ev => {
+                  const use = ev.target.value;
+                  if (use === vectors.CIRCLE) {
+                    this.props.updateOptions({ ...options, use, radius: 300 });
+                  } else {
+                    delete options.radius;
+                    this.props.updateOptions({ ...options, use });
+                  }
+                  this.props.loadVector(use);
+                }}
+              >
                 {Object.values(vectors).map(vector => (
                   <option key={vector} value={vector}>
                     L.{vector}
@@ -112,6 +124,16 @@ export default class Controls extends PureComponent {
           max={20}
           option={options.weight}
         />
+
+        {options.use === vectors.CIRCLE ? (
+          <OptionSlider
+            property="radius"
+            onOptionChange={radius => delayedChange({ radius })}
+            min={100}
+            max={800}
+            option={options.radius}
+          />
+        ) : null}
 
         <div className="columns">
           <div className="column is-6">

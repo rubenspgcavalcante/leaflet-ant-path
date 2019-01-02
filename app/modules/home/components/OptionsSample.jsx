@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import AntPath from "react-leaflet-ant-path";
 import L from "leaflet";
+import "@elfalem/leaflet-curve";
 
 import Map from "modules/ui/components/Map";
 import { AppRoutesProvider } from "modules/core/index";
@@ -9,33 +10,39 @@ import CodeDemo from "./stateless/CodeDemo";
 import HowToInstall from "./stateless/HowToInstall";
 import { POLYLINE } from "../../../utils/vectors.constant";
 
-const DEMO_ROUTE = "tabuba-fortaleza";
+const bounds = [
+  { lat: -3.6436221426376605, lng: -38.44036247786476 },
+  { lat: -3.809803653916078, lng: -38.60689613762902 }
+];
 
 export default class OptionsSample extends PureComponent {
   componentWillMount() {
-    this.props.loadRoute(DEMO_ROUTE);
+    this.props.loadVector(POLYLINE);
   }
 
   render() {
     const {
-      routes,
+      vectors,
       snippetType,
       options,
       changeSnippet,
       updateOptions,
+      loadVector,
       resetOptions
     } = this.props;
-    const route = routes.data[DEMO_ROUTE] || null;
+
+    const latLngs = vectors[options.use] || null;
 
     return (
       <div className="options-sample">
         <div className="columns">
           <div className="column is-8">
             <div className="box">
-              {route ? (
-                <Map latLngBounds={route}>
+              {latLngs ? (
+                <Map latLngBounds={bounds}>
                   <AntPath
-                    positions={route}
+                    key={options.use}
+                    positions={latLngs}
                     options={{ ...options, use: L[options.use] }}
                   />
                 </Map>
@@ -49,6 +56,7 @@ export default class OptionsSample extends PureComponent {
                   <div className="box">
                     <Controls
                       options={options}
+                      loadVector={loadVector}
                       updateOptions={updateOptions}
                       onReset={resetOptions}
                     />
