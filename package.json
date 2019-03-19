@@ -46,7 +46,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.0",
     "codacy-coverage": "^3.3.0",
-    "core-js": "^2.4.1",
+    "core-js": "^3.0.0",
     "css-loader": "^2.0.1",
     "eslint": "^5.10.0",
     "eslint-loader": "^2.0.0",
