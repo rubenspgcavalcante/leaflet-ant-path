@@ -3,8 +3,8 @@ module.exports = {
         "leaflet-ant-path.es6": "./src/plugin/main",
 
         "leaflet-ant-path": [
-            require.resolve("core-js/es6/symbol"),
-            require.resolve("core-js/es6/reflect"),
+            require.resolve("core-js/es/symbol"),
+            require.resolve("core-js/es/reflect"),
             "./src/plugin/main"
         ]
     },

@@ -3,8 +3,8 @@ const webpack = require("webpack");
 module.exports = {
     entry: {
         "dev-env": [
-            require.resolve("core-js/es6/symbol"),
-            require.resolve("core-js/es6/reflect"),
+            require.resolve("core-js/es/symbol"),
+            require.resolve("core-js/es/reflect"),
             "./dev-env/index.js"]
     },
     devtool: "source-map",
