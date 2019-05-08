@@ -4635,10 +4635,10 @@ lcov-parse@^1.x:
   resolved "https://registry.yarnpkg.com/lcov-parse/-/lcov-parse-1.0.0.tgz#eb0d46b54111ebc561acb4c408ef9363bdc8f7e0"
   integrity sha1-6w1GtUER68VhrLTECO+TY73I9+A=
 
-leaflet@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.4.0.tgz#d5f56eeb2aa32787c24011e8be4c77e362ae171b"
-  integrity sha512-x9j9tGY1+PDLN9pcWTx9/y6C5nezoTMB8BLK5jTakx+H7bPlnbCHfi9Hjg+Qt36sgDz/cb9lrSpNQXmk45Tvhw==
+leaflet@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.5.0.tgz#b8ed4643514f66737c2131252921a889c1ce3db1"
+  integrity sha512-6sVKn1GaeP01ofzPs2f62XgKEx4uYnHsgQK64zBZPN/6pAX53FNakYvtud+Wu3Z7C3vJpINkdQuR//hgCngOiA==
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
