@@ -23,7 +23,7 @@ export default class AntPath extends FeatureGroup {
     paused: false,
     reverse: false,
     hardwareAcceleration: false,
-    pane: "overlayPane",
+    renderer: svg({pane: "overlayPane"}),
     delay: 400,
     dashArray: [10, 20],
     weight: 5,
@@ -95,9 +95,7 @@ export default class AntPath extends FeatureGroup {
   _mount() {
     const { pathOpts, pulseOpts } = this._processOptions();
     const { use } = this.options;
-    const renderer = svg({pane: this.options.pane})
-    pulseOpts.renderer = renderer
-    pathOpts.renderer = renderer
+
     this.addLayer((this[Layers.main] = use(this._path, pathOpts)));
     this.addLayer((this[Layers.pulse] = use(this._path, pulseOpts)));
   }
@@ -205,13 +203,7 @@ export default class AntPath extends FeatureGroup {
 
   //Polyline interface
   setStyle(options) {
-    let { paused, delay, reverse } = options;
-
-    // Set defaults if not passed in options
-    paused = (typeof paused === "undefined") ? this.options.paused:paused;
-    delay = (typeof delay === "undefined") ? this.options.delay:delay;
-    reverse = (typeof delay === "undefined") ? this.options.reverse:reverse;
-
+    const { paused, delay, reverse } = {...this.options, ...options};
     paused ? this.pause() : this.resume();
 
     if (delay !== this.options.delay) {
