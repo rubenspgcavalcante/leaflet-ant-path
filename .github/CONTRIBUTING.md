@@ -1,10 +1,8 @@
-# How to Contribute
-
-## Important checks
-- Before create any pull requests, please open a issue explaining the situation
+# Important checks
+- Before creating any pull requests, please open an issue explaining the situation
 - Be sure to follow the eslint rules
 - Be sure, **before opening the pull request**, to test the existent code and/or create tests if you made a new feature or
-changed a already existing one.
+changed an already existing one.
 
 ## Issues
 Should be in the format:
@@ -32,12 +30,12 @@ The polyline doesn't appear
 ## Pull Requests
 - On the description of the pull request set the issue id for closing it:
 ```text
-Now the polyline appear normally. Closes #41
+Now the polyline appears normally. Closes #41
 ```
 
 ## Following the guideline
-Please follow the above rules, so the repo can stay consistent and easy for everyone find questions and
-already resolved stuff. Be aware that your PR can be denied if you don't follow then :cry:
+Please follow the above rules, so the repo can stay consistent and easy for everyone finding questions and
+already solved issues. Be aware that your PR can be denied if you don't follow then :cry:
 
 # Developing
 
@@ -51,7 +49,7 @@ npm start
 This will make the webpack compile the dev. env. and set up into a
 webserver with hot deployment into the localhost:8080. There you can make
 changes into the plugin and see in real time all your modifications running.
-Also, every modification will trigger the eslint, so alway check your code style!
+Also, every modification will trigger the eslint, so always check your code style!
 
 You can modify and see live all the modifications changing the file:
 ```
@@ -60,8 +58,8 @@ dev-env/index.js
 **Be sure not commit this file!**
 
 ## Testing and Building
-After develop/fix a bug, before do a **pull request**, run the test command:
-To run the build, before install the npm and gulp dependencies, then run:
+After develop/fix a bug, before doing a **pull request**, run the test command:
+To run the build, before installing the npm and gulp dependencies, then run:
 ```
 npm test
 ```
@@ -70,4 +68,4 @@ If you just want to use the latest version directly from the source code just do
 ```
 npm run build
 ```
-All the files will be outputed in the *dist/* directory
+All the files will be outputted in the *dist/* directory

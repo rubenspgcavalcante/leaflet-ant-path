@@ -218,7 +218,7 @@ Just use the lighter version (leaflet-ant-path.es6.js). If not, just use the ful
 
 ## Contributing
 Find any bug? Open a [issue](https://github.com/rubenspgcavalcante/leaflet-ant-path/issues) or make a PR!  
-Also, see the guide on [how to contribute](/.github/contributing.md).
+Also, see the guide on [how to contribute](https://github.com/rubenspgcavalcante/leaflet-ant-path/wiki/How-To-Contribute).
 
 ## License
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
