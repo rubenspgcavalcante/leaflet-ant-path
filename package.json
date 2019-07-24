@@ -68,7 +68,7 @@
     "materialize-css": "^1.0.0",
     "node-sass": "^4.8.3",
     "prettier": "^1.10.2",
-    "prettier-eslint": "^8.8.1",
+    "prettier-eslint": "^9.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "puppeteer": "^1.11.0",
     "regenerator-runtime": "^0.13.1",
