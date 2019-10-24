@@ -14,20 +14,11 @@ module.exports = function(config) {
       "karma-jasmine",
       "karma-sourcemap-loader",
       "karma-sourcemap-writer",
-      "karma-coverage",
-      "karma-remap-istanbul"
     ],
-
-    /**
-     * FIXME: Removed karma-remap-istanbul because of istanbul error
-     * @see https://github.com/gotwarlost/istanbul/issues/602
-     */
-    reporters: ["progress", "coverage"],
-
+    reporters: ["progress"],
     preprocessors: {
-      "./webpack.tests.js": ["webpack", "sourcemap", "sourcemap-writer", "coverage"]
+      "./webpack.tests.js": ["webpack", "sourcemap", "sourcemap-writer"]
     },
-
     webpack: {
       mode: "development",
       entry: ["./webpack.tests.js"],
@@ -52,27 +43,11 @@ module.exports = function(config) {
         ])
       }
     },
-
-    coverageReporter: {
-      type: "json",
-      dir: "coverage/",
-      subdir: ".",
-      file: "coverage.json"
-    },
-
-    remapIstanbulReporter: {
-      reports: {
-        html: "coverage",
-        json: "coverage/remapped.json"
-      }
-    },
-
     files: ["node_modules/@babel/polyfill/dist/polyfill.js", "./webpack.tests.js"],
     stats: {
       colors: true,
       reasons: true
     },
-
     progress: true
   });
 };
