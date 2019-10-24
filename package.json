@@ -17,7 +17,6 @@
     "analyze": "NODE_ENV=production webpack --profile --json > .wbprofile.json && webpack-bundle-analyzer .wbprofile.json -m server",
     "format": "prettier-eslint --write \"{dev-env,src}/**/*.js\"",
     "start": "NODE_ENV=development webpack-dev-server -d --cache --inline --host 0.0.0.0",
-    "codacy": "cat coverage/lcov.info | codacy-coverage",
     "prepublishOnly": "yarn run test && yarn run build"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante <rubenspgcavalcante@gmail.com>",
@@ -45,7 +44,6 @@
     "@babel/runtime": "^7.6.3",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
-    "codacy-coverage": "^3.4.0",
     "core-js": "^3.3.3",
     "css-loader": "^3.2.0",
     "eslint": "^6.5.1",
