@@ -7,7 +7,6 @@ addons:
 
 before_script: yarn build
 script: yarn test
-after_success: yarn codacy
 
 cache: yarn
 branches:
