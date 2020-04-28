@@ -69,7 +69,7 @@
     "puppeteer": "^2.0.0",
     "regenerator-runtime": "^0.13.3",
     "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.0",
+    "style-loader": "^1.2.1",
     "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-bundle-analyzer": "^3.6.0",
