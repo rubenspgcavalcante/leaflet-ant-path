@@ -41,7 +41,7 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
-    "@babel/runtime": "^7.6.3",
+    "@babel/runtime": "^7.10.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "core-js": "^3.3.3",
