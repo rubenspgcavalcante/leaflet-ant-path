@@ -109,7 +109,12 @@ export default class AntPath extends FeatureGroup {
       return;
     }
 
-    const zoomLevel = _map.getZoom();
+    // Use a minimum acceptable zoom level to prevent path animation from stopping when zoomLevel <= 0
+    // This may occur when using animations layered on ImageOverlay maps using CRS.Simple coordinates
+    // NOTE User may need to adjust options.delay under these conditions to achieve desired animation behavior
+    const minimumZoomLevel = 4;
+
+    const zoomLevel = Math.max(minimumZoomLevel, _map.getZoom());
     const animatedPolyElements = document.getElementsByClassName(_animatedPathId);
 
     //Get the animation duration (in seconds) based on the given delay and the current zoom level
