@@ -32,12 +32,14 @@ export default class AntPath extends FeatureGroup {
     pulseColor: "#FFFFFF"
   };
 
+  static pathId = 0;
+
   constructor(path, customOptions = {}) {
     super();
 
     Util.setOptions(this, { ...this._defaultOptions, ...customOptions });
     this._path = path;
-    this._animatedPathId = `ant-path-${new Date().getTime()}`;
+    this._animatedPathId = `ant-path-${AntPath.pathId++}`;
     this._mount();
   }
 
