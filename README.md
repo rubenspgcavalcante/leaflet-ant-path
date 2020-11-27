@@ -27,6 +27,11 @@ Via Bower:
  bower install leaflet-ant-path
 ```
 
+## Including
+Via HTML Script (Include the Ant-Path's script after Leaflet's):
+```
+<script src="https://unpkg.com/leaflet-ant-path" type="text/javascript"></script>
+```
 Or just [download](https://github.com/rubenspgcavalcante/leaflet-ant-path-bower/archive/master.zip) this source code
 
 
